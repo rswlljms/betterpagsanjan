@@ -18,6 +18,10 @@ const typeFilters: { id: SearchResultType | "all"; label: string }[] = [
   { id: "service", label: "Services" },
   { id: "office", label: "Offices" },
   { id: "barangay", label: "Barangays" },
+  { id: "legislative", label: "Legislative" },
+  { id: "project", label: "Projects" },
+  { id: "transparency", label: "Transparency" },
+  { id: "location", label: "Locations" },
   { id: "page", label: "Pages" },
 ];
 
@@ -25,6 +29,10 @@ const typeBadgeVariant: Record<SearchResultType, BadgeVariant> = {
   service: "primary",
   office: "accent",
   barangay: "success",
+  legislative: "primary",
+  project: "warning",
+  transparency: "neutral",
+  location: "success",
   page: "neutral",
 };
 
@@ -32,6 +40,10 @@ const typeLabel: Record<SearchResultType, string> = {
   service: "Service",
   office: "Office",
   barangay: "Barangay",
+  legislative: "Legislative",
+  project: "Project",
+  transparency: "Transparency",
+  location: "Location",
   page: "Page",
 };
 
@@ -97,7 +109,7 @@ export function SiteSearch({ records }: SiteSearchProps) {
               applyParams(event.target.value);
             }}
             placeholder="Search services, offices, barangays…"
-            className="min-h-11 w-full rounded-lg border border-slate-300 bg-white pl-9 pr-4 text-sm text-slate-900 placeholder:text-muted focus:border-primary-500"
+            className="min-h-11 w-full rounded-lg border border-line bg-white pl-9 pr-4 text-sm text-ink placeholder:text-bp-stone"
           />
         </div>
       </form>
@@ -112,8 +124,8 @@ export function SiteSearch({ records }: SiteSearchProps) {
             className={cn(
               "min-h-9 rounded-full border px-3.5 text-sm font-medium transition-colors",
               type === filter.id
-                ? "border-primary-700 bg-primary-700 text-white"
-                : "border-slate-300 bg-white text-slate-700 hover:border-slate-400",
+                ? "border-bp-ink bg-bp-ink text-white"
+                : "border-line bg-white text-bp-graphite hover:border-bp-stone",
             )}
           >
             {filter.label}
@@ -133,7 +145,7 @@ export function SiteSearch({ records }: SiteSearchProps) {
                   setQuery(term);
                   applyParams(term);
                 }}
-                className="rounded-full border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-700 hover:border-primary-300 hover:text-primary-800"
+                className="rounded-full border border-line bg-white px-3 py-1.5 text-sm text-bp-graphite hover:border-bp-stone hover:text-bp-ink"
               >
                 {term}
               </button>
@@ -153,7 +165,7 @@ export function SiteSearch({ records }: SiteSearchProps) {
               <li key={record.id}>
                 <Link
                   href={record.href}
-                  className="group flex flex-col gap-1.5 rounded-lg border border-line bg-white p-4 transition-colors hover:border-primary-300 hover:bg-primary-50/40 sm:flex-row sm:items-start sm:gap-4"
+                  className="group flex flex-col gap-1.5 rounded-xl bg-white p-4 shadow-bp-sm-4 transition hover:shadow-bp-sm sm:flex-row sm:items-start sm:gap-4"
                 >
                   <span className="shrink-0 pt-0.5">
                     <Badge variant={typeBadgeVariant[record.type]}>
@@ -164,11 +176,11 @@ export function SiteSearch({ records }: SiteSearchProps) {
                     <span className="flex items-center gap-1.5 font-semibold text-ink">
                       {record.title}
                       <ArrowRight
-                        className="size-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5"
+                        className="size-4 shrink-0 text-bp-stone transition-transform group-hover:translate-x-0.5"
                         aria-hidden
                       />
                     </span>
-                    <span className="mt-0.5 line-clamp-2 block text-sm leading-relaxed text-slate-600">
+                    <span className="mt-0.5 line-clamp-2 block text-sm leading-relaxed text-bp-graphite">
                       {record.description}
                     </span>
                   </span>
@@ -190,7 +202,7 @@ export function SiteSearch({ records }: SiteSearchProps) {
                 setQuery("");
                 applyParams("");
               }}
-              className="min-h-11 rounded-lg border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-900 hover:bg-slate-50"
+              className="min-h-11 rounded-full border border-line bg-white px-6 text-sm font-semibold text-bp-graphite hover:border-bp-stone hover:text-bp-ink"
             >
               Clear search
             </button>

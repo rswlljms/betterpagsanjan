@@ -1,54 +1,20 @@
 import type { Metadata } from "next";
-import {
-  BarChart3,
-  FileSearch,
-  FileText,
-  Landmark,
-  Receipt,
-} from "lucide-react";
+import { ExternalLink, FileText } from "lucide-react";
 import { PageHero } from "@/components/civic/page-hero";
 import { SourceAttribution } from "@/components/civic/source-attribution";
+import { VerificationBadge } from "@/components/civic/verification-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
+import {
+  getTransparencyByCategory,
+  transparencyCategories,
+} from "@/data/transparency/records";
 
 export const metadata: Metadata = {
   title: "Transparency",
   description:
     "Budget, procurement, projects, and public document information for Pagsanjan — as it becomes verifiable from official sources.",
 };
-
-const areas = [
-  {
-    icon: Landmark,
-    title: "Budget",
-    description:
-      "Annual budgets, appropriations, and financial summaries once published in verifiable form.",
-  },
-  {
-    icon: Receipt,
-    title: "Procurement",
-    description:
-      "Biddings, awards, and contract information from official procurement channels.",
-  },
-  {
-    icon: BarChart3,
-    title: "Financial information",
-    description:
-      "Reports and financial statements released by the local government.",
-  },
-  {
-    icon: FileText,
-    title: "Public documents",
-    description:
-      "Development plans, reports, and other public documents with their sources.",
-  },
-  {
-    icon: FileSearch,
-    title: "Open data",
-    description:
-      "Reusable civic datasets for researchers, journalists, and developers.",
-  },
-];
 
 export default function TransparencyPage() {
   return (
@@ -60,27 +26,74 @@ export default function TransparencyPage() {
       />
       <Container className="py-10 sm:py-12">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {areas.map((area) => (
-            <Card key={area.title}>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-base">
-                  <area.icon
-                    className="size-5 shrink-0 text-primary-700"
-                    aria-hidden
-                  />
-                  {area.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm leading-relaxed text-slate-600">
-                  {area.description}
-                </p>
-                <p className="mt-3 text-xs italic text-muted">
-                  Information not yet available
-                </p>
-              </CardContent>
-            </Card>
-          ))}
+          {transparencyCategories.map((area) => {
+            const records = getTransparencyByCategory(area.id);
+            return (
+              <Card key={area.id} className="flex flex-col">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-base">
+                    <FileText
+                      className="size-5 shrink-0 text-primary-700"
+                      aria-hidden
+                    />
+                    {area.name}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-1 flex-col">
+                  <p className="text-sm leading-relaxed text-slate-600">
+                    {area.description}
+                  </p>
+                  {records.length === 0 ? (
+                    <p className="mt-3 text-xs italic text-muted">
+                      Information not yet available
+                    </p>
+                  ) : (
+                    <ul className="mt-4 space-y-3">
+                      {records.map((record) => (
+                        <li
+                          key={record.id}
+                          className="rounded-lg border border-line p-3 text-sm"
+                        >
+                          <p className="font-medium text-ink">
+                            {record.title}
+                          </p>
+                          <p className="mt-1 text-xs text-muted">
+                            {record.description}
+                          </p>
+                          <div className="mt-2 flex flex-wrap items-center gap-2">
+                            <VerificationBadge
+                              verification={record.verification}
+                            />
+                            {record.year ? (
+                              <span className="text-xs text-muted">
+                                {record.year}
+                              </span>
+                            ) : null}
+                          </div>
+                          {(record.documentUrl ?? record.sourceUrl) ? (
+                            <a
+                              href={
+                                record.documentUrl ?? record.sourceUrl
+                              }
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary-700 hover:underline"
+                            >
+                              Original document
+                              <ExternalLink
+                                className="size-3.5"
+                                aria-hidden
+                              />
+                            </a>
+                          ) : null}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         <p className="mt-8 max-w-3xl text-sm leading-relaxed text-muted">

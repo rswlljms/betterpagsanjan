@@ -31,7 +31,7 @@ export function SourceAttribution({
     <aside
       aria-label="Source information"
       className={cn(
-        "rounded-lg border border-line bg-surface p-4 text-sm",
+        "rounded-lg bg-bp-info-banner-bg p-4 text-sm",
         className,
       )}
     >
@@ -39,13 +39,13 @@ export function SourceAttribution({
         Source
       </h2>
       {source ? (
-        <p className="mt-1 font-medium text-slate-800">
+        <p className="mt-1 font-medium text-bp-graphite">
           {href ? (
             <a
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary-700 hover:underline"
+              className="font-medium text-link hover:underline"
             >
               {source.name}
             </a>
@@ -61,7 +61,7 @@ export function SourceAttribution({
       {lastChecked ? (
         <p className="mt-1 text-muted">Last checked: {lastChecked}</p>
       ) : null}
-      {note ? <p className="mt-2 leading-relaxed text-slate-600">{note}</p> : null}
+      {note ? <p className="mt-2 leading-relaxed text-bp-graphite">{note}</p> : null}
     </aside>
   );
 }

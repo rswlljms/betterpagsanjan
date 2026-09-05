@@ -149,3 +149,108 @@ export interface Announcement {
   sourceUrl?: string;
   kind?: "announcement" | "advisory" | "notice" | "event";
 }
+
+export type LegislativeDocumentType = "ordinance" | "resolution";
+
+export interface LegislativeDocument {
+  id: string;
+  slug: string;
+  documentType: LegislativeDocumentType;
+  /** e.g. "Ordinance No. 2024-01" — only when published officially. */
+  number?: string;
+  title: string;
+  summary: string;
+  /** ISO date passed/approved, when published. */
+  date?: string;
+  /** Four-digit year string, e.g. "2024". Derived from date when available. */
+  year?: string;
+  /** Free-form topics, e.g. "traffic", "market", "budget". */
+  topics?: string[];
+  /** Authors as published by the source, e.g. ["HON. ..."]. */
+  authors?: string[];
+  sourceUrl?: string;
+  verification: Verification;
+  lastChecked?: string;
+}
+
+export type ProjectStatus =
+  | "proposed"
+  | "planned"
+  | "ongoing"
+  | "completed"
+  | "delayed"
+  | "cancelled";
+
+export interface PublicProject {
+  id: string;
+  slug: string;
+  name: string;
+  /**
+   * Plain-language label for listings, derived from the official name
+   * without adding new facts (e.g. DPWH "K0095 + 949" chainage rendered as
+   * "Km 95.9"). The verbatim official `name` is always kept on the detail
+   * page. Omit when the official name is already readable.
+   */
+  displayName?: string;
+  description: string;
+  location?: string;
+  implementingOffice?: string;
+  status: ProjectStatus;
+  /** Budget text exactly as published, e.g. "₱5,000,000 (as published)". Never estimated. */
+  budget?: string;
+  startDate?: string;
+  targetCompletion?: string;
+  sourceUrl?: string;
+  verification: Verification;
+  lastChecked?: string;
+}
+
+export type TransparencyCategory =
+  | "budget"
+  | "procurement"
+  | "financial"
+  | "plans-programs"
+  | "documents"
+  | "open-data";
+
+export interface TransparencyRecord {
+  id: string;
+  slug: string;
+  title: string;
+  category: TransparencyCategory;
+  description: string;
+  year?: string;
+  /** Direct URL to the original official document. */
+  documentUrl?: string;
+  sourceUrl?: string;
+  verification: Verification;
+  lastChecked?: string;
+}
+
+export type CivicLocationCategory =
+  | "government"
+  | "emergency"
+  | "health"
+  | "education"
+  | "barangay"
+  | "transport"
+  | "tourism"
+  | "evacuation"
+  | "community"
+  | "public-facility";
+
+export interface CivicLocation {
+  id: string;
+  slug: string;
+  name: string;
+  category: CivicLocationCategory;
+  description?: string;
+  address?: string;
+  /** Coordinates only when confirmed from an authoritative source. Never guessed. */
+  latitude?: number;
+  longitude?: number;
+  /** OpenStreetMap link, built from coordinates when available. */
+  osmUrl?: string;
+  verification: Verification;
+  lastChecked?: string;
+}

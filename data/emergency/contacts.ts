@@ -30,6 +30,12 @@ export const nationalHotline = {
  * Local emergency contacts. Numbers are reproduced exactly as posted by
  * their cited source. Local numbers can change — for life-threatening
  * emergencies, 911 always comes first.
+ *
+ * Currency note (September 2026): the site-wide directory on the municipal
+ * legislative portal publishes MDRRMO and BFP mobile numbers that differ
+ * from numbers previously transcribed from the MDRRMO's Facebook page. The
+ * portal directory is treated as current; the older numbers are kept below
+ * as previously posted so the conflict stays visible (AGENTS.md §48).
  */
 export const emergencyContacts: EmergencyContact[] = [
   {
@@ -38,17 +44,16 @@ export const emergencyContacts: EmergencyContact[] = [
     description:
       "Municipal Disaster Risk Reduction and Management Office. Coordinates rescue, relief, and early warning during disasters.",
     numbers: [
-      { label: "Globe", value: "0997-823-9254" },
-      { label: "Smart", value: "0963-986-6435" },
-      { label: "Landline", value: "321-2448" },
+      { label: "Mobile", value: "0918-208-9305" },
+      { label: "Mobile", value: "0995-964-8402" },
     ],
     verification: {
-      status: "pending",
-      sourceId: "pagsanjan-mdrrmo-fb",
-      note: "Numbers were transcribed from the MDRRMO's official Facebook page through search indexing.",
+      status: "verified",
+      sourceId: "pagsanjan-legislative-portal",
+      sourceUrl: "https://www.pagsanjanlaguna.com",
+      verifiedAt: "2026-09-04",
+      note: "Site-wide emergency directory on the municipal legislative portal. Previously transcribed Facebook-posted numbers (0997-823-9254, 0963-986-6435, 321-2448) differed — verify before relying on any local number, and call 911 first in life-threatening emergencies.",
     },
-    caution:
-      "Transcribed from the MDRRMO's official Facebook page. Numbers may change — verify before relying on them, and call 911 first in life-threatening emergencies.",
   },
   {
     id: "pnp-pagsanjan",
@@ -70,14 +75,17 @@ export const emergencyContacts: EmergencyContact[] = [
     id: "bfp-pagsanjan",
     name: "Bureau of Fire Protection — Pagsanjan",
     description: "Fire station serving Pagsanjan.",
-    numbers: [{ value: "501-4520" }],
+    numbers: [
+      { label: "Mobile", value: "0998-983-1307" },
+      { label: "Mobile", value: "0932-146-7933" },
+    ],
     verification: {
-      status: "pending",
-      sourceId: "pagsanjan-mdrrmo-fb",
-      note: "Numbers were transcribed from the MDRRMO's official Facebook page through search indexing.",
+      status: "verified",
+      sourceId: "pagsanjan-legislative-portal",
+      sourceUrl: "https://www.pagsanjanlaguna.com",
+      verifiedAt: "2026-09-04",
+      note: "Site-wide emergency directory on the municipal legislative portal. A previously transcribed Facebook-posted number (501-4520) differed — verify before relying on any local number, and call 911 first in emergencies.",
     },
-    caution:
-      "Transcribed from the MDRRMO's official Facebook page. Numbers may change — verify before relying on them, and call 911 first in emergencies.",
   },
   {
     id: "municipal-hall",

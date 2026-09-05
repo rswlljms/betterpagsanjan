@@ -110,9 +110,28 @@ export const sources: SourceRecord[] = [
       "Official social media page of the Pagsanjan MDRRMO, used for posted emergency contact numbers. Numbers were transcribed through search indexing — verify before relying on them.",
     accessedAt: LAST_CHECKED,
   },
+  {
+    id: "pagsanjan-legislative-portal",
+    name: "Municipality of Pagsanjan — Legislative Portal (pagsanjanlaguna.com)",
+    organization: "Sangguniang Bayan of Pagsanjan",
+    url: "https://www.pagsanjanlaguna.com",
+    sourceType: "government",
+    description:
+      "Self-described Official Government Portal of the Municipality of Pagsanjan, operated as a legislative information system (site footer: Legislative System). Hosts the searchable ordinance and resolution archive with official document PDFs, the Sangguniang Bayan roster, and a site-wide emergency hotline directory. Content is stated to be in the public domain. Note: this portal uses a .com domain; the .gov.ph site (pagsanjan.gov.ph, linked from the DTI CMCI profile) remains the primary municipal website.",
+    accessedAt: LAST_CHECKED,
+  },
 
   // ——— Secondary references (cross-checking) ———
   {
+    id: "bettergov-budget-api",
+    name: "BetterGov.PH — Philippine Budget Data API",
+    organization: "BetterGov.PH",
+    url: "https://budget.bettergov.ph/docs",
+    sourceType: "reference",
+    description:
+      "Independent civic-tech compilation of Department of Budget and Management GAA and NEP publications; free for public use under fair-use with attribution. Pagsanjan project records were transcribed in September 2026 from GAA search results (exact peso figures as published). National appropriations only — never municipal budget figures. Verify against official DBM/DPWH documents before formal citation.",
+    accessedAt: LAST_CHECKED,
+  },  {
     id: "philatlas-pagsanjan",
     name: "PhilAtlas — Pagsanjan, Laguna",
     url: "https://www.philatlas.com/luzon/r04a/laguna/pagsanjan.html",

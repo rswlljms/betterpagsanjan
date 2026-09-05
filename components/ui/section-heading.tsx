@@ -31,21 +31,21 @@ export function SectionHeading({
     >
       <div className="max-w-2xl">
         {eyebrow ? (
-          <p className="text-xs font-semibold uppercase tracking-wider text-primary-700">
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted">
             {eyebrow}
           </p>
         ) : null}
-        <Tag className="mt-1 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+        <Tag className="font-display mt-1 text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
           {title}
         </Tag>
         {description ? (
-          <p className="mt-2 text-sm text-muted sm:text-base">{description}</p>
+          <p className="mt-2 text-sm text-bp-graphite sm:text-base">{description}</p>
         ) : null}
       </div>
       {action ? (
         <Link
           href={action.href}
-          className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-primary-700 hover:text-primary-800"
+          className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-bp-graphite hover:text-bp-ink"
         >
           {action.label}
           <ArrowRight className="size-4" aria-hidden />

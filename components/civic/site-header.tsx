@@ -3,42 +3,86 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Menu, Search, Siren, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronDown, Menu, Search, Siren, X } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { emergencyNav, mainNav, mobileNav } from "@/data/navigation";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
+function slugFor(href: string) {
+  return href.replace(/[^a-z0-9]/gi, "") || "home";
+}
+
+function pathOf(href: string) {
+  return href.split("?")[0];
+}
+
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  /** Title of the currently open desktop dropdown (one at a time). */
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  /** Title of the currently expanded mobile accordion. */
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const headerRef = useRef<HTMLElement>(null);
 
-  // Close the panel whenever the route changes.
+  // Close everything whenever the route changes.
   useEffect(() => {
     setOpen(false);
+    setOpenMenu(null);
+    setExpanded(null);
   }, [pathname]);
 
-  // Escape closes the panel and returns focus to the toggle.
+  // Escape closes the dropdown first, then the mobile panel.
   useEffect(() => {
-    if (!open) return;
+    if (!openMenu && !open) return;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
+      if (event.key !== "Escape") return;
+      if (openMenu) {
+        setOpenMenu(null);
+        document.getElementById(`nav-toggle-${slugFor(openMenu)}`)?.focus();
+      } else {
         setOpen(false);
         document.getElementById("mobile-menu-toggle")?.focus();
       }
     };
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [open]);
+  }, [openMenu, open]);
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+  // Pointer outside the header closes the desktop dropdown.
+  useEffect(() => {
+    if (!openMenu) return;
+    const onPointerDown = (event: PointerEvent) => {
+      if (
+        headerRef.current &&
+        !headerRef.current.contains(event.target as Node)
+      ) {
+        setOpenMenu(null);
+      }
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [openMenu]);
+
+  const isActive = (href: string) => {
+    const path = pathOf(href);
+    return path === "/"
+      ? pathname === "/"
+      : pathname === path || pathname.startsWith(`${path}/`);
+  };
+
+  const isSectionActive = (href: string, children?: { href: string }[]) =>
+    isActive(href) || (children?.some((child) => isActive(child.href)) ?? false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-white">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-40 border-b border-line bg-bp-paper/95 backdrop-blur-md"
+    >
       <Container>
-        <div className="flex h-16 items-center justify-between gap-3">
+        <div className="flex h-[68px] items-center justify-between gap-3">
           <Link
             href="/"
             className="flex items-center"
@@ -57,30 +101,112 @@ export function SiteHeader() {
 
           <nav
             aria-label="Main navigation"
-            className="hidden items-center gap-1 lg:flex"
+            className="hidden items-center gap-2 lg:flex"
           >
-            {mainNav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isActive(item.href) ? "page" : undefined}
-                className={cn(
-                  "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                  isActive(item.href)
-                    ? "bg-primary-50 text-primary-800"
-                    : "text-slate-700 hover:bg-slate-100 hover:text-slate-900",
-                )}
-              >
-                {item.title}
-              </Link>
-            ))}
+            {mainNav.map((item) => {
+              const active = isSectionActive(item.href, item.children);
+              const expandedMenu = openMenu === item.title;
+              if (!item.children) {
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "px-2 py-2 text-sm font-medium transition-colors",
+                      active
+                        ? "font-semibold text-bp-ink"
+                        : "text-bp-graphite hover:text-bp-ink",
+                    )}
+                  >
+                    {item.title}
+                  </Link>
+                );
+              }
+              return (
+                <div
+                  key={item.href}
+                  className="relative"
+                  onMouseEnter={() => setOpenMenu(item.title)}
+                  onMouseLeave={() => setOpenMenu(null)}
+                >
+                  <span className="inline-flex items-center">
+                    <Link
+                      href={item.href}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "px-2 py-2 text-sm font-medium transition-colors",
+                        active
+                          ? "font-semibold text-bp-ink"
+                          : "text-bp-graphite hover:text-bp-ink",
+                      )}
+                    >
+                      {item.title}
+                    </Link>
+                    <button
+                      id={`nav-toggle-${slugFor(item.title)}`}
+                      type="button"
+                      aria-expanded={expandedMenu}
+                      aria-controls={`nav-submenu-${slugFor(item.title)}`}
+                      aria-label={`${expandedMenu ? "Hide" : "Show"} ${item.title} submenu`}
+                      onClick={() =>
+                        setOpenMenu(expandedMenu ? null : item.title)
+                      }
+                      className="-ml-1 flex size-7 items-center justify-center rounded-md text-bp-graphite transition-colors hover:text-bp-ink"
+                    >
+                      <ChevronDown
+                        className={cn(
+                          "size-4 transition-transform",
+                          expandedMenu && "rotate-180",
+                        )}
+                        aria-hidden
+                      />
+                    </button>
+                  </span>
+
+                  {expandedMenu ? (
+                    <div className="absolute left-0 top-full z-50 w-80 pt-2">
+                      <div className="rounded-xl bg-white p-2 shadow-bp-sm-4">
+                        <ul id={`nav-submenu-${slugFor(item.title)}`}>
+                          {item.children.map((child, index) => (
+                            <li key={child.href}>
+                              <Link
+                                href={child.href}
+                                onClick={() => setOpenMenu(null)}
+                                className="block rounded-lg px-3 py-2.5 transition-colors hover:bg-bp-paper"
+                              >
+                                <span
+                                  className={cn(
+                                    "block text-sm text-bp-graphite",
+                                    index === 0
+                                      ? "font-semibold"
+                                      : "font-medium",
+                                  )}
+                                >
+                                  {child.title}
+                                </span>
+                                {child.description ? (
+                                  <span className="mt-0.5 block text-xs leading-relaxed text-muted">
+                                    {child.description}
+                                  </span>
+                                ) : null}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
           </nav>
 
           <div className="flex items-center gap-1.5">
             <Link
               href="/search"
               aria-label="Search BetterPagsanjan"
-              className="flex size-10 items-center justify-center rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+              className="flex size-10 items-center justify-center rounded-lg text-bp-graphite transition-colors hover:text-bp-ink"
             >
               <Search className="size-5" aria-hidden />
             </Link>
@@ -98,7 +224,7 @@ export function SiteHeader() {
               aria-expanded={open}
               aria-controls="mobile-nav"
               aria-label={open ? "Close menu" : "Open menu"}
-              className="inline-flex size-10 items-center justify-center rounded-lg text-slate-700 hover:bg-slate-100 lg:hidden"
+              className="inline-flex size-10 items-center justify-center rounded-lg border border-line bg-white text-bp-graphite shadow-bp-subtle-3 transition-colors hover:text-bp-ink lg:hidden"
             >
               {open ? (
                 <X className="size-5" aria-hidden />
@@ -111,27 +237,99 @@ export function SiteHeader() {
       </Container>
 
       {open ? (
-        <div id="mobile-nav" className="border-t border-line bg-white lg:hidden">
-          <Container className="py-3">
+        <div
+          id="mobile-nav"
+          className="border-t border-line bg-bp-paper lg:hidden"
+        >
+          <Container className="max-h-[70vh] overflow-y-auto py-3">
             <nav aria-label="Mobile navigation">
               <ul className="space-y-1">
-                {mobileNav.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      aria-current={isActive(item.href) ? "page" : undefined}
-                      className={cn(
-                        "block rounded-lg px-3 py-2.5 text-sm font-medium",
-                        item.href === emergencyNav.href
-                          ? "text-red-700 hover:bg-red-50"
-                          : "text-slate-800 hover:bg-slate-100",
-                        isActive(item.href) && "bg-primary-50 text-primary-800",
-                      )}
-                    >
-                      {item.title}
-                    </Link>
-                  </li>
-                ))}
+                {mobileNav.map((item) => {
+                  const active = isSectionActive(item.href, item.children);
+                  if (!item.children) {
+                    return (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          onClick={() => setOpen(false)}
+                          aria-current={active ? "page" : undefined}
+                          className={cn(
+                            "block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                            item.href === emergencyNav.href
+                              ? "text-red-700 hover:bg-red-50"
+                              : "text-bp-graphite hover:text-bp-ink",
+                            active &&
+                              item.href !== emergencyNav.href &&
+                              "font-semibold text-bp-ink",
+                          )}
+                        >
+                          {item.title}
+                        </Link>
+                      </li>
+                    );
+                  }
+                  const isExpanded = expanded === item.title;
+                  return (
+                    <li key={item.href}>
+                      <div className="flex items-center gap-1">
+                        <Link
+                          href={item.href}
+                          onClick={() => setOpen(false)}
+                          aria-current={active ? "page" : undefined}
+                          className={cn(
+                            "flex-1 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                            active
+                              ? "font-semibold text-bp-ink"
+                              : "text-bp-graphite hover:text-bp-ink",
+                          )}
+                        >
+                          {item.title}
+                        </Link>
+                        <button
+                          type="button"
+                          aria-expanded={isExpanded}
+                          aria-controls={`mobile-submenu-${slugFor(item.title)}`}
+                          aria-label={`${isExpanded ? "Hide" : "Show"} ${item.title} submenu`}
+                          onClick={() =>
+                            setExpanded(isExpanded ? null : item.title)
+                          }
+                          className="flex size-10 items-center justify-center rounded-lg text-bp-graphite transition-colors hover:text-bp-ink"
+                        >
+                          <ChevronDown
+                            className={cn(
+                              "size-4 transition-transform",
+                              isExpanded && "rotate-180",
+                            )}
+                            aria-hidden
+                          />
+                        </button>
+                      </div>
+                      {isExpanded ? (
+                        <ul
+                          id={`mobile-submenu-${slugFor(item.title)}`}
+                          className="mb-1 ml-3 space-y-0.5 border-l-2 border-line pl-3"
+                        >
+                          {item.children.map((child, index) => (
+                            <li key={child.href}>
+                              <Link
+                                href={child.href}
+                                onClick={() => setOpen(false)}
+                                className={cn(
+                                  "block rounded-lg px-3 py-2 text-sm transition-colors hover:bg-white hover:text-bp-ink",
+                                  index === 0
+                                    ? "font-semibold text-bp-ink"
+                                    : "text-bp-graphite",
+                                )}
+                              >
+                                {child.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
           </Container>

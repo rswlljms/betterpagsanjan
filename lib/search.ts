@@ -1,8 +1,20 @@
 import { barangays } from "@/data/barangays/barangays";
 import { offices } from "@/data/government/offices";
+import { legislativeDocuments } from "@/data/legislative/documents";
+import { civicLocations } from "@/data/locations/locations";
+import { projects } from "@/data/projects/projects";
 import { getServiceCategory, services } from "@/data/services";
+import { transparencyRecords } from "@/data/transparency/records";
 
-export type SearchResultType = "service" | "office" | "barangay" | "page";
+export type SearchResultType =
+  | "service"
+  | "office"
+  | "barangay"
+  | "legislative"
+  | "project"
+  | "transparency"
+  | "location"
+  | "page";
 
 export interface SearchRecord {
   id: string;
@@ -218,6 +230,56 @@ export const searchIndex: SearchRecord[] = [
     description: barangay.description ?? "Barangay of Pagsanjan, Laguna.",
     href: `/barangays/${barangay.slug}`,
     keywords: ["barangay", "pagsanjan"],
+  })),
+  ...legislativeDocuments.map((doc): SearchRecord => ({
+    id: `legislative-${doc.id}`,
+    title: doc.number ? `${doc.number} — ${doc.title}` : doc.title,
+    type: "legislative",
+    description: doc.summary,
+    href:
+      doc.documentType === "ordinance"
+        ? `/ordinances/${doc.slug}`
+        : `/resolutions/${doc.slug}`,
+    keywords: [
+      doc.documentType,
+      doc.number ?? "",
+      doc.year ?? "",
+      ...(doc.topics ?? []),
+    ].filter(Boolean),
+    badge: doc.documentType === "ordinance" ? "Ordinance" : "Resolution",
+  })),
+  ...projects.map((project): SearchRecord => ({
+    id: `project-${project.id}`,
+    title: project.displayName ?? project.name,
+    type: "project",
+    description: project.description,
+    href: `/projects/${project.slug}`,
+    keywords: [
+      project.name,
+      project.status,
+      project.location ?? "",
+      project.implementingOffice ?? "",
+    ].filter(Boolean),
+    badge: "Project",
+  })),
+  ...transparencyRecords.map((record): SearchRecord => ({
+    id: `transparency-${record.id}`,
+    title: record.title,
+    type: "transparency",
+    description: record.description,
+    href: "/transparency",
+    keywords: [record.category, record.year ?? ""].filter(Boolean),
+    badge: "Transparency",
+  })),
+  ...civicLocations.map((location): SearchRecord => ({
+    id: `location-${location.id}`,
+    title: location.name,
+    type: "location",
+    description:
+      location.description ?? location.address ?? "Verified civic location.",
+    href: "/map",
+    keywords: [location.category, location.address ?? ""].filter(Boolean),
+    badge: "Location",
   })),
   ...pageRecords,
 ];

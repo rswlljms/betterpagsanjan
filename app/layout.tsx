@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { PwaRegister } from "@/components/civic/pwa-register";
+import { EmergencyStrip } from "@/components/civic/emergency-strip";
 import { SiteFooter } from "@/components/civic/site-footer";
 import { SiteHeader } from "@/components/civic/site-header";
 import { SkipLink } from "@/components/civic/skip-link";
@@ -11,6 +12,14 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-poppins",
+  display: "swap",
+});
+
+// BP guide: Poppins for display + Inter for reading and civic UI text.
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -32,7 +41,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1d4ed8",
+  themeColor: "#101010",
 };
 
 export default function RootLayout({
@@ -42,8 +51,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} font-sans`}>
+      <body className={`${poppins.variable} ${inter.variable} font-ui`}>
         <SkipLink />
+        <EmergencyStrip />
         <SiteHeader />
         <main id="main-content" tabIndex={-1} className="focus:outline-none">
           {children}

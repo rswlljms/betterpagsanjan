@@ -11,14 +11,14 @@ export function ServiceCard({ service }: { service: GovernmentService }) {
   return (
     <Link
       href={`/services/${service.slug}`}
-      className="group flex h-full flex-col rounded-lg border border-line bg-white p-5 transition-colors hover:border-primary-300 hover:bg-primary-50/40"
+      className="group flex h-full flex-col rounded-xl bg-white p-6 shadow-bp-sm-4 transition hover:shadow-bp-sm"
     >
       <div className="pb-4">
         {category ? <Badge variant="primary">{category.name}</Badge> : null}
-        <h3 className="mt-3 font-semibold leading-snug text-ink">
+        <h3 className="font-display mt-3 font-semibold leading-snug tracking-[0.2px] text-ink">
           {service.title}
         </h3>
-        <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-slate-600">
+        <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-bp-graphite">
           {service.description}
         </p>
       </div>

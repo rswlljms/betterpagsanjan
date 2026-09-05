@@ -22,15 +22,15 @@ export function PageHero({
     <div className={cn("border-b border-line bg-surface", className)}>
       <Container className="py-10 sm:py-14">
         {eyebrow ? (
-          <p className="text-xs font-semibold uppercase tracking-wider text-primary-700">
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted">
             {eyebrow}
           </p>
         ) : null}
-        <h1 className="mt-1 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+        <h1 className="font-display mt-1 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
           {title}
         </h1>
         {description ? (
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-bp-graphite sm:text-base">
             {description}
           </p>
         ) : null}

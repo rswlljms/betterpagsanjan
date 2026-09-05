@@ -15,6 +15,7 @@ import { Container } from "@/components/ui/container";
 import { offices } from "@/data/government/offices";
 import { officials } from "@/data/government/officials";
 import { site } from "@/data/site";
+import { getSource } from "@/data/sources";
 import type { OfficeGroup } from "@/types/civic";
 
 export const metadata: Metadata = {
@@ -122,30 +123,46 @@ export default function GovernmentPage() {
             Public officials
           </h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {officials.map((official) => (
-              <Card key={official.id}>
-                <CardContent className="pt-5">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-muted">
-                    {official.position}
-                  </p>
-                  <p className="mt-1 font-semibold text-ink">{official.name}</p>
-                  <p className="mt-2 text-xs leading-relaxed text-muted">
-                    Source: DTI CMCI LGU profile · Last checked: September 2026
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-            <div className="flex flex-col justify-center rounded-lg border border-dashed border-slate-300 bg-surface p-5 text-sm">
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted">
-                Vice Mayor
-              </p>
-              <p className="mt-1 italic text-muted">Not yet available</p>
-            </div>
+            {officials.map((official) => {
+              const source = getSource(official.sourceId);
+              return (
+                <Card key={official.id}>
+                  <CardContent className="pt-5">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted">
+                      {official.position}
+                    </p>
+                    <p className="mt-1 font-semibold text-ink">
+                      {official.name}
+                    </p>
+                    <p className="mt-2 text-xs leading-relaxed text-muted">
+                      Source: {source?.name ?? official.sourceId} ·
+                      Verified: {official.verifiedAt}
+                    </p>
+                    {official.note ? (
+                      <p className="mt-2 text-xs leading-relaxed text-muted">
+                        {official.note}
+                      </p>
+                    ) : null}
+                  </CardContent>
+                </Card>
+              );
+            })}
             <div className="flex flex-col justify-center rounded-lg border border-dashed border-slate-300 bg-surface p-5 text-sm">
               <p className="text-xs font-semibold uppercase tracking-wider text-muted">
                 Sangguniang Bayan members
               </p>
-              <p className="mt-1 italic text-muted">Not yet available</p>
+              <p className="mt-1 italic text-muted">
+                Full roster on the{" "}
+                <a
+                  href={`${site.legislativePortal}/legislative`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium not-italic text-primary-700 hover:underline"
+                >
+                  official legislative portal
+                </a>{" "}
+                — being verified for this directory.
+              </p>
             </div>
           </div>
           <p className="mt-4 flex max-w-3xl items-start gap-2 text-sm leading-relaxed text-muted">

@@ -11,13 +11,14 @@ export type BadgeVariant =
   | "outline";
 
 const variantStyles: Record<BadgeVariant, string> = {
-  neutral: "border-slate-200 bg-slate-100 text-slate-700",
-  primary: "border-primary-200 bg-primary-50 text-primary-800",
+  // BP tag: paper fill / silver edge, graphite text, pill, 4px × 12px.
+  neutral: "border-line bg-bp-paper text-bp-graphite",
+  primary: "border-line bg-bp-info-banner-bg text-bp-graphite",
   accent: "border-accent-100 bg-accent-50 text-accent-800",
   success: "border-green-200 bg-green-50 text-green-800",
   warning: "border-amber-300 bg-amber-50 text-amber-900",
   danger: "border-red-200 bg-red-50 text-red-800",
-  outline: "border-line bg-white text-slate-600",
+  outline: "border-line bg-white text-muted",
 };
 
 export function Badge({
@@ -28,7 +29,7 @@ export function Badge({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-medium",
+        "inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-medium",
         variantStyles[variant],
         className,
       )}

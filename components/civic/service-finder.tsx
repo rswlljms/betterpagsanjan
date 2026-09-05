@@ -98,14 +98,14 @@ export function ServiceFinder({ services, categories }: ServiceFinderProps) {
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
             placeholder="Search services, e.g. business permit…"
-            className="min-h-11 w-full rounded-lg border border-slate-300 bg-white pl-9 pr-9 text-sm text-slate-900 placeholder:text-muted focus:border-primary-500"
+            className="min-h-11 w-full rounded-lg border border-line bg-white pl-9 pr-9 text-sm text-ink placeholder:text-bp-stone"
           />
           {query ? (
             <button
               type="button"
               onClick={() => onQueryChange("")}
               aria-label="Clear search"
-              className="absolute right-2 top-1/2 flex size-6 -translate-y-1/2 items-center justify-center rounded-full text-muted hover:bg-slate-100 hover:text-slate-700"
+              className="absolute right-2 top-1/2 flex size-6 -translate-y-1/2 items-center justify-center rounded-full text-muted hover:bg-bp-paper hover:text-bp-graphite"
             >
               <X className="size-4" aria-hidden />
             </button>
@@ -124,8 +124,8 @@ export function ServiceFinder({ services, categories }: ServiceFinderProps) {
           className={cn(
             "min-h-9 rounded-full border px-3.5 text-sm font-medium transition-colors",
             category === ""
-              ? "border-primary-700 bg-primary-700 text-white"
-              : "border-slate-300 bg-white text-slate-700 hover:border-slate-400",
+              ? "border-bp-ink bg-bp-ink text-white"
+              : "border-line bg-white text-bp-graphite hover:border-bp-stone",
           )}
         >
           All
@@ -139,8 +139,8 @@ export function ServiceFinder({ services, categories }: ServiceFinderProps) {
             className={cn(
               "min-h-9 rounded-full border px-3.5 text-sm font-medium transition-colors",
               category === item.id
-                ? "border-primary-700 bg-primary-700 text-white"
-                : "border-slate-300 bg-white text-slate-700 hover:border-slate-400",
+                ? "border-bp-ink bg-bp-ink text-white"
+                : "border-line bg-white text-bp-graphite hover:border-bp-stone",
             )}
           >
             {item.name}
@@ -156,7 +156,7 @@ export function ServiceFinder({ services, categories }: ServiceFinderProps) {
       </p>
 
       {filtered.length > 0 ? (
-        <ul className="mt-4 grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-4 grid list-none gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((service) => (
             <li key={service.id} className="h-full">
               <ServiceCard service={service} />

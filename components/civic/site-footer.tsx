@@ -41,8 +41,9 @@ const resources: { title: string; href: string }[] = [
 ];
 
 export function SiteFooter() {
+  // BP guide: ink (#101010) dark footer anchoring decisive moments.
   return (
-    <footer className="bg-neutral-950 text-neutral-300">
+    <footer className="bg-bp-ink text-neutral-300">
       <Container className="py-12">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           {/* Brand */}

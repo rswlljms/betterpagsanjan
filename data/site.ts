@@ -19,6 +19,11 @@ export const site = {
    * (verified via the DTI CMCI LGU profile, September 2026).
    */
   officialWebsite: "https://pagsanjan.gov.ph",
+  /**
+   * Legislative information portal of the Municipality of Pagsanjan —
+   * searchable ordinance/resolution archive with official PDFs.
+   */
+  legislativePortal: "https://www.pagsanjanlaguna.com",
 };
 
 export const independence = {
