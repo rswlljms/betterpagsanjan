@@ -86,12 +86,15 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, Arial, sans-serif;
-  --font-display: var(--font-poppins), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, Arial, sans-serif;
-  --font-ui: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, Arial, sans-serif;
+  --font-sans:
+    var(--font-poppins), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Arial, sans-serif;
+  --font-display:
+    var(--font-poppins), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Arial, sans-serif;
+  --font-ui:
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Arial, sans-serif;
 }
 
 @theme {
@@ -188,8 +191,15 @@ html {
   body {
     background-color: var(--bp-color-paper);
     color: var(--bp-color-graphite);
-    font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
-      "Segoe UI", Roboto, Arial, sans-serif;
+    font-family:
+      var(--font-inter),
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      Roboto,
+      Arial,
+      sans-serif;
     font-weight: 400;
     letter-spacing: -0.19px;
     -webkit-font-smoothing: antialiased;
@@ -199,8 +209,15 @@ html {
   h1,
   h2,
   h3 {
-    font-family: var(--font-poppins), ui-sans-serif, system-ui, -apple-system,
-      "Segoe UI", Roboto, Arial, sans-serif;
+    font-family:
+      var(--font-poppins),
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      Roboto,
+      Arial,
+      sans-serif;
     font-weight: 600;
     color: var(--bp-color-ink);
   }
@@ -229,4 +246,81 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/*
+ * Civic map (Leaflet + OpenStreetMap).
+ * Pins are CSS divIcons so no marker image assets are needed.
+ * The stacking context keeps Leaflet panes below sticky site chrome.
+ */
+.civic-map {
+  isolation: isolate;
+  background-color: #e5e7eb;
+}
+
+.civic-map.leaflet-container {
+  z-index: 0;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+.bp-pin-wrap {
+  background: none;
+  border: none;
+}
+
+.bp-pin {
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border: 2px solid;
+}
+
+.bp-pin--verified {
+  background-color: #4285f4;
+  border-color: #174ea6;
+}
+
+.bp-pin--pending {
+  background-color: #fbbc04;
+  border-color: #92400e;
+}
+
+.bp-pin::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: #ffffff;
+}
+
+.bp-pin--pending::after {
+  background-color: #101010;
+}
+
+.bp-pin-wrap:focus-visible {
+  outline: 2px solid #101010;
+  outline-offset: 2px;
+}
+
+/* Barangay hover labels: white pill, civic type. */
+.bp-brgy-tip.leaflet-tooltip {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: rgba(34, 42, 53, 0.12) 0 4px 8px 0;
+  color: #101010;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 4px 10px;
+}
+
+.bp-brgy-tip.leaflet-tooltip::before {
+  border-top-color: #ffffff;
 }

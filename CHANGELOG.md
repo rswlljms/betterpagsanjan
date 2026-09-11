@@ -11,6 +11,16 @@ internal mechanics.
 
 ## [Unreleased]
 
+### Added
+
+- Interactive civic map with all 16 barangay areas (hover for names,
+  select to open the barangay page) plus facility pins
+- Live Pagsanjan weather on the homepage Today section, with source
+  attribution and observation time
+- Police station, fire station, and five health facilities on the map
+  as clearly labeled unverified leads, and a map pin for the Municipal
+  Hall with its conflicting street names shown
+
 ## [0.1.0] - 2026-09-05
 
 ### Added

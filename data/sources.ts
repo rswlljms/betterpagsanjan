@@ -24,8 +24,7 @@ export const sources: SourceRecord[] = [
   },
   {
     id: "ra-10121",
-    name:
-      "Philippine Disaster Risk Reduction and Management Act of 2010 (Republic Act No. 10121)",
+    name: "Philippine Disaster Risk Reduction and Management Act of 2010 (Republic Act No. 10121)",
     organization: "Official Gazette of the Republic of the Philippines",
     url: "https://www.officialgazette.gov.ph/2010/05/27/republic-act-no-10121/",
     sourceType: "statute",
@@ -35,8 +34,7 @@ export const sources: SourceRecord[] = [
   },
   {
     id: "ra-9994",
-    name:
-      "Expanded Senior Citizens Act of 2010 (Republic Act No. 9994)",
+    name: "Expanded Senior Citizens Act of 2010 (Republic Act No. 9994)",
     sourceType: "statute",
     description:
       "Grants senior citizens their benefits and privileges, including identification cards issued through the Office of the Senior Citizens Affairs (OSCA).",
@@ -131,7 +129,8 @@ export const sources: SourceRecord[] = [
     description:
       "Independent civic-tech compilation of Department of Budget and Management GAA and NEP publications; free for public use under fair-use with attribution. Pagsanjan project records were transcribed in September 2026 from GAA search results (exact peso figures as published). National appropriations only — never municipal budget figures. Verify against official DBM/DPWH documents before formal citation.",
     accessedAt: LAST_CHECKED,
-  },  {
+  },
+  {
     id: "philatlas-pagsanjan",
     name: "PhilAtlas — Pagsanjan, Laguna",
     url: "https://www.philatlas.com/luzon/r04a/laguna/pagsanjan.html",
@@ -156,6 +155,28 @@ export const sources: SourceRecord[] = [
     sourceType: "reference",
     description:
       "Secondary source on Pagsanjan Falls (Magdapio/Cavinti Falls), its jurisdiction, and access via the shooting-the-rapids boat trip.",
+    accessedAt: LAST_CHECKED,
+  },
+
+  // ——— Candidate leads (not authoritative) ———
+  {
+    id: "google-maps-pin",
+    name: "Google Maps place pin (candidate lead)",
+    organization: "Google Maps contributors",
+    url: "https://maps.google.com",
+    sourceType: "reference",
+    description:
+      "Crowd-sourced map pin used only as a candidate lead for a facility's approximate location. Not an authoritative source: coordinates are approximate, place names and addresses can be contributor-edited, and inclusion here never means the facility's services, hours, or contact details are verified. Records citing this source stay pending until confirmed against an LGU, PNP, BFP, DOH, or other authoritative source.",
+    accessedAt: LAST_CHECKED,
+  },
+  {
+    id: "openstreetmap",
+    name: "OpenStreetMap contributors",
+    organization: "OpenStreetMap",
+    url: "https://www.openstreetmap.org/copyright",
+    sourceType: "reference",
+    description:
+      "Community-mapped geographic data under the Open Database License (ODbL). Used for map tiles and the Pagsanjan barangay boundary polygons (admin_level 10 relations, fetched September 2026 via the Overpass API and vendored as static GeoJSON). Boundaries are community contributions — approximate, not a legal or cadastral survey. OSM short names differ in two cases: relations named Uno/Dos are mapped to Barangay I/II (Poblacion) by name inference, unverified against the LGU.",
     accessedAt: LAST_CHECKED,
   },
 

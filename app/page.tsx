@@ -5,20 +5,20 @@ import {
   HardHat,
   Landmark,
   Map,
-  Megaphone,
   Mountain,
   ScrollText,
-  Siren,
   Users,
 } from "lucide-react";
+import { CivicMapLoader } from "@/components/civic/civic-map-loader";
 import { LinkCard } from "@/components/civic/link-card";
 import { ServiceCard } from "@/components/civic/service-card";
 import { StatCard } from "@/components/civic/stat-card";
+import { WeatherCard } from "@/components/civic/weather-card";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Button, ButtonLink } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { announcements } from "@/data/announcements";
+import { getMappableLocations } from "@/data/locations/locations";
 import { getFeaturedServices } from "@/data/services";
 import { site } from "@/data/site";
 import { statistics } from "@/data/statistics";
@@ -32,6 +32,12 @@ const popularSearches = [
 
 export default function HomePage() {
   const featured = getFeaturedServices();
+  // Homepage embed mirrors the reference layout: barangay areas with only
+  // the Municipal Hall pinned.
+  const municipalHall = getMappableLocations().find(
+    (location) => location.id === "municipal-hall",
+  );
+  const homeLocations = municipalHall ? [municipalHall] : [];
   const glanceStats = statistics.filter((item) =>
     ["population-2024", "barangays"].includes(item.id),
   );
@@ -64,8 +70,8 @@ export default function HomePage() {
               {site.tagline}
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-bp-graphite">
-              Access government services, information, and resources for the people
-              of Pagsanjan, Laguna.
+              Access government services, information, and resources for the
+              people of Pagsanjan, Laguna.
             </p>
             <form
               action="/search"
@@ -103,98 +109,73 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Today in Pagsanjan */}
+      {/* Today in Pagsanjan — live weather + civic map */}
       <section className="py-16 sm:py-24">
         <Container>
           <SectionHeading
             eyebrow="Today in Pagsanjan"
-            title="What’s happening"
-            description="Announcements and advisories appear here only after they can be traced to an official source."
+            title="Weather & map of Pagsanjan"
+            description="Live conditions and barangay map — Pagsanjan, Laguna."
           />
-          <div className="mt-8 grid gap-3 lg:grid-cols-2">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Megaphone
-                    className="size-5 shrink-0 text-bp-graphite"
-                    aria-hidden
-                  />
-                  Latest announcements
-                </CardTitle>
-                <CardDescription>
-                  From official government channels.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                {announcements.length === 0 ? (
-                  <div className="rounded-xl border border-dashed border-line bg-bp-paper px-5 py-8 text-center">
-                    <p className="font-medium text-ink">
-                      No announcements published yet
-                    </p>
-                    <p className="mx-auto mt-1 max-w-sm text-sm leading-relaxed text-muted">
-                      BetterPagsanjan does not publish unverified
-                      announcements. For current advisories, check the official
-                      channels of the Municipality of Pagsanjan.
-                    </p>
-                    <div className="mt-4 flex flex-wrap justify-center gap-2">
-                      <ButtonLink variant="secondary" size="sm" href="/announcements">
-                        Announcements
-                      </ButtonLink>
-                      <ButtonLink
-                        variant="secondary"
-                        size="sm"
-                        href={site.officialWebsite}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Official website
-                      </ButtonLink>
-                    </div>
-                  </div>
-                ) : (
-                  <ul className="space-y-4">
-                    {announcements.slice(0, 4).map((announcement) => (
-                      <li key={announcement.id} className="text-sm">
-                        <p className="font-medium text-ink">
-                          {announcement.title}
-                        </p>
-                        <p className="mt-0.5 text-muted">
-                          {announcement.summary}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Siren className="size-5 shrink-0 text-red-700" aria-hidden />
-                  Emergency information
-                </CardTitle>
-                <CardDescription>
-                  Know what to do before, during, and after a disaster.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="list-disc space-y-2 pl-5 text-sm text-bp-graphite">
-                  <li>
-                    National emergency hotline:{" "}
-                    <strong className="font-semibold text-ink">911</strong>
-                  </li>
-                  <li>Local emergency and government contact numbers</li>
-                  <li>Typhoon, flood, and earthquake safety guides</li>
-                  <li>Emergency kit checklist</li>
-                </ul>
-                <ButtonLink href="/emergency" variant="danger" className="mt-5">
-                  <Siren className="size-4" aria-hidden />
-                  Emergency &amp; disaster information
-                </ButtonLink>
-              </CardContent>
-            </Card>
+          <div className="mt-8 grid gap-3 lg:grid-cols-5">
+            <div className="lg:col-span-2">
+              <WeatherCard />
+            </div>
+            <div className="lg:col-span-3">
+              <CivicMapLoader locations={homeLocations} showFilters={false} />
+              <p className="mt-3 text-sm">
+                <Link
+                  href="/map"
+                  className="font-medium text-link hover:underline"
+                >
+                  Open the full civic map
+                  <span aria-hidden> →</span>
+                </Link>
+              </p>
+            </div>
           </div>
+          {announcements.length === 0 ? (
+            <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted">
+              No announcements published yet — BetterPagsanjan does not publish
+              unverified announcements. For current advisories, check the{" "}
+              <Link
+                href="/announcements"
+                className="font-medium text-link hover:underline"
+              >
+                announcements page
+              </Link>{" "}
+              or the{" "}
+              <a
+                href={site.officialWebsite}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-link hover:underline"
+              >
+                official channels of the Municipality of Pagsanjan
+              </a>
+              . For emergencies, call{" "}
+              <a href="tel:911" className="font-bold text-ink">
+                911
+              </a>{" "}
+              or visit the{" "}
+              <Link
+                href="/emergency"
+                className="font-medium text-link hover:underline"
+              >
+                emergency center
+              </Link>
+              .
+            </p>
+          ) : (
+            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+              {announcements.slice(0, 2).map((announcement) => (
+                <li key={announcement.id} className="text-sm">
+                  <p className="font-medium text-ink">{announcement.title}</p>
+                  <p className="mt-0.5 text-muted">{announcement.summary}</p>
+                </li>
+              ))}
+            </ul>
+          )}
         </Container>
       </section>
 
