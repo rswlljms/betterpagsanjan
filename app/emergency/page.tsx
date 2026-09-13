@@ -1,19 +1,11 @@
 import type { Metadata } from "next";
-import {
-  Backpack,
-  Droplets,
-  House,
-  TriangleAlert,
-} from "lucide-react";
+import { Backpack, Droplets, House, TriangleAlert } from "lucide-react";
 import { PageHero } from "@/components/civic/page-hero";
 import { SourceAttribution } from "@/components/civic/source-attribution";
 import { VerificationBadge } from "@/components/civic/verification-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
-import {
-  emergencyContacts,
-  nationalHotline,
-} from "@/data/emergency/contacts";
+import { emergencyContacts, nationalHotline } from "@/data/emergency/contacts";
 
 export const metadata: Metadata = {
   title: "Emergency & disaster information",
@@ -65,6 +57,27 @@ export default function EmergencyPage() {
       />
 
       <Container className="space-y-12 py-10 sm:py-12">
+        {/* Cached-copy notice: emergency numbers change — cached pages go stale. */}
+        <div
+          role="note"
+          className="max-w-3xl rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm leading-relaxed text-amber-900"
+        >
+          <p>
+            <strong>Check the date before you rely on these numbers.</strong>{" "}
+            Local hotlines can change. This page was last checked in{" "}
+            {nationalHotline.lastChecked}. If you saved or printed it earlier,
+            confirm time-sensitive numbers once you are back online — and in a
+            life-threatening emergency, call{" "}
+            <a
+              href="tel:911"
+              className="font-bold underline underline-offset-2"
+            >
+              911
+            </a>{" "}
+            first.
+          </p>
+        </div>
+
         {/* National hotline */}
         <section aria-labelledby="hotline-911">
           <h2 id="hotline-911" className="sr-only">
@@ -132,8 +145,29 @@ export default function EmergencyPage() {
                       {contact.caution}
                     </p>
                   ) : null}
-                  <div className="mt-3">
+                  {contact.previouslyPosted &&
+                  contact.previouslyPosted.length > 0 ? (
+                    <details className="mt-3 text-xs">
+                      <summary className="cursor-pointer font-medium text-muted hover:text-ink">
+                        Previously posted numbers (do not use — kept for
+                        transparency)
+                      </summary>
+                      <p className="mt-1.5 leading-relaxed text-muted">
+                        {contact.previouslyPosted.join(" · ")}. These older
+                        numbers conflict with the current listing above and may
+                        be disconnected. They are shown only so the conflict
+                        stays visible — call 911 first in a life-threatening
+                        emergency.
+                      </p>
+                    </details>
+                  ) : null}
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
                     <VerificationBadge verification={contact.verification} />
+                    {contact.lastChecked ? (
+                      <span className="text-xs text-muted">
+                        Last checked: {contact.lastChecked}
+                      </span>
+                    ) : null}
                   </div>
                 </CardContent>
               </Card>

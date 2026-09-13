@@ -123,10 +123,13 @@ export default function HomePage() {
             </div>
             <div className="lg:col-span-3">
               <CivicMapLoader locations={homeLocations} showFilters={false} />
-              <p className="mt-3 text-sm">
+              <p className="mt-3 text-xs leading-relaxed text-muted">
+                Municipal Hall pin: approximate location — address from the DTI
+                CMCI LGU profile, coordinates from a contributor map pin.
+                Confirm on site.{" "}
                 <Link
                   href="/map"
-                  className="font-medium text-link hover:underline"
+                  className="text-sm font-medium text-link hover:underline"
                 >
                   Open the full civic map
                   <span aria-hidden> →</span>
@@ -243,6 +246,8 @@ export default function HomePage() {
             title="Pagsanjan at a glance"
             description="Verified figures and local identity — every number carries its source and year."
           />
+          {/* Row 1 fills all four columns: the two headline stats, then
+              All statistics with Explore Pagsanjan lined up beside it. */}
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {glanceStats.map((item) => (
               <StatCard key={item.id} item={item} />
@@ -253,14 +258,16 @@ export default function HomePage() {
               description="Population, geography, and classification — with sources and caveats."
               icon={BarChart3}
             />
-          </div>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <LinkCard
               href="/tourism"
               title="Explore Pagsanjan"
               description="The falls, the gorge, the rivers, and 350+ years of town history."
               icon={Mountain}
             />
+          </div>
+          {/* Row 2 is a symmetric pair that fills the full row, so no
+              trailing empty column is left on desktop. */}
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <LinkCard
               href="/barangays"
               title="Barangays"

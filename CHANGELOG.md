@@ -11,8 +11,34 @@ internal mechanics.
 
 ## [Unreleased]
 
+### Changed
+
+- Replaced the browser-tab icon with the BetterPagsanjan falls-and-sun
+  mark; favicon assets now live in a dedicated folder
+  (`public/images/favicon`, .ico + sized .png files, PWA icons and the
+  maskable install icon updated to match)
+
+### Fixed
+
+- Emergency contacts now show a per-contact last-checked date and keep older
+  conflicting numbers in a collapsed "previously posted" line instead of a
+  long note; the Emergency page warns that cached or saved copies can go
+  stale
+- Civic map pins no longer overstate their provenance: GAA-chainage
+  barangay-hall pins are pending leads (chainage is not coordinates), and
+  private clinics were removed from the map
+- Civic map is announced as a text-complemented region (not an application),
+  with verified/pending counts on the map page and an honest evacuation
+  center empty state
+
 ### Added
 
+- Global utility bar below the main nav, matching the reference info-bar
+  behavior (BetterSolano/BetterLibmanan `assets/js/info-bar.js`): one rate
+  slot rotating `1 USD = ₱ 62.61` → `1 EUR = …` → `1 JPY = …` (GBP, AED,
+  SAR, SGD, CAD, AUD, KRW) every 4s with a short fade, static Pagsanjan
+  temperature (Open-Meteo) and ticking Philippine time; reference-style "--"
+  placeholders, nothing invented, hidden offline
 - Interactive civic map with all 16 barangay areas (hover for names,
   select to open the barangay page) plus facility pins
 - Live Pagsanjan weather on the homepage Today section, with source

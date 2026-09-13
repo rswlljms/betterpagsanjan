@@ -249,6 +249,60 @@ html {
 }
 
 /*
+ * Emergency ticker (EmergencyStrip): seamless horizontal loop.
+ * The track holds an even number of identical copies and translates -50%,
+ * so the second half slides exactly into the first half's place. Pause on
+ * hover/focus keeps tap-to-call links usable while moving.
+ */
+.bp-ticker-track {
+  animation: bp-ticker-scroll 32s linear infinite;
+  will-change: transform;
+}
+
+.bp-ticker:hover .bp-ticker-track,
+.bp-ticker:focus-within .bp-ticker-track {
+  animation-play-state: paused;
+}
+
+@keyframes bp-ticker-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bp-ticker-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .bp-ticker-copy-hidden {
+    display: none;
+  }
+}
+
+/* Utility-bar rate rotation: one fading slot, like the reference info bar. */
+.bp-rate-fade {
+  animation: bp-rate-fade-in 0.4s ease-out;
+}
+
+@keyframes bp-rate-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bp-rate-fade {
+    animation: none;
+  }
+}
+
+/*
  * Civic map (Leaflet + OpenStreetMap).
  * Pins are CSS divIcons so no marker image assets are needed.
  * The stacking context keeps Leaflet panes below sticky site chrome.

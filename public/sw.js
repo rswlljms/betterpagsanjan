@@ -6,11 +6,17 @@
  * - Static assets: stale-while-revalidate.
  * - Only same-origin GET requests are handled.
  *
- * Cached content can be stale. The /offline page says so explicitly.
+ * Cached content can be stale. The /offline page says so explicitly, and
+ * the /emergency page carries its own cached-copy notice.
  */
-const VERSION = "v1";
+const VERSION = "v2";
 const CACHE_NAME = `betterpagsanjan-${VERSION}`;
-const PRECACHE = ["/offline", "/emergency", "/manifest.webmanifest", "/icon.svg"];
+const PRECACHE = [
+  "/offline",
+  "/emergency",
+  "/manifest.webmanifest",
+  "/images/favicon/favicon-192.png",
+];
 const MAX_RUNTIME_ENTRIES = 60;
 
 self.addEventListener("install", (event) => {

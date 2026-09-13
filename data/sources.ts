@@ -4,6 +4,45 @@ import type { SourceRecord } from "@/types/civic";
 export const LAST_CHECKED = "September 2026";
 
 /**
+ * Favicon set (AGENTS.md §45). All favicon assets live in the dedicated
+ * `/public/images/favicon` folder, generated from the BetterPagsanjan
+ * falls-and-sun mark.
+ */
+export const faviconSet = {
+  directory: "/images/favicon",
+  shortcutIcon: "/images/favicon/favicon.ico",
+  appleIcon: "/images/favicon/favicon-180.png",
+  iconPng: "/images/favicon/favicon-512.png",
+} as const;
+
+/**
+ * Live third-party data feeds used by the global utility bar. These are
+ * national/global conveniences (weather, exchange rate, clock) — never
+ * Pagsanjan civic facts — and every value is labeled with its provider in
+ * the UI (AGENTS.md §4, §42).
+ */
+export const liveFeeds = {
+  weather: {
+    provider: "Open-Meteo",
+    url: "https://open-meteo.com",
+  },
+  exchangeRate: {
+    provider: "Frankfurter",
+    url: "https://frankfurter.dev",
+    /**
+     * No key, CORS-open, daily reference rates blended from central banks.
+     * One USD-base request returns every quoted currency as { date, base,
+     * quote, rate } rows; the bar converts to foreign→PHP like the
+     * BetterSolano/BetterLibmanan reference info bar
+     * (assets/js/info-bar.js, MIT-licensed peer project — behavior adapted,
+     * code written fresh: rotate one `1 CODE = ₱ X` slot every 4s).
+     */
+    endpoint:
+      "https://api.frankfurter.dev/v2/rates?base=USD&quotes=PHP,EUR,JPY,GBP,AED,SAR,SGD,CAD,AUD,KRW",
+  },
+} as const;
+
+/**
  * Central source registry (AGENTS.md §31). Civic records reference sources
  * by `id` so attribution stays consistent across the platform.
  *
@@ -155,6 +194,28 @@ export const sources: SourceRecord[] = [
     sourceType: "reference",
     description:
       "Secondary source on Pagsanjan Falls (Magdapio/Cavinti Falls), its jurisdiction, and access via the shooting-the-rapids boat trip.",
+    accessedAt: LAST_CHECKED,
+  },
+
+  // ——— Live utility feeds (national/global conveniences, not civic facts) ———
+  {
+    id: "open-meteo",
+    name: "Open-Meteo weather API",
+    organization: "Open-Meteo",
+    url: "https://open-meteo.com",
+    sourceType: "reference",
+    description:
+      "Free no-key weather API used for the live Pagsanjan temperature in the global utility bar and the homepage weather card. Numerical weather-prediction data; conditions can differ from PAGASA advisories — follow official advisories during storms.",
+    accessedAt: LAST_CHECKED,
+  },
+  {
+    id: "frankfurter-fx",
+    name: "Frankfurter exchange-rate API",
+    organization: "Frankfurter",
+    url: "https://frankfurter.dev",
+    sourceType: "reference",
+    description:
+      "Free no-key exchange-rate API (no quotas; rate-limited only against abuse) used for the indicative USD→PHP reference rate in the global utility bar. Daily reference rates blended from central-bank sources — indicative only, not a Bangko Sentral ng Pilipinas reference rate and never a Pagsanjan civic fact.",
     accessedAt: LAST_CHECKED,
   },
 

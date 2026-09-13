@@ -12,8 +12,14 @@ import type { CivicLocation, CivicLocationCategory } from "@/types/civic";
  * pin; pending pins carry a "Verification pending" badge and must be
  * confirmed on site or against an LGU / PNP / BFP / DOH source.
  *
- * The interactive map launches once enough verified pins exist; until then
- * the /map page renders this list honestly (no decorative map).
+ * Appropriation records (e.g. GAA project names with survey chainage like
+ * "Sta. 0+000") never supply coordinates: chainage is a position along a
+ * route, not latitude/longitude, so those locations stay pending until
+ * confirmed on site or against an LGU source.
+ *
+ * Private clinics and laboratories are not civic-map pins — listing them
+ * risks implying endorsement. Public health coverage lives in the
+ * services directory (Rural Health Unit) instead.
  */
 export const civicLocations: CivicLocation[] = [
   {
@@ -42,16 +48,15 @@ export const civicLocations: CivicLocation[] = [
     name: "Brgy. San Isidro Multi-Purpose Building (Barangay Hall & Center)",
     category: "barangay",
     description:
-      "Barangay hall and center in San Isidro, funded at ₱6,000,000 under the FY2026 GAA (DPWH). Record reflects the appropriation — construction status unverified.",
+      "Barangay hall and center in San Isidro, funded at ₱6,000,000 under the FY2026 GAA (DPWH). Record reflects the appropriation — construction status and exact location unverified.",
     address: "Barangay San Isidro, Pagsanjan, Laguna",
     latitude: 14.282353,
     longitude: 121.45749,
     verification: {
-      status: "verified",
-      sourceId: "bettergov-budget-api",
+      status: "pending",
+      sourceId: "google-maps-pin",
       sourceUrl: "https://budget.bettergov.ph/gaa/2026",
-      verifiedAt: "2026-09",
-      note: "Coordinates as published in the FY2026 GAA project name via the BetterGov.PH Budget Data API (DBM data). Pin is approximate to the published coordinates.",
+      note: "Candidate lead: funding and project name as published in the FY2026 GAA via the BetterGov.PH Budget Data API (DBM data) — but GAA chainage is not coordinates. Pin coordinates are approximate and not yet confirmed against an LGU source; construction status unverified.",
     },
     lastChecked: LAST_CHECKED,
   },
@@ -61,16 +66,15 @@ export const civicLocations: CivicLocation[] = [
     name: "Brgy. Sampaloc Multi-Purpose Building (Barangay Hall)",
     category: "barangay",
     description:
-      "Barangay hall in Sampaloc, funded at ₱5,000,000 under the FY2026 GAA (DPWH). Record reflects the appropriation — construction status unverified.",
+      "Barangay hall in Sampaloc, funded at ₱5,000,000 under the FY2026 GAA (DPWH). Record reflects the appropriation — construction status and exact location unverified.",
     address: "Barangay Sampaloc, Pagsanjan, Laguna",
     latitude: 14.268216,
     longitude: 121.442423,
     verification: {
-      status: "verified",
-      sourceId: "bettergov-budget-api",
+      status: "pending",
+      sourceId: "google-maps-pin",
       sourceUrl: "https://budget.bettergov.ph/gaa/2026",
-      verifiedAt: "2026-09",
-      note: "Coordinates as published in the FY2026 GAA project name via the BetterGov.PH Budget Data API (DBM data). Pin is approximate to the published coordinates.",
+      note: "Candidate lead: funding and project name as published in the FY2026 GAA via the BetterGov.PH Budget Data API (DBM data) — but GAA chainage is not coordinates. Pin coordinates are approximate and not yet confirmed against an LGU source; construction status unverified.",
     },
     lastChecked: LAST_CHECKED,
   },
@@ -80,16 +84,15 @@ export const civicLocations: CivicLocation[] = [
     name: "Brgy. Biñan Multi-Purpose Covered Court",
     category: "community",
     description:
-      "Covered court in Biñan, completion funded at ₱2,000,000 under the FY2026 GAA (DPWH). Record reflects the appropriation — construction status unverified.",
+      "Covered court in Biñan, completion funded at ₱2,000,000 under the FY2026 GAA (DPWH). Record reflects the appropriation — construction status and exact location unverified.",
     address: "Barangay Biñan, Pagsanjan, Laguna",
     latitude: 14.260639,
     longitude: 121.431241,
     verification: {
-      status: "verified",
-      sourceId: "bettergov-budget-api",
+      status: "pending",
+      sourceId: "google-maps-pin",
       sourceUrl: "https://budget.bettergov.ph/gaa/2026",
-      verifiedAt: "2026-09",
-      note: "Coordinates as published in the FY2026 GAA project name via the BetterGov.PH Budget Data API (DBM data). Pin is approximate to the published coordinates.",
+      note: "Candidate lead: funding and project name as published in the FY2026 GAA via the BetterGov.PH Budget Data API (DBM data) — but GAA chainage is not coordinates. Pin coordinates are approximate and not yet confirmed against an LGU source; construction status unverified.",
     },
     lastChecked: LAST_CHECKED,
   },
@@ -175,40 +178,6 @@ export const civicLocations: CivicLocation[] = [
       sourceId: "google-maps-pin",
       sourceUrl: "https://maps.app.goo.gl/LrJtpEc4DDNFXhQJA",
       note: "Candidate lead: coordinates transcribed from a Google Maps place pin, approximate and not yet confirmed against a DOH or LGU source.",
-    },
-    lastChecked: LAST_CHECKED,
-  },
-  {
-    id: "pagsanjan-medical-clinic-inc",
-    slug: "pagsanjan-medical-clinic-inc",
-    name: "Pagsanjan Medical Clinic Incorporated",
-    category: "health",
-    description:
-      "Private medical clinic. Not a government facility — services, hours, and fees not verified.",
-    latitude: 14.2723219,
-    longitude: 121.4557752,
-    verification: {
-      status: "pending",
-      sourceId: "google-maps-pin",
-      sourceUrl: "https://maps.app.goo.gl/sMVPeo6EZDvGF7VN8",
-      note: "Candidate lead: private facility pinned on Google Maps. Coordinates approximate; nothing about services or fees verified.",
-    },
-    lastChecked: LAST_CHECKED,
-  },
-  {
-    id: "fammed-diagnostic-center",
-    slug: "fammed-diagnostic-center",
-    name: "Fammed Diagnostic Center",
-    category: "health",
-    description:
-      "Private diagnostic laboratory. Not a government facility — services, hours, and fees not verified.",
-    latitude: 14.2646849,
-    longitude: 121.4328342,
-    verification: {
-      status: "pending",
-      sourceId: "google-maps-pin",
-      sourceUrl: "https://maps.app.goo.gl/ZdWuoz4rWHfMUZbG6",
-      note: "Candidate lead: private facility pinned on Google Maps. Coordinates approximate; nothing about services or fees verified.",
     },
     lastChecked: LAST_CHECKED,
   },

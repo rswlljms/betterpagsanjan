@@ -22,6 +22,10 @@ const plannedCategories = Object.values(locationCategoryLabels);
 
 export default function MapPage() {
   const mappable = getMappableLocations();
+  const verifiedCount = mappable.filter(
+    (location) => location.verification.status === "verified",
+  ).length;
+  const pendingCount = mappable.length - verifiedCount;
 
   return (
     <>
@@ -33,7 +37,16 @@ export default function MapPage() {
       <Container className="py-10 sm:py-12">
         {mappable.length > 0 ? (
           <>
-            <CivicMapLoader locations={mappable} />
+            <p className="max-w-2xl text-sm leading-relaxed text-muted">
+              Showing {mappable.length} pinned{" "}
+              {mappable.length === 1 ? "location" : "locations"}:{" "}
+              {verifiedCount} verified · {pendingCount} pending verification.
+              Blue pins are verified; amber pins are candidate leads not yet
+              confirmed.
+            </p>
+            <div className="mt-3">
+              <CivicMapLoader locations={mappable} />
+            </div>
             <p className="mt-3 text-xs leading-relaxed text-muted">
               Map tiles and barangay boundaries © OpenStreetMap contributors
               (boundaries under ODbL — community-mapped and approximate, not a
@@ -53,6 +66,11 @@ export default function MapPage() {
         )}
 
         <h2 className="mt-10 text-lg font-semibold text-ink">All locations</h2>
+        <p className="mt-1 max-w-2xl text-sm leading-relaxed text-muted">
+          Text alternative to the map above — every pin is listed here with its
+          verification status, including locations without confirmed
+          coordinates.
+        </p>
         {civicLocations.length > 0 ? (
           <ul className="mt-4 grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {civicLocations.map((location) => (
@@ -72,6 +90,23 @@ export default function MapPage() {
             own source.
           </p>
         ) : null}
+
+        <div className="mt-8 max-w-2xl rounded-lg border border-line bg-surface p-4">
+          <h2 className="text-sm font-semibold text-ink">Evacuation centers</h2>
+          <p className="mt-1 text-sm leading-relaxed text-muted">
+            No evacuation centers are listed yet — none could be verified
+            against an LGU, MDRRMO, or DepEd source. Do not rely on unverified
+            lists during a disaster: follow official MDRRMO advisories, and in a
+            life-threatening emergency call{" "}
+            <a
+              href="tel:911"
+              className="font-semibold text-link hover:underline"
+            >
+              911
+            </a>
+            .
+          </p>
+        </div>
 
         <div className="mt-8 max-w-2xl">
           <p className="text-sm font-semibold text-ink">Categories</p>

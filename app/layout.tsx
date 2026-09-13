@@ -6,7 +6,9 @@ import { EmergencyStrip } from "@/components/civic/emergency-strip";
 import { SiteFooter } from "@/components/civic/site-footer";
 import { SiteHeader } from "@/components/civic/site-header";
 import { SkipLink } from "@/components/civic/skip-link";
+import { UtilityBar } from "@/components/civic/utility-bar";
 import { site } from "@/data/site";
+import { faviconSet } from "@/data/sources";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -31,6 +33,19 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
+  icons: {
+    icon: [
+      { url: faviconSet.shortcutIcon, type: "image/x-icon" },
+      { url: faviconSet.iconPng, sizes: "512x512", type: "image/png" },
+      ...([16, 32, 48, 64, 128, 192, 256] as const).map((size) => ({
+        url: `${faviconSet.directory}/favicon-${size}.png`,
+        sizes: `${size}x${size}`,
+        type: "image/png",
+      })),
+    ],
+    shortcut: [{ url: faviconSet.shortcutIcon, type: "image/x-icon" }],
+    apple: [{ url: faviconSet.appleIcon, sizes: "180x180", type: "image/png" }],
+  },
   openGraph: {
     type: "website",
     siteName: site.name,
@@ -55,6 +70,7 @@ export default function RootLayout({
         <SkipLink />
         <EmergencyStrip />
         <SiteHeader />
+        <UtilityBar />
         <main id="main-content" tabIndex={-1} className="focus:outline-none">
           {children}
         </main>

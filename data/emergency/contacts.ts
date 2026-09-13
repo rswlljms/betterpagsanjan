@@ -9,6 +9,14 @@ export interface EmergencyContact {
   verification: Verification;
   /** Extra caution shown with the numbers, e.g. when transcribed. */
   caution?: string;
+  /**
+   * Older numbers from a previous source that conflict with the current
+   * listing. Kept visible (AGENTS.md §48) in a collapsed
+   * "previously posted" line — never presented as current.
+   */
+  previouslyPosted?: string[];
+  /** Display label, e.g. "September 2026". Defaults to LAST_CHECKED. */
+  lastChecked?: string;
 }
 
 /**
@@ -47,29 +55,29 @@ export const emergencyContacts: EmergencyContact[] = [
       { label: "Mobile", value: "0918-208-9305" },
       { label: "Mobile", value: "0995-964-8402" },
     ],
+    previouslyPosted: ["0997-823-9254", "0963-986-6435", "321-2448"],
+    lastChecked: LAST_CHECKED,
     verification: {
       status: "verified",
       sourceId: "pagsanjan-legislative-portal",
       sourceUrl: "https://www.pagsanjanlaguna.com",
       verifiedAt: "2026-09-04",
-      note: "Site-wide emergency directory on the municipal legislative portal. Previously transcribed Facebook-posted numbers (0997-823-9254, 0963-986-6435, 321-2448) differed — verify before relying on any local number, and call 911 first in life-threatening emergencies.",
+      note: "Site-wide emergency directory on the municipal legislative portal. The current listing is treated as current; older Facebook-posted numbers are kept below as previously posted so the conflict stays visible.",
     },
   },
   {
     id: "pnp-pagsanjan",
     name: "Pagsanjan Police Station (PNP)",
     description: "Philippine National Police station serving Pagsanjan.",
-    numbers: [
-      { value: "821-0422" },
-      { value: "501-4054" },
-    ],
+    numbers: [{ value: "821-0422" }, { value: "501-4054" }],
+    lastChecked: LAST_CHECKED,
     verification: {
       status: "pending",
       sourceId: "pagsanjan-mdrrmo-fb",
       note: "Numbers were transcribed from the MDRRMO's official Facebook page through search indexing.",
     },
     caution:
-      "Transcribed from the MDRRMO's official Facebook page. Numbers may change — verify before relying on them, and call 911 first in emergencies.",
+      "Call 911 first in emergencies. These local numbers are transcribed from the MDRRMO's official Facebook page and may have changed — verify before relying on them.",
   },
   {
     id: "bfp-pagsanjan",
@@ -79,12 +87,14 @@ export const emergencyContacts: EmergencyContact[] = [
       { label: "Mobile", value: "0998-983-1307" },
       { label: "Mobile", value: "0932-146-7933" },
     ],
+    previouslyPosted: ["501-4520"],
+    lastChecked: LAST_CHECKED,
     verification: {
       status: "verified",
       sourceId: "pagsanjan-legislative-portal",
       sourceUrl: "https://www.pagsanjanlaguna.com",
       verifiedAt: "2026-09-04",
-      note: "Site-wide emergency directory on the municipal legislative portal. A previously transcribed Facebook-posted number (501-4520) differed — verify before relying on any local number, and call 911 first in emergencies.",
+      note: "Site-wide emergency directory on the municipal legislative portal. A previously transcribed Facebook-posted number is kept below as previously posted so the conflict stays visible.",
     },
   },
   {
@@ -93,6 +103,7 @@ export const emergencyContacts: EmergencyContact[] = [
     description:
       "Municipal government trunkline. Office hours and department extensions have not yet been verified.",
     numbers: [{ value: "(049) 808-4057" }],
+    lastChecked: LAST_CHECKED,
     verification: {
       status: "verified",
       sourceId: "dti-cmci",

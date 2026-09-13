@@ -269,8 +269,8 @@ export function CivicMap({ locations, showFilters = true }: CivicMapProps) {
 
       <div
         ref={containerRef}
-        role="application"
-        aria-label={`Interactive map of Pagsanjan: 16 barangay areas plus ${filtered.length} facility pin${filtered.length === 1 ? "" : "s"}. Hover a barangay for its name, or use plus and minus buttons to zoom; tab reaches each pin.`}
+        role="region"
+        aria-label={`Map of Pagsanjan: 16 barangay areas plus ${filtered.length} facility pin${filtered.length === 1 ? "" : "s"}. Hover a barangay for its name, or use plus and minus buttons to zoom; tab reaches each pin. The directory below lists every pin as text.`}
         className="civic-map z-0 h-80 w-full sm:h-96"
       />
 
