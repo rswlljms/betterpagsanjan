@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { PwaRegister } from "@/components/civic/pwa-register";
+import { BootSplash } from "@/components/civic/boot-splash";
 import { EmergencyStrip } from "@/components/civic/emergency-strip";
 import { SiteFooter } from "@/components/civic/site-footer";
 import { SiteHeader } from "@/components/civic/site-header";
@@ -67,6 +68,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} ${inter.variable} font-ui`}>
+        <BootSplash />
         <SkipLink />
         <EmergencyStrip />
         <SiteHeader />

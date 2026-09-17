@@ -378,3 +378,25 @@ html {
 .bp-brgy-tip.leaflet-tooltip::before {
   border-top-color: #ffffff;
 }
+
+/*
+ * LoaderOne (components/ui/loader): three-dot bounce.
+ * Pure-CSS equivalent of the Aceternity "Simple Loader" stagger — each dot
+ * runs the same 1s loop with a 0.2s incremental delay set inline. The global
+ * prefers-reduced-motion rule above neutralizes the motion automatically.
+ */
+.bp-loader-one-dot {
+  animation: bp-loader-one-bounce 1s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes bp-loader-one-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(10px);
+  }
+}
