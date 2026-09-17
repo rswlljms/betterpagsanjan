@@ -380,6 +380,21 @@ html {
 }
 
 /*
+ * Search inputs render their own "clear search" button (see the finder
+ * components), so the browser-native cancel button is hidden to avoid a
+ * duplicated ✕. `type="search"` is kept for semantics and the mobile
+ * search action key.
+ */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  display: none;
+}
+
+input[type="search"]::-ms-clear {
+  display: none;
+}
+
+/*
  * HeroMosaic (components/civic/hero-mosaic): seamless horizontal marquee.
  * Each row track holds 4 identical photo strips and loops by exactly one
  * strip width (-25%), so the scroll never jumps. Rows run at different

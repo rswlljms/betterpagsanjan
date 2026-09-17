@@ -3,11 +3,15 @@
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, Search, SearchX } from "lucide-react";
+import { ArrowRight, Search, SearchX, X } from "lucide-react";
 import { EmptyState } from "@/components/civic/empty-state";
 import { Badge, type BadgeVariant } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { searchRecords, type SearchRecord, type SearchResultType } from "@/lib/search";
+import {
+  searchRecords,
+  type SearchRecord,
+  type SearchResultType,
+} from "@/lib/search";
 
 interface SiteSearchProps {
   records: SearchRecord[];
@@ -109,12 +113,29 @@ export function SiteSearch({ records }: SiteSearchProps) {
               applyParams(event.target.value);
             }}
             placeholder="Search services, offices, barangays…"
-            className="min-h-11 w-full rounded-lg border border-line bg-white pl-9 pr-4 text-sm text-ink placeholder:text-bp-stone"
+            className="min-h-11 w-full rounded-lg border border-line bg-white pl-9 pr-9 text-sm text-ink placeholder:text-bp-stone"
           />
+          {query ? (
+            <button
+              type="button"
+              onClick={() => {
+                setQuery("");
+                applyParams("");
+              }}
+              aria-label="Clear search"
+              className="absolute right-2 top-1/2 flex size-6 -translate-y-1/2 items-center justify-center rounded-full text-muted hover:bg-bp-paper hover:text-bp-graphite"
+            >
+              <X className="size-4" aria-hidden />
+            </button>
+          ) : null}
         </div>
       </form>
 
-      <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter by type">
+      <div
+        className="mt-4 flex flex-wrap gap-2"
+        role="group"
+        aria-label="Filter by type"
+      >
         {typeFilters.map((filter) => (
           <button
             key={filter.id}
@@ -155,9 +176,7 @@ export function SiteSearch({ records }: SiteSearchProps) {
       ) : results.length > 0 ? (
         <>
           <p aria-live="polite" className="mt-8 text-sm text-muted">
-            {results.length === 1
-              ? "1 result"
-              : `${results.length} results`}{" "}
+            {results.length === 1 ? "1 result" : `${results.length} results`}{" "}
             for “{query.trim()}”
           </p>
           <ul className="mt-4 max-w-3xl list-none space-y-3">

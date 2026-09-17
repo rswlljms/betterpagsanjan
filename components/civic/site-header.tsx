@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, Search, Siren, X } from "lucide-react";
+import { ChevronDown, Menu, Siren, X } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { emergencyNav, mainNav, mobileNav } from "@/data/navigation";
 import { site } from "@/data/site";
@@ -237,13 +237,6 @@ export function SiteHeader() {
             </nav>
 
             <div className="flex items-center gap-1.5">
-              <Link
-                href="/search"
-                aria-label="Search BetterPagsanjan"
-                className="flex size-10 items-center justify-center rounded-lg text-bp-graphite transition-colors hover:text-bp-ink"
-              >
-                <Search className="size-5" aria-hidden />
-              </Link>
               <Link
                 href={emergencyNav.href}
                 className="hidden min-h-10 items-center gap-1.5 rounded-lg bg-red-700 px-3.5 text-sm font-semibold text-white hover:bg-red-800 sm:inline-flex"
