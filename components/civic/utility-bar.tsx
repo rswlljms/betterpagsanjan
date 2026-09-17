@@ -195,7 +195,7 @@ export function UtilityBar() {
     fx && fx.rates.length > 0 ? fx.rates[rateIndex % fx.rates.length] : null;
 
   return (
-    <div className="border-b border-line bg-ink text-white">
+    <div className="bg-ink text-white">
       <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-center gap-x-5 gap-y-1 px-4 py-1.5 text-xs sm:justify-end sm:px-6 sm:text-[13px]">
         <span className="flex items-center gap-1.5">
           <span className="sr-only">

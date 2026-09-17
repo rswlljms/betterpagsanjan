@@ -380,6 +380,29 @@ html {
 }
 
 /*
+ * HeroMosaic (components/civic/hero-mosaic): seamless horizontal marquee.
+ * Each row track holds 4 identical photo strips and loops by exactly one
+ * strip width (-25%), so the scroll never jumps. Rows run at different
+ * speeds/directions via `--bp-marquee-duration` and the reverse modifier.
+ * Transform-only (compositor-friendly); the global prefers-reduced-motion
+ * rule above reduces it to a static mosaic.
+ */
+.bp-marquee-track {
+  animation: bp-marquee-scroll var(--bp-marquee-duration, 70s) linear infinite;
+  will-change: transform;
+}
+
+.bp-marquee-track--reverse {
+  animation-direction: reverse;
+}
+
+@keyframes bp-marquee-scroll {
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+/*
  * LoaderOne (components/ui/loader): three-dot bounce.
  * Pure-CSS equivalent of the Aceternity "Simple Loader" stagger — each dot
  * runs the same 1s loop with a 0.2s incremental delay set inline. The global

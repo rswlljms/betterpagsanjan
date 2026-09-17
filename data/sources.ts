@@ -194,6 +194,15 @@ export const sources: SourceRecord[] = [
     sourceType: "reference",
     description:
       "Secondary source on Pagsanjan Falls (Magdapio/Cavinti Falls), its jurisdiction, and access via the shooting-the-rapids boat trip.",
+  },
+  {
+    id: "wikimedia-commons-hero-photos",
+    name: "Wikimedia Commons — Pagsanjan hero photos",
+    organization: "Wikimedia Commons contributors",
+    url: "https://commons.wikimedia.org",
+    sourceType: "reference",
+    description:
+      "Photographs of Pagsanjan Falls, the town arch, the church and belfry, and the Municipal Hall used in the homepage hero mosaic. Files by Kathleen Mae Tugano, Angelo Juan Ramos, Ramon FVelasquez, Ralff Nestor Nacor, Patrickroque01, and Elmer B. Domingo under CC BY 2.0 / CC BY-SA 3.0 / CC BY-SA 4.0; per-photo author, license, and file-page links live in data/tourism/hero-photos.ts. Images were downsized to 480px-wide JPEGs in September 2026 without other modification.",
     accessedAt: LAST_CHECKED,
   },
 

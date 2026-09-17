@@ -10,6 +10,7 @@ import {
   Users,
 } from "lucide-react";
 import { CivicMapLoader } from "@/components/civic/civic-map-loader";
+import { HeroMosaic } from "@/components/civic/hero-mosaic";
 import { LinkCard } from "@/components/civic/link-card";
 import { ServiceCard } from "@/components/civic/service-card";
 import { StatCard } from "@/components/civic/stat-card";
@@ -59,12 +60,13 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero — BP rhythm: quiet paper canvas, white civic surface */}
-      <section className="bg-surface">
-        <Container className="py-10 sm:py-16">
+      {/* Hero — photo mosaic of Pagsanjan landmarks behind the civic card */}
+      <section className="relative overflow-hidden">
+        <HeroMosaic />
+        <Container className="relative py-10 sm:py-16">
           <div className="rounded-xl bg-white px-6 py-12 text-center shadow-bp-sm-4 sm:px-12 sm:py-16">
             <p className="text-xs font-semibold uppercase tracking-wider text-muted">
-              Independent civic technology project · Pagsanjan, Laguna
+              Welcome to BetterPagsanjan
             </p>
             <h1 className="font-display mx-auto mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
               {site.tagline}
