@@ -174,12 +174,7 @@ export interface LegislativeDocument {
 }
 
 export type ProjectStatus =
-  | "proposed"
-  | "planned"
-  | "ongoing"
-  | "completed"
-  | "delayed"
-  | "cancelled";
+  "proposed" | "planned" | "ongoing" | "completed" | "delayed" | "cancelled";
 
 export interface PublicProject {
   id: string;
@@ -251,6 +246,51 @@ export interface CivicLocation {
   longitude?: number;
   /** OpenStreetMap link, built from coordinates when available. */
   osmUrl?: string;
+  verification: Verification;
+  lastChecked?: string;
+}
+
+export type ConsultationStatus = "upcoming" | "open" | "closed";
+
+export interface Consultation {
+  id: string;
+  slug: string;
+  topic: string;
+  description: string;
+  /** ISO date when participation opens, when officially published. */
+  opensAt?: string;
+  /** ISO date when participation closes, when officially published. */
+  closesAt?: string;
+  /** Direct URL to the official notice or draft document. */
+  documentUrl?: string;
+  /** How a citizen participates via the official channel. Never a BetterPagsanjan form. */
+  howToParticipate?: string[];
+  sourceUrl?: string;
+  verification: Verification;
+  lastChecked?: string;
+}
+
+export interface ReportingCategory {
+  id: string;
+  title: string;
+  description: string;
+  examples: string[];
+  /**
+   * id of a GovernmentOffice in data/government/offices.ts, when the
+   * mapping follows the office's standard function. Omit when the
+   * responsible Pagsanjan office has not been verified.
+   */
+  officeId?: string;
+  /** Shown when officeId is omitted or the routing is general. */
+  officeNote?: string;
+  /** When true, the card tells the reader to call 911 first. */
+  urgent?: boolean;
+  /**
+   * General guidance on what to note before contacting the office
+   * (location, time, photo if safe). Original BetterPagsanjan content —
+   * not an official requirement list.
+   */
+  whatToPrepare: string[];
   verification: Verification;
   lastChecked?: string;
 }

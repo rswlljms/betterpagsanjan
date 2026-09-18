@@ -26,6 +26,7 @@ const typeFilters: { id: SearchResultType | "all"; label: string }[] = [
   { id: "project", label: "Projects" },
   { id: "transparency", label: "Transparency" },
   { id: "location", label: "Locations" },
+  { id: "consultation", label: "Consultations" },
   { id: "page", label: "Pages" },
 ];
 
@@ -37,6 +38,7 @@ const typeBadgeVariant: Record<SearchResultType, BadgeVariant> = {
   project: "warning",
   transparency: "neutral",
   location: "success",
+  consultation: "accent",
   page: "neutral",
 };
 
@@ -48,6 +50,7 @@ const typeLabel: Record<SearchResultType, string> = {
   project: "Project",
   transparency: "Transparency",
   location: "Location",
+  consultation: "Consultation",
   page: "Page",
 };
 

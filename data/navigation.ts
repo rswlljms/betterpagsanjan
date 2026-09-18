@@ -55,6 +55,18 @@ export const mainNav: NavItem[] = [
         href: "/projects",
         description: "Projects and their status, from public records.",
       },
+      {
+        title: "Public consultations",
+        href: "/consultations",
+        description:
+          "Consultation notices with dates, documents, and how to participate.",
+      },
+      {
+        title: "Report an issue",
+        href: "/report",
+        description:
+          "Guide to reporting community concerns through official channels.",
+      },
     ],
   },
   { title: "Barangays", href: "/barangays" },
@@ -113,6 +125,8 @@ export const footerNavGroups: { heading: string; items: NavItem[] }[] = [
       { title: "Barangays", href: "/barangays" },
       { title: "Announcements", href: "/announcements" },
       { title: "Emergency", href: "/emergency" },
+      { title: "Consultations", href: "/consultations" },
+      { title: "Report an issue", href: "/report" },
     ],
   },
   {

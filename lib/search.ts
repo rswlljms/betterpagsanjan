@@ -1,5 +1,7 @@
 import { barangays } from "@/data/barangays/barangays";
+import { consultations } from "@/data/consultations";
 import { offices } from "@/data/government/offices";
+import { reportingCategories } from "@/data/reporting";
 import { legislativeDocuments } from "@/data/legislative/documents";
 import { civicLocations } from "@/data/locations/locations";
 import { projects } from "@/data/projects/projects";
@@ -14,6 +16,7 @@ export type SearchResultType =
   | "project"
   | "transparency"
   | "location"
+  | "consultation"
   | "page";
 
 export interface SearchRecord {
@@ -97,8 +100,7 @@ const pageRecords: SearchRecord[] = [
     id: "page-ordinances",
     title: "Ordinances",
     type: "page",
-    description:
-      "Searchable public index of Pagsanjan municipal ordinances.",
+    description: "Searchable public index of Pagsanjan municipal ordinances.",
     href: "/ordinances",
     keywords: ["ordinance", "legislation", "law", "sangguniang bayan"],
   },
@@ -106,8 +108,7 @@ const pageRecords: SearchRecord[] = [
     id: "page-resolutions",
     title: "Resolutions",
     type: "page",
-    description:
-      "Searchable public index of Pagsanjan municipal resolutions.",
+    description: "Searchable public index of Pagsanjan municipal resolutions.",
     href: "/resolutions",
     keywords: ["resolution", "legislation", "sangguniang bayan"],
   },
@@ -118,15 +119,65 @@ const pageRecords: SearchRecord[] = [
     description:
       "Public project directory with status information, based on verified public records.",
     href: "/projects",
-    keywords: ["infrastructure", "programs", "ongoing", "completed", "flood control"],
+    keywords: [
+      "infrastructure",
+      "programs",
+      "ongoing",
+      "completed",
+      "flood control",
+    ],
+  },
+  {
+    id: "page-consultations",
+    title: "Public consultations",
+    type: "page",
+    description:
+      "Consultation notices with opening dates, official documents, and how to participate through official channels.",
+    href: "/consultations",
+    keywords: [
+      "consultation",
+      "public hearing",
+      "participation",
+      "feedback",
+      "ordinance draft",
+      "notice",
+    ],
+  },
+  {
+    id: "page-report",
+    title: "Report a community issue",
+    type: "page",
+    description:
+      "Guide to reporting road damage, flooding, garbage, streetlights, and other concerns through official channels. BetterPagsanjan does not receive reports.",
+    href: "/report",
+    keywords: [
+      "report",
+      "complaint",
+      "road damage",
+      "flooding",
+      "drainage",
+      "garbage",
+      "streetlight",
+      "traffic",
+      "barangay",
+      "municipal hall",
+    ],
   },
   {
     id: "page-statistics",
     title: "Statistics",
     type: "page",
-    description: "Pagsanjan statistics with sources: population, geography, and more.",
+    description:
+      "Pagsanjan statistics with sources: population, geography, and more.",
     href: "/statistics",
-    keywords: ["population", "census", "demographics", "data", "figures", "psa"],
+    keywords: [
+      "population",
+      "census",
+      "demographics",
+      "data",
+      "figures",
+      "psa",
+    ],
   },
   {
     id: "page-emergency",
@@ -191,7 +242,8 @@ const pageRecords: SearchRecord[] = [
     id: "page-sources",
     title: "Sources",
     type: "page",
-    description: "The source registry behind BetterPagsanjan's civic information.",
+    description:
+      "The source registry behind BetterPagsanjan's civic information.",
     href: "/sources",
     keywords: ["sources", "references", "attribution", "citations", "registry"],
   },
@@ -271,6 +323,28 @@ export const searchIndex: SearchRecord[] = [
     keywords: [record.category, record.year ?? ""].filter(Boolean),
     badge: "Transparency",
   })),
+  ...consultations.map((consultation): SearchRecord => ({
+    id: `consultation-${consultation.id}`,
+    title: consultation.topic,
+    type: "consultation",
+    description: consultation.description,
+    href: `/consultations/${consultation.slug}`,
+    keywords: [
+      "consultation",
+      consultation.opensAt ?? "",
+      consultation.closesAt ?? "",
+    ].filter(Boolean),
+    badge: "Consultation",
+  })),
+  ...reportingCategories.map((category): SearchRecord => ({
+    id: `report-${category.id}`,
+    title: `${category.title} — how to report`,
+    type: "page",
+    description: category.description,
+    href: "/report",
+    keywords: ["report", category.title, ...category.examples].filter(Boolean),
+    badge: "Reporting guide",
+  })),
   ...civicLocations.map((location): SearchRecord => ({
     id: `location-${location.id}`,
     title: location.name,
@@ -293,11 +367,7 @@ export function searchRecords(
   records: SearchRecord[],
   query: string,
 ): SearchRecord[] {
-  const terms = query
-    .trim()
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(Boolean);
+  const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
   if (terms.length === 0) return [];
 
   const scored: { record: SearchRecord; score: number }[] = [];
@@ -323,7 +393,5 @@ export function searchRecords(
     if (matchedAll && score > 0) scored.push({ record, score });
   }
 
-  return scored
-    .sort((a, b) => b.score - a.score)
-    .map((entry) => entry.record);
+  return scored.sort((a, b) => b.score - a.score).map((entry) => entry.record);
 }

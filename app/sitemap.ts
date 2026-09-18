@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { barangays } from "@/data/barangays/barangays";
+import { consultations } from "@/data/consultations";
 import { legislativeDocuments } from "@/data/legislative/documents";
 import { projects } from "@/data/projects/projects";
 import { services } from "@/data/services";
@@ -15,6 +16,8 @@ const staticRoutes = [
   "/ordinances",
   "/resolutions",
   "/projects",
+  "/consultations",
+  "/report",
   "/statistics",
   "/emergency",
   "/tourism",
@@ -54,6 +57,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       })),
     ...projects.map((project) => ({
       url: `${site.url}/projects/${project.slug}`,
+      lastModified,
+    })),
+    ...consultations.map((consultation) => ({
+      url: `${site.url}/consultations/${consultation.slug}`,
       lastModified,
     })),
   ];
