@@ -9,7 +9,7 @@
  * Cached content can be stale. The /offline page says so explicitly, and
  * the /emergency page carries its own cached-copy notice.
  */
-const VERSION = "v2";
+const VERSION = "v3";
 const CACHE_NAME = `betterpagsanjan-${VERSION}`;
 const PRECACHE = [
   "/offline",

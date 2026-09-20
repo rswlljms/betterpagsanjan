@@ -33,6 +33,14 @@ internal mechanics.
 
 ### Added
 
+- Self-sufficient offline emergency page: 911 plus local hotlines with
+  tap-to-call links, last-checked dates, and a grab-and-go checklist are
+  baked into `/offline`, so they work even on a cache miss; service
+  worker bumped to v3
+- Read-only open data API (`/api/v1`, `/api/v1/emergency`,
+  `/api/v1/services`, `/api/v1/barangays`, `/api/v1/offices`,
+  `/api/v1/sources`) reusing the existing structured data layer with
+  source and verification metadata and the independence disclaimer
 - Global utility bar below the main nav, matching the reference info-bar
   behavior (BetterSolano/BetterLibmanan `assets/js/info-bar.js`): one rate
   slot rotating `1 USD = ₱ 62.61` → `1 EUR = …` → `1 JPY = …` (GBP, AED,
