@@ -40,10 +40,16 @@ internal mechanics.
 - Ask BetterPagsanjan (`/ask`): a chat assistant that answers
   plain-language questions with links to the site's own pages, shows
   911-first emergency numbers for urgent questions, and says when
-  nothing on the site matches instead of guessing. Retrieval-only —
-  no AI model, no accounts, nothing stored. A floating chat button on
-  every page opens the same assistant in a panel, so help is one tap
-  away from anywhere on the site
+  nothing on the site matches instead of guessing. `POST /api/ask`
+  grounds a Gemini free-tier model in retrieved pages (temperature 0,
+  refusal when the pages lack the answer) with per-IP rate limits and
+  automatic fallback to page matches when the model is unavailable or
+  over quota — no AI model key is ever committed. A relevance gate
+  (top page must carry a question term in its title) keeps the model
+  off off-topic questions; emergencies bypass it so 911-first numbers
+  never wait on retrieval. A floating chat
+  button on every page opens the same assistant in a panel, so help is
+  one tap away from anywhere on the site
 - Open data documentation on the Sources page listing the read-only
   `/api/v1/*` JSON endpoints
 - Self-sufficient offline emergency page: 911 plus local hotlines with
