@@ -33,6 +33,10 @@ internal mechanics.
 
 ### Added
 
+- Service guide (`/services/guide`): answer two quick questions in plain
+  language — what you need to do, plus one follow-up — and get pointed
+  to the right service page. Client-side only, no account, nothing
+  stored; every outcome resolves to a real service record
 - Ask BetterPagsanjan (`/ask`): a deterministic civic discovery assistant
   that answers plain-language questions with links to the site's own
   pages, shows 911-first emergency numbers for urgent questions, and

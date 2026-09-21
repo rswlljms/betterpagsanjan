@@ -9,6 +9,7 @@ import { site } from "@/data/site";
 const staticRoutes = [
   "",
   "/services",
+  "/services/guide",
   "/government",
   "/barangays",
   "/announcements",
