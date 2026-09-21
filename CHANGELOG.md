@@ -37,10 +37,13 @@ internal mechanics.
   language — what you need to do, plus one follow-up — and get pointed
   to the right service page. Client-side only, no account, nothing
   stored; every outcome resolves to a real service record
-- Ask BetterPagsanjan (`/ask`): a deterministic civic discovery assistant
-  that answers plain-language questions with links to the site's own
-  pages, shows 911-first emergency numbers for urgent questions, and
-  says when nothing on the site matches instead of guessing
+- Ask BetterPagsanjan (`/ask`): a chat assistant that answers
+  plain-language questions with links to the site's own pages, shows
+  911-first emergency numbers for urgent questions, and says when
+  nothing on the site matches instead of guessing. Retrieval-only —
+  no AI model, no accounts, nothing stored. A floating chat button on
+  every page opens the same assistant in a panel, so help is one tap
+  away from anywhere on the site
 - Open data documentation on the Sources page listing the read-only
   `/api/v1/*` JSON endpoints
 - Self-sufficient offline emergency page: 911 plus local hotlines with

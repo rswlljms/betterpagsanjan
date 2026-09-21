@@ -256,6 +256,15 @@ const pageRecords: SearchRecord[] = [
     href: "/ask",
     keywords: ["ask", "assistant", "help", "question", "chat"],
   },
+  {
+    id: "page-service-guide",
+    title: "Which service do I need?",
+    type: "page",
+    description:
+      "Answer two quick questions in plain language and get pointed to the right government service.",
+    href: "/services/guide",
+    keywords: ["guide", "which service", "help", "start", "quiz", "assistant"],
+  },
 ];
 
 export const searchIndex: SearchRecord[] = [
@@ -403,4 +412,119 @@ export function searchRecords(
   }
 
   return scored.sort((a, b) => b.score - a.score).map((entry) => entry.record);
+}
+
+/** Filler words stripped before question-tolerant ranking (EN + Filipino). */
+const stopwords = new Set([
+  "how",
+  "what",
+  "where",
+  "when",
+  "who",
+  "which",
+  "do",
+  "does",
+  "did",
+  "is",
+  "are",
+  "was",
+  "were",
+  "am",
+  "be",
+  "can",
+  "could",
+  "would",
+  "should",
+  "i",
+  "me",
+  "my",
+  "we",
+  "you",
+  "your",
+  "the",
+  "a",
+  "an",
+  "and",
+  "or",
+  "to",
+  "of",
+  "in",
+  "on",
+  "for",
+  "get",
+  "got",
+  "need",
+  "needs",
+  "want",
+  "please",
+  "tell",
+  "give",
+  "know",
+  "about",
+  "it",
+  "this",
+  "that",
+  "there",
+  "with",
+  "from",
+  "paano",
+  "ano",
+  "ang",
+  "ng",
+  "mga",
+  "sa",
+  "ko",
+  "nang",
+  "ay",
+  "ba",
+  "po",
+]);
+
+/**
+ * Question-tolerant ranked retrieval for the Ask assistant and /api/ask.
+ * Unlike searchRecords (every term must match — right for keyword search),
+ * this strips filler words and ranks by any-term score, so natural
+ * questions like "How do I get a business permit?" find the right pages.
+ * Returns at most `limit` records scoring at least `minScore`.
+ *
+ * Score weights: title start 40 / title includes 30 / keyword 20 /
+ * description 10. A minScore of 30 means at least one meaningful term
+ * appears in a page title — the /api/ask relevance gate uses this so the
+ * model is only called for questions with a genuine on-site anchor.
+ */
+export function searchRecordsRanked(
+  records: SearchRecord[],
+  query: string,
+  limit = 4,
+  minScore = 0,
+): SearchRecord[] {
+  const terms = query
+    .trim()
+    .toLowerCase()
+    .split(/\s+/)
+    .filter((term) => term.length > 2 && !stopwords.has(term));
+  if (terms.length === 0) return [];
+
+  const scored: { record: SearchRecord; score: number }[] = [];
+
+  for (const record of records) {
+    const title = record.title.toLowerCase();
+    const keywords = record.keywords.join(" ").toLowerCase();
+    const description = record.description.toLowerCase();
+    let score = 0;
+
+    for (const term of terms) {
+      if (title.startsWith(term)) score += 40;
+      else if (title.includes(term)) score += 30;
+      else if (keywords.includes(term)) score += 20;
+      else if (description.includes(term)) score += 10;
+    }
+
+    if (score >= Math.max(1, minScore)) scored.push({ record, score });
+  }
+
+  return scored
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map((entry) => entry.record);
 }
