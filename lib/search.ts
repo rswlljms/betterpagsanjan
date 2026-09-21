@@ -247,6 +247,15 @@ const pageRecords: SearchRecord[] = [
     href: "/sources",
     keywords: ["sources", "references", "attribution", "citations", "registry"],
   },
+  {
+    id: "page-ask",
+    title: "Ask BetterPagsanjan",
+    type: "page",
+    description:
+      "Ask a question in plain language and get links to the pages that answer it. Retrieval-only — it never guesses.",
+    href: "/ask",
+    keywords: ["ask", "assistant", "help", "question", "chat"],
+  },
 ];
 
 export const searchIndex: SearchRecord[] = [

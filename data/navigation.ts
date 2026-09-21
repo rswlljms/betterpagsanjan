@@ -112,6 +112,7 @@ export const mobileNav: NavItem[] = [
   // desktop dropdowns above, so the mobile list only adds the pages that
   // have no other home in the header.
   { title: "Search", href: "/search" },
+  { title: "Ask", href: "/ask" },
   { title: "About", href: "/about" },
   { title: "Sources", href: "/sources" },
 ];
@@ -145,6 +146,7 @@ export const footerNavGroups: { heading: string; items: NavItem[] }[] = [
       { title: "Explore Pagsanjan", href: "/tourism" },
       { title: "Civic map", href: "/map" },
       { title: "Search", href: "/search" },
+      { title: "Ask", href: "/ask" },
       { title: "About", href: "/about" },
       { title: "Sources", href: "/sources" },
     ],

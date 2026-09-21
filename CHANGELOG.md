@@ -33,6 +33,12 @@ internal mechanics.
 
 ### Added
 
+- Ask BetterPagsanjan (`/ask`): a deterministic civic discovery assistant
+  that answers plain-language questions with links to the site's own
+  pages, shows 911-first emergency numbers for urgent questions, and
+  says when nothing on the site matches instead of guessing
+- Open data documentation on the Sources page listing the read-only
+  `/api/v1/*` JSON endpoints
 - Self-sufficient offline emergency page: 911 plus local hotlines with
   tap-to-call links, last-checked dates, and a grab-and-go checklist are
   baked into `/offline`, so they work even on a cache miss; service

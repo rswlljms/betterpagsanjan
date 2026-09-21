@@ -23,6 +23,7 @@ const staticRoutes = [
   "/tourism",
   "/map",
   "/search",
+  "/ask",
   "/about",
   "/sources",
 ];
