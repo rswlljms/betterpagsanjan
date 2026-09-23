@@ -126,12 +126,10 @@ export default function HomePage() {
             <div className="lg:col-span-3">
               <CivicMapLoader locations={homeLocations} showFilters={false} />
               <p className="mt-3 text-xs leading-relaxed text-muted">
-                Municipal Hall pin: approximate location — address from the DTI
-                CMCI LGU profile, coordinates from a contributor map pin.
-                Confirm on site.{" "}
+                Municipal Hall pin is approximate — confirm on site.{" "}
                 <Link
                   href="/map"
-                  className="text-sm font-medium text-link hover:underline"
+                  className="font-medium text-link hover:underline"
                 >
                   Open the full civic map
                   <span aria-hidden> →</span>
@@ -141,8 +139,7 @@ export default function HomePage() {
           </div>
           {announcements.length === 0 ? (
             <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted">
-              No announcements published yet — BetterPagsanjan does not publish
-              unverified announcements. For current advisories, check the{" "}
+              No announcements yet — see the{" "}
               <Link
                 href="/announcements"
                 className="font-medium text-link hover:underline"
@@ -158,17 +155,6 @@ export default function HomePage() {
               >
                 official channels of the Municipality of Pagsanjan
               </a>
-              . For emergencies, call{" "}
-              <a href="tel:911" className="font-bold text-ink">
-                911
-              </a>{" "}
-              or visit the{" "}
-              <Link
-                href="/emergency"
-                className="font-medium text-link hover:underline"
-              >
-                emergency center
-              </Link>
               .
             </p>
           ) : (
