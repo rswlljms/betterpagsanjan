@@ -140,12 +140,10 @@ export function SiteFooter() {
         <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-neutral-500 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
             <p>
-              © {new Date().getFullYear()} {site.name} MIT | CC BY 4.0 All
-              public information sourced from official government portals.
+              © {new Date().getFullYear()} {site.name} MIT | CC BY 4.0
+              Information is compiled from publicly available sources.
             </p>
-            <p>
-              Not an official website of the Municipality of Pagsanjan.
-            </p>
+            <p>Not an official website of the Municipality of Pagsanjan.</p>
           </div>
           <p className="shrink-0 font-medium">Ver. {packageJson.version}</p>
         </div>
