@@ -11,6 +11,8 @@ internal mechanics.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-23
+
 ### Changed
 
 - Replaced the browser-tab icon with the BetterPagsanjan falls-and-sun
@@ -30,6 +32,9 @@ internal mechanics.
 - Civic map is announced as a text-complemented region (not an application),
   with verified/pending counts on the map page and an honest evacuation
   center empty state
+- Footer no longer overstates provenance: it now reads "Information is
+  compiled from publicly available sources" instead of implying everything
+  comes from official government portals
 
 ### Added
 
@@ -89,5 +94,6 @@ internal mechanics.
 - PWA foundation (web manifest, service worker, offline page)
 - SEO baseline (sitemap, robots, canonical URLs, Open Graph metadata)
 
-[Unreleased]: https://github.com/rswlljms/betterpagsanjan/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/rswlljms/betterpagsanjan/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/rswlljms/betterpagsanjan/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/rswlljms/betterpagsanjan/releases/tag/v0.1.0
