@@ -11,6 +11,7 @@ import {
   projectStatusLabels,
   projects,
 } from "@/data/projects/projects";
+import { floodControlProjects } from "@/data/projects/flood-control";
 
 export const metadata: Metadata = {
   title: "Public projects",
@@ -68,6 +69,34 @@ export default function ProjectsPage() {
             </p>
             <ul className="grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {projects.map((project) => (
+                <li key={project.id} className="h-full">
+                  <ProjectCard project={project} />
+                </li>
+              ))}
+            </ul>
+
+            <h2 className="mb-3 mt-12 text-xl font-bold tracking-tight text-ink">
+              DPWH implementation records in Pagsanjan
+            </h2>
+            <p className="mb-8 max-w-3xl text-sm leading-relaxed text-muted">
+              Showing {floodControlProjects.length} DPWH contracts physically
+              located in Pagsanjan, as published in DPWH transparency data via{" "}
+              <a
+                href="https://flood-control.bettergov.ph/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 font-medium text-primary-700 hover:underline"
+              >
+                BetterGov.PH Flood Watch
+                <ExternalLink className="size-3.5" aria-hidden />
+              </a>
+              . These are implementation records — contract, status, contractor,
+              and dates as published — not appropriations and not municipal
+              budget figures. The full Pagsanjan result set holds dozens of
+              contracts; this is a starting seed.
+            </p>
+            <ul className="grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {floodControlProjects.map((project) => (
                 <li key={project.id} className="h-full">
                   <ProjectCard project={project} />
                 </li>

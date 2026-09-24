@@ -170,6 +170,26 @@ export const sources: SourceRecord[] = [
     accessedAt: LAST_CHECKED,
   },
   {
+    id: "bettergov-flood-watch",
+    name: "BetterGov.PH — Flood Watch (DPWH transparency data)",
+    organization: "BetterGov.PH",
+    url: "https://flood-control.bettergov.ph/",
+    sourceType: "reference",
+    description:
+      "Independent civic-tech compilation of DPWH infrastructure transparency data (contract, budget, status, contractor, dates, coordinates). Free public read-only API. Pagsanjan records were transcribed in September 2026 from filtered API queries. Implementation records — not appropriations and never municipal budget figures. Verify against official DPWH documents before formal citation.",
+    accessedAt: LAST_CHECKED,
+  },
+  {
+    id: "bettergov-psgc-api",
+    name: "BetterGov.PH — PSA Classification API (PSGC mirror)",
+    organization: "BetterGov.PH",
+    url: "https://statistics.bettergov.ph/api#classification",
+    sourceType: "reference",
+    description:
+      "Independent civic-tech mirror of PSA classification snapshots (PSGC Q2_2024, with census populations and income classification per municipality/barangay). Free public read-only API, no key. Pagsanjan figures were transcribed in September 2026 from filtered queries. PSA remains the authoritative source — verify against official PSA releases before formal citation.",
+    accessedAt: LAST_CHECKED,
+  },
+  {
     id: "philatlas-pagsanjan",
     name: "PhilAtlas — Pagsanjan, Laguna",
     url: "https://www.philatlas.com/luzon/r04a/laguna/pagsanjan.html",

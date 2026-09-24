@@ -11,6 +11,14 @@ internal mechanics.
 
 ## [Unreleased]
 
+### Added
+
+- Public projects now include DPWH implementation records in Pagsanjan
+  (starting with four flood-control contracts in Magdapio, Pinagsanjan,
+  Maulawin, and Sampaloc) from DPWH transparency data via BetterGov.PH
+  Flood Watch, shown separately from FY2026 appropriation records with
+  contract, status, contractor, and dates as published
+
 ## [0.2.0] - 2026-09-23
 
 ### Changed

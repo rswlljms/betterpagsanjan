@@ -4,6 +4,7 @@ import { offices } from "@/data/government/offices";
 import { reportingCategories } from "@/data/reporting";
 import { legislativeDocuments } from "@/data/legislative/documents";
 import { civicLocations } from "@/data/locations/locations";
+import { floodControlProjects } from "@/data/projects/flood-control";
 import { projects } from "@/data/projects/projects";
 import { getServiceCategory, services } from "@/data/services";
 import { transparencyRecords } from "@/data/transparency/records";
@@ -318,7 +319,7 @@ export const searchIndex: SearchRecord[] = [
     ].filter(Boolean),
     badge: doc.documentType === "ordinance" ? "Ordinance" : "Resolution",
   })),
-  ...projects.map((project): SearchRecord => ({
+  ...[...projects, ...floodControlProjects].map((project): SearchRecord => ({
     id: `project-${project.id}`,
     title: project.displayName ?? project.name,
     type: "project",

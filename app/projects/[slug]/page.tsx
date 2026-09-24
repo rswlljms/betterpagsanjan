@@ -11,20 +11,30 @@ import {
   projectStatusLabels,
   projects,
 } from "@/data/projects/projects";
+import {
+  floodControlProjects,
+  getFloodControlProjectBySlug,
+} from "@/data/projects/flood-control";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
 }
 
+function getAnyProjectBySlug(slug: string) {
+  return getProjectBySlug(slug) ?? getFloodControlProjectBySlug(slug);
+}
+
 export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  return [...projects, ...floodControlProjects].map((project) => ({
+    slug: project.slug,
+  }));
 }
 
 export async function generateMetadata({
   params,
 }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = getAnyProjectBySlug(slug);
   if (!project) return {};
   return {
     title: project.name,
@@ -34,7 +44,7 @@ export async function generateMetadata({
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = getAnyProjectBySlug(slug);
   if (!project) notFound();
 
   return (
@@ -47,16 +57,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         ]}
       />
       <div className="mt-6 max-w-3xl">
-        <Badge variant="primary">
-          {projectStatusLabels[project.status]}
-        </Badge>
+        <Badge variant="primary">{projectStatusLabels[project.status]}</Badge>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
           {project.displayName ?? project.name}
         </h1>
         {project.displayName ? (
           <p className="mt-3 rounded-lg border border-line bg-surface p-3 text-xs leading-relaxed text-muted">
             <span className="font-semibold text-slate-700">
-              Official name in the FY2026 GAA:{" "}
+              {project.verification.sourceId === "bettergov-flood-watch"
+                ? "Official description in the DPWH record: "
+                : "Official name in the FY2026 GAA: "}
             </span>
             {project.name}
           </p>

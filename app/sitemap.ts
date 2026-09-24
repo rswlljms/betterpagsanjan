@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { barangays } from "@/data/barangays/barangays";
 import { consultations } from "@/data/consultations";
 import { legislativeDocuments } from "@/data/legislative/documents";
+import { floodControlProjects } from "@/data/projects/flood-control";
 import { projects } from "@/data/projects/projects";
 import { services } from "@/data/services";
 import { site } from "@/data/site";
@@ -57,7 +58,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url: `${site.url}/resolutions/${doc.slug}`,
         lastModified,
       })),
-    ...projects.map((project) => ({
+    ...[...projects, ...floodControlProjects].map((project) => ({
       url: `${site.url}/projects/${project.slug}`,
       lastModified,
     })),
