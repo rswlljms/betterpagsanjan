@@ -50,6 +50,17 @@ export default async function BarangayPage({ params }: BarangayPageProps) {
         <div className="mt-3">
           <VerificationBadge verification={barangay.verification} />
         </div>
+        {barangay.psgcCode ? (
+          <p className="mt-3 text-sm text-muted">
+            PSGC code:{" "}
+            <span className="font-mono text-[13px] text-slate-700">
+              {barangay.psgcCode}
+            </span>{" "}
+            <span className="text-xs">
+              (Q2_2024 snapshot, PSA data via BetterGov mirror)
+            </span>
+          </p>
+        ) : null}
         {barangay.description ? (
           <p className="mt-5 text-base leading-relaxed text-slate-700">
             {barangay.description}

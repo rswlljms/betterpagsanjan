@@ -18,6 +18,11 @@ internal mechanics.
   Maulawin, and Sampaloc) from DPWH transparency data via BetterGov.PH
   Flood Watch, shown separately from FY2026 appropriation records with
   contract, status, contractor, and dates as published
+- Statistics now cite the PSGC Q2_2024 snapshot via the BetterGov
+  classification mirror (PSA data): 2015 population added (42,164), 2020
+  and 2024 populations strengthened, and every barangay page shows its
+  10-digit PSGC code; the income-class conflict now notes the mirror
+  also lists 3rd
 
 ## [0.2.0] - 2026-09-23
 

@@ -30,6 +30,12 @@ export default function StatisticsPage() {
 
         <div className="mt-8 max-w-3xl space-y-4">
           <SourceAttribution
+            sourceId="bettergov-psgc-api"
+            sourceUrl="https://statistics.bettergov.ph/api/classification/psgc/Q2_2024/municipalities?prv=34&page_size=50"
+            lastChecked="September 2026"
+            note="PSGC Q2_2024 snapshot mirror of PSA data: census populations (2015, 2020, 2024), 16 barangay codes (0403419001–0403419016), and income classification for Pagsanjan (0403419000). PSA remains the authoritative source — verify against official PSA releases before formal citation."
+          />
+          <SourceAttribution
             sourceId="psa-psgc"
             sourceUrl="https://psa.gov.ph/classification/psgc/barangays/0403419000"
             lastChecked="September 2026"

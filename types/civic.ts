@@ -119,6 +119,8 @@ export interface Barangay {
   slug: string;
   name: string;
   description?: string;
+  /** 10-digit PSGC code (Q2_2024 snapshot), when confirmed. Never guessed. */
+  psgcCode?: string;
   officeAddress?: string;
   phone?: string;
   verification: Verification;
