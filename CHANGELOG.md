@@ -20,6 +20,10 @@ internal mechanics.
   shown separately from FY2026 appropriation records with contract,
   status, contractor, and dates as published; neighboring Lumban
   contracts from the same result set are excluded
+- Appropriations directory now covers both Pagsanjan-tagged departments
+  in the budget API result set: the fourteen FY2026 DPWH projects plus
+  the FY2020 Department of Agriculture farm-to-market road concreting
+  from Brgy. Biñan to Brgy. Sampaloc (₱14,000,000)
 - Statistics now cite the PSGC Q2_2024 snapshot via the BetterGov
   classification mirror (PSA data): 2015 population added (42,164), 2020
   and 2024 populations strengthened, and every barangay page shows its

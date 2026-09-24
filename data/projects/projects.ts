@@ -4,18 +4,22 @@ import type { PublicProject, ProjectStatus } from "@/types/civic";
 /**
  * Public project directory (AGENTS.md §24).
  *
- * Seed records below are national-government (DPWH) projects physically
+ * Seed records below are national-government projects physically
  * located in Pagsanjan, Laguna, transcribed in September 2026 from the
- * FY2026 General Appropriations Act via the BetterGov.PH Budget Data API
- * (source: bettergov-budget-api; upstream: DBM publications).
+ * General Appropriations Act via the BetterGov.PH Budget Data API
+ * (source: bettergov-budget-api; upstream: DBM publications): fourteen
+ * DPWH projects under the FY2026 GAA plus one Department of Agriculture
+ * farm-to-market road under the FY2020 GAA (the only non-DPWH
+ * Pagsanjan-tagged program in the API result set).
  *
- * These are APPROPRIATION records — funding authorized under the FY2026
- * GAA — not implementation reports. Every record carries status "planned"
+ * These are APPROPRIATION records — funding authorized under the GAA —
+ * not implementation reports. Every record carries status "planned"
  * with an explicit note that construction status has not been verified.
  * Never change a status without supporting information, and never present
  * these national figures as municipal budget figures.
  */
 const GAA_2026_SOURCE = "https://budget.bettergov.ph/gaa/2026";
+const GAA_2020_SOURCE = "https://budget.bettergov.ph/gaa/2020";
 
 function dpwh2026(
   entry: Pick<
@@ -94,7 +98,8 @@ export const projects: PublicProject[] = [
     id: "sta-cruz-pagsanjan-diversion-road-2026",
     slug: "sta-cruz-pagsanjan-diversion-road-2026",
     name: "Sta. Cruz - Pagsanjan Diversion Road, Laguna, Sta. 1 + 300 - 1 + 839",
-    displayName: "Sta. Cruz–Pagsanjan Diversion Road works, Sta. 1.3 – Sta. 1.8",
+    displayName:
+      "Sta. Cruz–Pagsanjan Diversion Road works, Sta. 1.3 – Sta. 1.8",
     location: "Sta. Cruz–Pagsanjan Diversion Road, Laguna",
     budget: "₱24,055,000 — FY2026 GAA (DPWH)",
   }),
@@ -151,9 +156,31 @@ export const projects: PublicProject[] = [
     location: "Barangay Biñan, Pagsanjan, Laguna",
     budget: "₱2,000,000 — FY2026 GAA (DPWH)",
   }),
+  {
+    id: "fmr-binan-sampaloc-2020",
+    slug: "fmr-binan-sampaloc-2020",
+    name: "Concreting of Brgy. Biñan to Brgy. Sampaloc FMR, Brgy. Biñan and Brgy. Sampaloc, Pagsanjan, Laguna",
+    displayName:
+      "Farm-to-market road concreting, Brgy. Biñan to Brgy. Sampaloc",
+    location: "Barangay Biñan to Barangay Sampaloc, Pagsanjan, Laguna",
+    description:
+      "Department of Agriculture farm-to-market road concreting from Brgy. Biñan to Brgy. Sampaloc, funded under the FY2020 General Appropriations Act. This record reflects the national appropriation only — construction status has not been verified.",
+    implementingOffice: "Department of Agriculture (DA)",
+    status: "planned",
+    budget: "₱14,000,000 — FY2020 GAA (DA)",
+    sourceUrl: GAA_2020_SOURCE,
+    verification: {
+      status: "verified",
+      sourceId: "bettergov-budget-api",
+      sourceUrl: GAA_2020_SOURCE,
+      verifiedAt: "2026-09",
+      note: "Project name and peso amount as published in the FY2020 GAA via the BetterGov.PH Budget Data API (DBM data); the only non-DPWH Pagsanjan-tagged program in the result set. The API renders Biñan without the ñ; corrected here to match the barangay name. Appropriation record only — implementation status unverified. Verify against official DBM/DA documents before formal citation.",
+    },
+    lastChecked: LAST_CHECKED,
+  },
 ];
 
-/** Sum of the FY2026 GAA amounts above, in exact pesos. */
+/** Sum of the fourteen FY2026 GAA (DPWH) amounts above, in exact pesos. */
 export const PROJECTS_FY2026_TOTAL = 350333000;
 
 export function formatPeso(amount: number): string {

@@ -66,7 +66,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <span className="font-semibold text-slate-700">
               {project.verification.sourceId === "bettergov-flood-watch"
                 ? "Official description in the DPWH record: "
-                : "Official name in the FY2026 GAA: "}
+                : "Official name in the GAA: "}
             </span>
             {project.name}
           </p>

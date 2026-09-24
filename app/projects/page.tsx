@@ -40,15 +40,16 @@ export default function ProjectsPage() {
         ) : (
           <>
             <p className="mb-8 max-w-3xl text-sm leading-relaxed text-muted">
-              Showing {projects.length} national-government (DPWH) projects in
-              Pagsanjan funded under the FY2026 General Appropriations Act,
-              totaling{" "}
+              Showing {projects.length} national-government appropriations in
+              Pagsanjan: fourteen DPWH projects funded under the FY2026 General
+              Appropriations Act, totaling{" "}
               <strong className="font-semibold text-ink">
                 {formatPeso(PROJECTS_FY2026_TOTAL)}
               </strong>
-              . These are appropriation records — funding authorized, not
-              completion reports — and are not municipal budget figures. Browse
-              the source data on the{" "}
+              , plus one Department of Agriculture farm-to-market road funded
+              under the FY2020 GAA (₱14,000,000). These are appropriation
+              records — funding authorized, not completion reports — and are not
+              municipal budget figures. Browse the source data on the{" "}
               <a
                 href="https://budget.bettergov.ph/gaa/2026"
                 target="_blank"
