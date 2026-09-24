@@ -14,10 +14,12 @@ internal mechanics.
 ### Added
 
 - Public projects now include DPWH implementation records in Pagsanjan
-  (starting with four flood-control contracts in Magdapio, Pinagsanjan,
-  Maulawin, and Sampaloc) from DPWH transparency data via BetterGov.PH
-  Flood Watch, shown separately from FY2026 appropriation records with
-  contract, status, contractor, and dates as published
+  (fourteen flood-control contracts in Magdapio, Pinagsanjan, Maulawin,
+  Lambac, Sampaloc, and the Sta. Cruz, Balanac, and Pagsanjan river
+  sections) from DPWH transparency data via BetterGov.PH Flood Watch,
+  shown separately from FY2026 appropriation records with contract,
+  status, contractor, and dates as published; neighboring Lumban
+  contracts from the same result set are excluded
 - Statistics now cite the PSGC Q2_2024 snapshot via the BetterGov
   classification mirror (PSA data): 2015 population added (42,164), 2020
   and 2024 populations strengthened, and every barangay page shows its

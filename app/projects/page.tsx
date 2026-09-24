@@ -92,8 +92,9 @@ export default function ProjectsPage() {
               </a>
               . These are implementation records — contract, status, contractor,
               and dates as published — not appropriations and not municipal
-              budget figures. The full Pagsanjan result set holds dozens of
-              contracts; this is a starting seed.
+              budget figures. The result set also returns contracts in
+              neighboring Lumban, Laguna; those are excluded here because they
+              are not in Pagsanjan.
             </p>
             <ul className="grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {floodControlProjects.map((project) => (
