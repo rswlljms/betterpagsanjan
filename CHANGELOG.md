@@ -11,6 +11,8 @@ internal mechanics.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-09-25
+
 ### Added
 
 - Public projects now include DPWH implementation records in Pagsanjan
@@ -113,6 +115,7 @@ internal mechanics.
 - PWA foundation (web manifest, service worker, offline page)
 - SEO baseline (sitemap, robots, canonical URLs, Open Graph metadata)
 
-[Unreleased]: https://github.com/rswlljms/betterpagsanjan/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/rswlljms/betterpagsanjan/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/rswlljms/betterpagsanjan/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/rswlljms/betterpagsanjan/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/rswlljms/betterpagsanjan/releases/tag/v0.1.0
