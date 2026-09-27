@@ -220,6 +220,12 @@ export interface TransparencyRecord {
   /** Direct URL to the original official document. */
   documentUrl?: string;
   sourceUrl?: string;
+  /**
+   * Slug of the related ordinance/resolution detail page, when this record
+   * is also indexed as legislation (e.g. a budget authorized by an
+   * appropriation ordinance). Enables two-way cross-linking.
+   */
+  relatedLegislativeSlug?: string;
   verification: Verification;
   lastChecked?: string;
 }

@@ -6,6 +6,7 @@ import { floodControlProjects } from "@/data/projects/flood-control";
 import { projects } from "@/data/projects/projects";
 import { services } from "@/data/services";
 import { site } from "@/data/site";
+import { transparencyRecords } from "@/data/transparency/records";
 
 const staticRoutes = [
   "",
@@ -64,6 +65,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...consultations.map((consultation) => ({
       url: `${site.url}/consultations/${consultation.slug}`,
+      lastModified,
+    })),
+    ...transparencyRecords.map((record) => ({
+      url: `${site.url}/transparency/${record.slug}`,
       lastModified,
     })),
   ];

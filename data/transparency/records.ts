@@ -1,8 +1,5 @@
 import { LAST_CHECKED } from "@/data/sources";
-import type {
-  TransparencyCategory,
-  TransparencyRecord,
-} from "@/types/civic";
+import type { TransparencyCategory, TransparencyRecord } from "@/types/civic";
 
 /**
  * Transparency records (AGENTS.md §22).
@@ -17,6 +14,7 @@ import type {
 export const transparencyRecords: TransparencyRecord[] = [
   {
     id: "supplemental-budget-04-2026",
+    relatedLegislativeSlug: "appropriation-ordinance-no-04-2026",
     slug: "supplemental-budget-04-2026",
     title: "Supplemental Budget No. 04-2026 — ₱520,000.00",
     category: "budget",
@@ -37,6 +35,7 @@ export const transparencyRecords: TransparencyRecord[] = [
   },
   {
     id: "supplemental-budget-03-2026",
+    relatedLegislativeSlug: "appropriation-ordinance-no-03-2026",
     slug: "supplemental-budget-03-2026",
     title: "Supplemental Budget No. 03-2026 — ₱6,579,500.00",
     category: "budget",
@@ -57,6 +56,7 @@ export const transparencyRecords: TransparencyRecord[] = [
   },
   {
     id: "supplemental-budget-02-2026",
+    relatedLegislativeSlug: "appropriation-ordinance-no-02-2026",
     slug: "supplemental-budget-02-2026",
     title: "Supplemental Budget No. 02-2026 — ₱31,000,000.00",
     category: "budget",
@@ -185,4 +185,16 @@ export function getTransparencyBySlug(
   slug: string,
 ): TransparencyRecord | undefined {
   return transparencyRecords.find((record) => record.slug === slug);
+}
+
+/**
+ * Find the transparency record cross-linked to an ordinance or
+ * resolution detail page, if one exists.
+ */
+export function getTransparencyByLegislativeSlug(
+  legislativeSlug: string,
+): TransparencyRecord | undefined {
+  return transparencyRecords.find(
+    (record) => record.relatedLegislativeSlug === legislativeSlug,
+  );
 }

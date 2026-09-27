@@ -338,7 +338,7 @@ export const searchIndex: SearchRecord[] = [
     title: record.title,
     type: "transparency",
     description: record.description,
-    href: "/transparency",
+    href: `/transparency/${record.slug}`,
     keywords: [record.category, record.year ?? ""].filter(Boolean),
     badge: "Transparency",
   })),

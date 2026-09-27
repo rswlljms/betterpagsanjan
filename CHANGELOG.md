@@ -13,6 +13,15 @@ internal mechanics.
 
 ### Added
 
+- Transparency detail pages: every record now opens at
+  `/transparency/[slug]` with its category, year, verification block,
+  original-document link, and source attribution, and is included in
+  the sitemap and site search
+- Transparency category and year filters (shareable via URL) on the
+  Transparency index; areas without verified records stay honestly
+  empty
+- Two-way cross-links between the three 2026 supplemental-budget
+  transparency records and their appropriation ordinance pages
 - Legislative topic filters now work: all twenty ordinance and resolution
   records carry discovery topics (budget, utilities, transportation,
   education, and more) assigned from their published titles, so the

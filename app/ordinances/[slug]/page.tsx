@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ExternalLink } from "lucide-react";
 import { Breadcrumbs } from "@/components/civic/breadcrumbs";
@@ -10,6 +11,7 @@ import {
   getLegislativeBySlug,
   legislativeDocuments,
 } from "@/data/legislative/documents";
+import { getTransparencyByLegislativeSlug } from "@/data/transparency/records";
 
 interface OrdinancePageProps {
   params: Promise<{ slug: string }>;
@@ -37,6 +39,7 @@ export default async function OrdinancePage({ params }: OrdinancePageProps) {
   const { slug } = await params;
   const doc = getLegislativeBySlug(slug);
   if (!doc || doc.documentType !== "ordinance") notFound();
+  const transparencyRecord = getTransparencyByLegislativeSlug(doc.slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -62,9 +65,7 @@ export default async function OrdinancePage({ params }: OrdinancePageProps) {
       />
       <div className="mt-6 max-w-3xl">
         <div className="flex flex-wrap items-center gap-1.5">
-          {doc.number ? (
-            <Badge variant="primary">{doc.number}</Badge>
-          ) : null}
+          {doc.number ? <Badge variant="primary">{doc.number}</Badge> : null}
           {doc.year ? <Badge variant="outline">{doc.year}</Badge> : null}
           {(doc.topics ?? []).map((topic) => (
             <Badge key={topic} variant="neutral">
@@ -108,6 +109,18 @@ export default async function OrdinancePage({ params }: OrdinancePageProps) {
               View original official document
               <ExternalLink className="size-4" aria-hidden />
             </a>
+          </p>
+        ) : null}
+        {transparencyRecord ? (
+          <p className="mt-4 text-sm leading-relaxed text-slate-700">
+            Also listed under{" "}
+            <Link
+              href={`/transparency/${transparencyRecord.slug}`}
+              className="font-medium text-primary-700 hover:underline"
+            >
+              Transparency: {transparencyRecord.title}
+            </Link>
+            .
           </p>
         ) : null}
         <SourceAttribution
