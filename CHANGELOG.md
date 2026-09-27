@@ -11,6 +11,15 @@ internal mechanics.
 
 ## [Unreleased]
 
+### Added
+
+- Legislative topic filters now work: all twenty ordinance and resolution
+  records carry discovery topics (budget, utilities, transportation,
+  education, and more) assigned from their published titles, so the
+  topic chips, card badges, and keyword search on `/ordinances` and
+  `/resolutions` filter real data; topics are labeled as
+  BetterPagsanjan discovery aids, not official classifications
+
 ## [0.3.0] - 2026-09-25
 
 ### Added

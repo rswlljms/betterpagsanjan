@@ -14,6 +14,12 @@ import type { LegislativeDocument } from "@/types/civic";
  * of resolutions). BetterPagsanjan indexes recent entries here and links to
  * the portal for the full archive — new records are added only from the
  * portal, never invented.
+ *
+ * Topics are BetterPagsanjan discovery labels assigned from the published
+ * titles (e.g. "budget", "utilities") — not official classifications.
+ * The portal publishes ordinances, resolutions, and other documents; no
+ * executive-order section was found there as of September 2026, so none
+ * are indexed.
  */
 const SEED_VERIFICATION_SOURCE = "pagsanjan-legislative-portal" as const;
 
@@ -38,6 +44,7 @@ function seed(
 const ordinances: LegislativeDocument[] = [
   seed({
     id: "appropriation-ordinance-no-04-2026",
+    topics: ["budget"],
     slug: "appropriation-ordinance-no-04-2026",
     documentType: "ordinance",
     number: "APPROPRIATION ORDINANCE NO. 04-2026",
@@ -57,6 +64,7 @@ const ordinances: LegislativeDocument[] = [
   }),
   seed({
     id: "municipal-ordinance-no-11-2026",
+    topics: ["personnel", "education"],
     slug: "municipal-ordinance-no-11-2026",
     documentType: "ordinance",
     number: "MUNICIPAL ORDINANCE NO. 11-2026",
@@ -71,6 +79,7 @@ const ordinances: LegislativeDocument[] = [
   }),
   seed({
     id: "municipal-ordinance-no-10-2026",
+    topics: ["fees", "business"],
     slug: "municipal-ordinance-no-10-2026",
     documentType: "ordinance",
     number: "MUNICIPAL ORDINANCE NO. 10-2026",
@@ -85,6 +94,7 @@ const ordinances: LegislativeDocument[] = [
   }),
   seed({
     id: "natatanging-kautusang-bayan-blg-01-2026",
+    topics: ["roads", "naming"],
     slug: "natatanging-kautusang-bayan-blg-01-2026",
     documentType: "ordinance",
     number: "NATATANGING KAUTUSANG BAYAN BLG. 01-2026",
@@ -100,6 +110,7 @@ const ordinances: LegislativeDocument[] = [
   }),
   seed({
     id: "appropriation-ordinance-no-03-2026",
+    topics: ["budget"],
     slug: "appropriation-ordinance-no-03-2026",
     documentType: "ordinance",
     number: "APPROPRIATION ORDINANCE NO. 03-2026",
@@ -119,6 +130,7 @@ const ordinances: LegislativeDocument[] = [
   }),
   seed({
     id: "municipal-ordinance-no-09-2026",
+    topics: ["business", "fees"],
     slug: "municipal-ordinance-no-09-2026",
     documentType: "ordinance",
     number: "MUNICIPAL ORDINANCE NO. 09-2026",
@@ -143,6 +155,7 @@ const ordinances: LegislativeDocument[] = [
   }),
   seed({
     id: "municipal-ordinance-no-08-2026",
+    topics: ["personnel", "education"],
     slug: "municipal-ordinance-no-08-2026",
     documentType: "ordinance",
     number: "MUNICIPAL ORDINANCE NO. 08-2026",
@@ -157,6 +170,7 @@ const ordinances: LegislativeDocument[] = [
   }),
   seed({
     id: "municipal-ordinance-no-06-2026",
+    topics: ["education", "naming"],
     slug: "municipal-ordinance-no-06-2026",
     documentType: "ordinance",
     number: "MUNICIPAL ORDINANCE NO. 06-2026",
@@ -171,6 +185,7 @@ const ordinances: LegislativeDocument[] = [
   }),
   seed({
     id: "appropriation-ordinance-no-02-2026",
+    topics: ["budget"],
     slug: "appropriation-ordinance-no-02-2026",
     documentType: "ordinance",
     number: "APPROPRIATION ORDINANCE NO. 02-2026",
@@ -190,6 +205,7 @@ const ordinances: LegislativeDocument[] = [
   }),
   seed({
     id: "municipal-ordinance-no-05-2026",
+    topics: ["transportation", "fees"],
     slug: "municipal-ordinance-no-05-2026",
     documentType: "ordinance",
     number: "MUNICIPAL ORDINANCE NO. 05-2026",
@@ -207,13 +223,13 @@ const ordinances: LegislativeDocument[] = [
 const resolutions: LegislativeDocument[] = [
   seed({
     id: "resolution-no-127-2026",
+    topics: ["disaster-relief"],
     slug: "resolution-no-127-2026",
     documentType: "resolution",
     number: "RESOLUTION NO. 127-2026",
     title:
       "A RESOLUTION OF THE SANGGUNIANG BAYAN OF PAGSANJAN, LAGUNA, AUTHORIZING THE MUNICIPAL MAYOR, HON. JANUARIO FERRY G. GARCIA, TO REPRESENT THE MUNICIPAL GOVERNMENT OF PAGSANJAN AND ENTER AND SIGN A MEMORANDUM OF AGREEMENT WITH RO8 GROCERY, REPRESENTED BY MS. MARITES LEE ONG, FOR THE IMMEDIATE PROVISION OF BASIC SUPPLIES AND RELIEF GOODS TO BE UTILIZED DURING CALAMITIES AND DISASTERS.",
-    summary:
-      "Approved August 24, 2026. Author: HON. MELVIN B. MADRIAGA.",
+    summary: "Approved August 24, 2026. Author: HON. MELVIN B. MADRIAGA.",
     date: "2026-08-24",
     year: "2026",
     authors: ["HON. MELVIN B. MADRIAGA"],
@@ -222,13 +238,13 @@ const resolutions: LegislativeDocument[] = [
   }),
   seed({
     id: "resolution-no-128-2026",
+    topics: ["governance"],
     slug: "resolution-no-128-2026",
     documentType: "resolution",
     number: "RESOLUTION NO. 128-2026",
     title:
       "A RESOLUTION OF THE SANGGUNIANG BAYAN OF PAGSANJAN CONFIRMING THE APPOINTMENT OF HON. NOOGINE ABLIR PABILONIA AS A REGULAR MEMBER OF THE SANGGUNIANG BAYAN OF PAGSANJAN, LAGUNA (AUGUST 17, 2026 - JUNE 30, 2028).",
-    summary:
-      "Approved August 24, 2026. Author: HON. MELVIN B. MADRIAGA.",
+    summary: "Approved August 24, 2026. Author: HON. MELVIN B. MADRIAGA.",
     date: "2026-08-24",
     year: "2026",
     authors: ["HON. MELVIN B. MADRIAGA"],
@@ -237,6 +253,7 @@ const resolutions: LegislativeDocument[] = [
   }),
   seed({
     id: "kapasiyahan-blg-129-2026",
+    topics: ["tribute"],
     slug: "kapasiyahan-blg-129-2026",
     documentType: "resolution",
     number: "KAPASIYAHAN BLG. 129-2026",
@@ -261,6 +278,7 @@ const resolutions: LegislativeDocument[] = [
   }),
   seed({
     id: "resolution-no-121-2026",
+    topics: ["commemoration"],
     slug: "resolution-no-121-2026",
     documentType: "resolution",
     number: "RESOLUTION NO. 121-2026",
@@ -280,13 +298,13 @@ const resolutions: LegislativeDocument[] = [
   }),
   seed({
     id: "resolution-no-122-2026",
+    topics: ["finance", "personnel"],
     slug: "resolution-no-122-2026",
     documentType: "resolution",
     number: "RESOLUTION NO. 122-2026",
     title:
       "A RESOLUTION OF THE SANGGUNIANG BAYAN OF PAGSANJAN AUTHORIZING THE MUNICIPAL MAYOR, HON. JANUARIO FERRY G. GARCIA, TO ENTER INTO AND SIGN A MEMORANDUM OF AGREEMENT (MOA) WITH THE DEVELOPMENT BANK OF THE PHILIPPINES (DBP), REPRESENTED BY ITS VICE PRESIDENT AND OFFICER-IN-CHARGE OF THE BRANCH BANKING GROUP SOUTHERN LUZON, CHED B. SY, FOR THE IMPLEMENTATION OF A SALARY LOAN FACILITY FOR QUALIFIED EMPLOYEES OF THE MUNICIPAL GOVERNMENT OF PAGSANJAN.",
-    summary:
-      "Approved August 3, 2026. Author: HON. MELVIN B. MADRIAGA.",
+    summary: "Approved August 3, 2026. Author: HON. MELVIN B. MADRIAGA.",
     date: "2026-08-03",
     year: "2026",
     authors: ["HON. MELVIN B. MADRIAGA"],
@@ -295,6 +313,7 @@ const resolutions: LegislativeDocument[] = [
   }),
   seed({
     id: "resolution-no-123-2026",
+    topics: ["market"],
     slug: "resolution-no-123-2026",
     documentType: "resolution",
     number: "RESOLUTION NO. 123-2026",
@@ -309,6 +328,7 @@ const resolutions: LegislativeDocument[] = [
   }),
   seed({
     id: "resolution-no-124-2026",
+    topics: ["finance", "governance"],
     slug: "resolution-no-124-2026",
     documentType: "resolution",
     number: "RESOLUTION NO. 124-2026",
@@ -324,13 +344,13 @@ const resolutions: LegislativeDocument[] = [
   }),
   seed({
     id: "resolution-no-125-2026",
+    topics: ["utilities"],
     slug: "resolution-no-125-2026",
     documentType: "resolution",
     number: "RESOLUTION NO. 125-2026",
     title:
       "A RESOLUTION OF THE SANGGUNIANG BAYAN REQUESTING THE FIRST LAGUNA ELECTRIC COOPERATIVE INC. (FLECO) TO REPLACE OR REMOVE ALL DILAPIDATED ELECTRIC POST AND ARRANGE DANGLING ELECTRIC AND SPAGHETTI WIRES WITHIN THE TERRITORIAL JURISDICTION OF THE MUNICIPALITY OF PAGSANJAN, PROVINCE OF LAGUNA.",
-    summary:
-      "Approved August 3, 2026. Author: HON. NATHANAEL C. BERNALES II.",
+    summary: "Approved August 3, 2026. Author: HON. NATHANAEL C. BERNALES II.",
     date: "2026-08-03",
     year: "2026",
     authors: ["HON. NATHANAEL C. BERNALES II"],
@@ -339,13 +359,13 @@ const resolutions: LegislativeDocument[] = [
   }),
   seed({
     id: "resolution-no-126-2026",
+    topics: ["utilities"],
     slug: "resolution-no-126-2026",
     documentType: "resolution",
     number: "RESOLUTION NO. 126-2026",
     title:
       "A RESOLUTION OF THE SANGGUNIANG BAYAN REQUESTING THE PHILIPPINE LONG DISTANCE TELEPHONE COMPANY INC. (PLDT), GLOBE TELECOMS, DITO TELECOMMUNITY, CABLE VISION AND OTHER TELECOMMUNICATIONS AND CABLE COMPANY OPERATING WITHIN THE TERRITORIAL JURISDICTION OF THE MUNICIPALITY OF PAGSANJAN, PROVINCE OF LAGUNA TO REPLACE OR REMOVE ALL DILAPIDATED COMMUNICATION POST AND ARRANGE DANGLING CABLE AND INTERNET SPAGHETTI WIRES IN THE MUNICIPALITY.",
-    summary:
-      "Approved August 3, 2026. Author: HON. NATHANAEL C. BERNALES II.",
+    summary: "Approved August 3, 2026. Author: HON. NATHANAEL C. BERNALES II.",
     date: "2026-08-03",
     year: "2026",
     authors: ["HON. NATHANAEL C. BERNALES II"],
@@ -354,6 +374,7 @@ const resolutions: LegislativeDocument[] = [
   }),
   seed({
     id: "resolution-no-118-2026",
+    topics: ["governance"],
     slug: "resolution-no-118-2026",
     documentType: "resolution",
     number: "RESOLUTION NO. 118-2026",
