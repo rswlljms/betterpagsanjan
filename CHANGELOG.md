@@ -35,6 +35,10 @@ internal mechanics.
 - Household count (11,404, 2024) as a labeled secondary figure;
   age distribution explicitly noted as unavailable at municipal
   level rather than estimated
+- Open data for Phase 2 datasets: read-only `/api/v1/legislative`,
+  `/api/v1/transparency`, `/api/v1/projects`, and `/api/v1/statistics`
+  with the same disclaimer and verification metadata, listed in the
+  API index and the Sources page docs
 - Legislative topic filters now work: all twenty ordinance and resolution
   records carry discovery topics (budget, utilities, transportation,
   education, and more) assigned from their published titles, so the

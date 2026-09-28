@@ -105,6 +105,16 @@ export default function SourcesPage() {
               { href: "/api/v1/services", label: "Service finder records" },
               { href: "/api/v1/barangays", label: "Barangay list" },
               { href: "/api/v1/offices", label: "Government offices" },
+              {
+                href: "/api/v1/legislative",
+                label: "Ordinances and resolutions",
+              },
+              { href: "/api/v1/transparency", label: "Transparency records" },
+              {
+                href: "/api/v1/projects",
+                label: "Appropriations and implementation records",
+              },
+              { href: "/api/v1/statistics", label: "Statistics" },
               { href: "/api/v1/sources", label: "Source registry" },
             ].map((endpoint) => (
               <li
