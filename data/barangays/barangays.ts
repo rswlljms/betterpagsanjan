@@ -13,6 +13,12 @@ import type { Barangay } from "@/types/civic";
  *
  * Barangay officials, offices, and contact details are deliberately absent
  * until verified from official sources (AGENTS.md §14, §20).
+ *
+ * 2024 POPCEN populations and urban/rural tags below are transcribed from
+ * the PSA PSGC page for Pagsanjan (source: psa-psgc). psa.gov.ph blocks
+ * automated access, so figures were read from the search-indexed PSA page
+ * in September 2026 and cross-checked by summation: the 16 barangay
+ * figures total exactly 45,602, matching the municipal 2024 census total.
  */
 export const barangays: Barangay[] = [
   {
@@ -20,6 +26,8 @@ export const barangays: Barangay[] = [
     slug: "anibong",
     name: "Anibong",
     psgcCode: "0403419001",
+    population2024: 420,
+    urbanRural: "Rural",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",
@@ -35,6 +43,8 @@ export const barangays: Barangay[] = [
     description:
       "One of the two poblacion barangays at the town proper, where the Municipal Hall is located.",
     psgcCode: "0403419012",
+    population2024: 1491,
+    urbanRural: "Rural",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",
@@ -49,6 +59,8 @@ export const barangays: Barangay[] = [
     name: "Barangay II (Poblacion)",
     description: "One of the two poblacion barangays at the town proper.",
     psgcCode: "0403419013",
+    population2024: 1945,
+    urbanRural: "Urban",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",
@@ -62,6 +74,8 @@ export const barangays: Barangay[] = [
     slug: "binan",
     name: "Biñan",
     psgcCode: "0403419002",
+    population2024: 6494,
+    urbanRural: "Urban",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",
@@ -75,6 +89,8 @@ export const barangays: Barangay[] = [
     slug: "buboy",
     name: "Buboy",
     psgcCode: "0403419003",
+    population2024: 1838,
+    urbanRural: "Rural",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",
@@ -88,6 +104,8 @@ export const barangays: Barangay[] = [
     slug: "cabanbanan",
     name: "Cabanbanan",
     psgcCode: "0403419004",
+    population2024: 5736,
+    urbanRural: "Urban",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",
@@ -101,6 +119,8 @@ export const barangays: Barangay[] = [
     slug: "calusiche",
     name: "Calusiche",
     psgcCode: "0403419005",
+    population2024: 1107,
+    urbanRural: "Rural",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",
@@ -114,6 +134,8 @@ export const barangays: Barangay[] = [
     slug: "dingin",
     name: "Dingin",
     psgcCode: "0403419006",
+    population2024: 1747,
+    urbanRural: "Rural",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",
@@ -127,6 +149,8 @@ export const barangays: Barangay[] = [
     slug: "lambac",
     name: "Lambac",
     psgcCode: "0403419007",
+    population2024: 1120,
+    urbanRural: "Rural",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",
@@ -140,6 +164,8 @@ export const barangays: Barangay[] = [
     slug: "layugan",
     name: "Layugan",
     psgcCode: "0403419008",
+    population2024: 457,
+    urbanRural: "Rural",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",
@@ -155,6 +181,8 @@ export const barangays: Barangay[] = [
     description:
       "Shares its name with Magdapio Falls, the falls popularly known as Pagsanjan Falls.",
     psgcCode: "0403419009",
+    population2024: 2525,
+    urbanRural: "Rural",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",
@@ -168,6 +196,8 @@ export const barangays: Barangay[] = [
     slug: "maulawin",
     name: "Maulawin",
     psgcCode: "0403419010",
+    population2024: 4684,
+    urbanRural: "Rural",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",
@@ -181,6 +211,8 @@ export const barangays: Barangay[] = [
     slug: "pinagsanjan",
     name: "Pinagsanjan",
     psgcCode: "0403419011",
+    population2024: 5194,
+    urbanRural: "Urban",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",
@@ -194,6 +226,8 @@ export const barangays: Barangay[] = [
     slug: "sabang",
     name: "Sabang",
     psgcCode: "0403419014",
+    population2024: 3799,
+    urbanRural: "Rural",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",
@@ -207,6 +241,8 @@ export const barangays: Barangay[] = [
     slug: "sampaloc",
     name: "Sampaloc",
     psgcCode: "0403419015",
+    population2024: 4267,
+    urbanRural: "Urban",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",
@@ -220,6 +256,8 @@ export const barangays: Barangay[] = [
     slug: "san-isidro",
     name: "San Isidro",
     psgcCode: "0403419016",
+    population2024: 2778,
+    urbanRural: "Rural",
     verification: {
       status: "verified",
       sourceId: "psa-psgc",

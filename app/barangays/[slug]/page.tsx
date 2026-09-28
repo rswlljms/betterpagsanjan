@@ -61,6 +61,16 @@ export default async function BarangayPage({ params }: BarangayPageProps) {
             </span>
           </p>
         ) : null}
+        {barangay.population2024 ? (
+          <p className="mt-3 text-sm text-muted">
+            Population (2024 census):{" "}
+            <span className="font-semibold text-slate-700">
+              {barangay.population2024.toLocaleString("en-PH")}
+            </span>
+            {barangay.urbanRural ? ` · ${barangay.urbanRural}` : null}{" "}
+            <span className="text-xs">(PSA PSGC listing)</span>
+          </p>
+        ) : null}
         {barangay.description ? (
           <p className="mt-5 text-base leading-relaxed text-slate-700">
             {barangay.description}

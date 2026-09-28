@@ -30,10 +30,17 @@ export default function BarangaysPage() {
                 className="flex items-center justify-between gap-2 rounded-lg border border-line bg-white px-4 py-3 text-sm font-medium text-slate-800 transition-colors hover:border-primary-300 hover:bg-primary-50/40 hover:text-primary-900"
               >
                 {barangay.name}
-                <ChevronRight
-                  className="size-4 shrink-0 text-slate-400"
-                  aria-hidden
-                />
+                <span className="flex shrink-0 items-center gap-2">
+                  {barangay.population2024 ? (
+                    <span className="text-xs font-normal tabular-nums text-muted">
+                      {barangay.population2024.toLocaleString("en-PH")}
+                    </span>
+                  ) : null}
+                  <ChevronRight
+                    className="size-4 shrink-0 text-slate-400"
+                    aria-hidden
+                  />
+                </span>
               </Link>
             </li>
           ))}

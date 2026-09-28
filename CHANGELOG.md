@@ -26,6 +26,15 @@ internal mechanics.
   projects index: keyword search across names and barangays plus
   record-type and status filters, keeping appropriation records and
   DPWH implementation records in separate sections
+- Population trend section on the Statistics page: 2015–2020–2024
+  census figures with intercensal change in an accessible table
+  plus a CSS bar visual, derived from the existing verified stats
+- Per-barangay 2024 census populations with urban/rural tags on all
+  sixteen barangay pages and the directory list, transcribed from
+  the PSA PSGC listing and sum-checked against the municipal total
+- Household count (11,404, 2024) as a labeled secondary figure;
+  age distribution explicitly noted as unavailable at municipal
+  level rather than estimated
 - Legislative topic filters now work: all twenty ordinance and resolution
   records carry discovery topics (budget, utilities, transportation,
   education, and more) assigned from their published titles, so the

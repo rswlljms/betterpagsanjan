@@ -47,6 +47,16 @@ export const statistics: StatisticItem[] = [
     note: "PSGC Q2_2024 populations array (PSA data via mirror). Included for census trend comparison.",
   },
   {
+    id: "households-2024",
+    label: "Households",
+    value: "11,404",
+    context: "2024 Census of Population (POPCEN)",
+    year: "2024",
+    sourceId: "wikipedia-pagsanjan",
+    sourceUrl: "https://en.wikipedia.org/wiki/Pagsanjan",
+    note: "Secondary compilation citing the PSA 2024 census (average household size computes to ~4.0 persons, consistent with national patterns). Verify against PSA census releases before formal citation.",
+  },
+  {
     id: "barangays",
     label: "Barangays",
     value: "16",

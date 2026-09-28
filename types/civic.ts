@@ -121,6 +121,10 @@ export interface Barangay {
   description?: string;
   /** 10-digit PSGC code (Q2_2024 snapshot), when confirmed. Never guessed. */
   psgcCode?: string;
+  /** 2024 POPCEN population as listed on the PSA PSGC page. Never guessed. */
+  population2024?: number;
+  /** Urban/rural classification as listed on the PSA PSGC page. */
+  urbanRural?: "Urban" | "Rural";
   officeAddress?: string;
   phone?: string;
   verification: Verification;
