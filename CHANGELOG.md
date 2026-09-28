@@ -22,6 +22,10 @@ internal mechanics.
   empty
 - Two-way cross-links between the three 2026 supplemental-budget
   transparency records and their appropriation ordinance pages
+- Project search and filters (shareable via URL) on the Public
+  projects index: keyword search across names and barangays plus
+  record-type and status filters, keeping appropriation records and
+  DPWH implementation records in separate sections
 - Legislative topic filters now work: all twenty ordinance and resolution
   records carry discovery topics (budget, utilities, transportation,
   education, and more) assigned from their published titles, so the

@@ -17,6 +17,13 @@ import type { PublicProject, ProjectStatus } from "@/types/civic";
  * with an explicit note that construction status has not been verified.
  * Never change a status without supporting information, and never present
  * these national figures as municipal budget figures.
+ *
+ * Municipal (LGU-funded) projects are not covered here: the municipal
+ * portal's executive and news sections publish no itemized municipal
+ * project record (location, budget, status) as of September 2026, and
+ * the 2026 supplemental budgets authorize priority programs without
+ * itemized project names. Add municipal records only from an itemized
+ * official source — never from news prose.
  */
 const GAA_2026_SOURCE = "https://budget.bettergov.ph/gaa/2026";
 const GAA_2020_SOURCE = "https://budget.bettergov.ph/gaa/2020";

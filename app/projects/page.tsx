@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { ExternalLink, HardHat } from "lucide-react";
 import { PageHero } from "@/components/civic/page-hero";
-import { ProjectCard } from "@/components/civic/project-card";
+import { ProjectFinder } from "@/components/civic/project-finder";
 import { EmptyState } from "@/components/civic/empty-state";
 import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/ui/container";
+import { CardGridSkeleton } from "@/components/ui/page-skeleton";
 import {
   formatPeso,
   PROJECTS_FY2026_TOTAL,
@@ -22,6 +24,7 @@ export const metadata: Metadata = {
 const statusValues = Object.values(projectStatusLabels);
 
 export default function ProjectsPage() {
+  const hasRecords = projects.length > 0 || floodControlProjects.length > 0;
   return (
     <>
       <PageHero
@@ -30,7 +33,7 @@ export default function ProjectsPage() {
         description="A directory of public projects in Pagsanjan — location, implementing office, budget, and status, each traceable to an official record. BetterPagsanjan never assigns a project status without supporting information."
       />
       <Container className="py-10 sm:py-12">
-        {projects.length === 0 ? (
+        {!hasRecords ? (
           <EmptyState
             className="max-w-2xl"
             icon={HardHat}
@@ -39,7 +42,7 @@ export default function ProjectsPage() {
           />
         ) : (
           <>
-            <p className="mb-8 max-w-3xl text-sm leading-relaxed text-muted">
+            <p className="mb-4 max-w-3xl text-sm leading-relaxed text-muted">
               Showing {projects.length} national-government appropriations in
               Pagsanjan: fourteen DPWH projects funded under the FY2026 General
               Appropriations Act, totaling{" "}
@@ -59,29 +62,9 @@ export default function ProjectsPage() {
                 BetterGov.PH FY2026 budget browser
                 <ExternalLink className="size-3.5" aria-hidden />
               </a>
-              .
-            </p>
-            <p className="mb-8 max-w-3xl text-sm leading-relaxed text-muted">
-              Road project names use DPWH station codes — for example,{" "}
-              <span className="font-mono text-xs">K0095 + 949</span> means
-              kilometer 95.949 along the route. Card titles simplify these
-              codes; each detail page keeps the official name exactly as
-              published in the budget.
-            </p>
-            <ul className="grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {projects.map((project) => (
-                <li key={project.id} className="h-full">
-                  <ProjectCard project={project} />
-                </li>
-              ))}
-            </ul>
-
-            <h2 className="mb-3 mt-12 text-xl font-bold tracking-tight text-ink">
-              DPWH implementation records in Pagsanjan
-            </h2>
-            <p className="mb-8 max-w-3xl text-sm leading-relaxed text-muted">
-              Showing {floodControlProjects.length} DPWH contracts physically
-              located in Pagsanjan, as published in DPWH transparency data via{" "}
+              . Below them are {floodControlProjects.length} DPWH contracts
+              physically located in Pagsanjan, as published in DPWH transparency
+              data via{" "}
               <a
                 href="https://flood-control.bettergov.ph/"
                 target="_blank"
@@ -90,20 +73,31 @@ export default function ProjectsPage() {
               >
                 BetterGov.PH Flood Watch
                 <ExternalLink className="size-3.5" aria-hidden />
-              </a>
-              . These are implementation records — contract, status, contractor,
-              and dates as published — not appropriations and not municipal
-              budget figures. The result set also returns contracts in
-              neighboring Lumban, Laguna; those are excluded here because they
-              are not in Pagsanjan.
+              </a>{" "}
+              — implementation records (contract, status, contractor, and dates
+              as published), not appropriations and not municipal budget
+              figures.
             </p>
-            <ul className="grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {floodControlProjects.map((project) => (
-                <li key={project.id} className="h-full">
-                  <ProjectCard project={project} />
-                </li>
-              ))}
-            </ul>
+            <p className="mb-4 max-w-3xl text-sm leading-relaxed text-muted">
+              Road project names use DPWH station codes — for example,{" "}
+              <span className="font-mono text-xs">K0095 + 949</span> means
+              kilometer 95.949 along the route. Card titles simplify these
+              codes; each detail page keeps the official name exactly as
+              published in the budget.
+            </p>
+            <p className="mb-8 max-w-3xl text-sm leading-relaxed text-muted">
+              Municipal (LGU-funded) projects are not listed yet: no itemized
+              municipal project record — with location, budget, and status —
+              could be verified from the municipal portal&apos;s executive and
+              news sections as of September 2026. The 2026 supplemental budgets
+              authorize priority programs without itemized project names.
+            </p>
+            <Suspense fallback={<CardGridSkeleton />}>
+              <ProjectFinder
+                appropriations={projects}
+                implementations={floodControlProjects}
+              />
+            </Suspense>
           </>
         )}
 
