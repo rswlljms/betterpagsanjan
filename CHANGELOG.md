@@ -13,6 +13,14 @@ internal mechanics.
 
 ### Added
 
+- Verified service details for new and renewal business permits and
+  local birth-certificate copies, transcribed from the 2026 Pagsanjan
+  Citizen's Charter with printed-page and PDF-page citations:
+  requirements, steps, fees, and processing times now appear on those
+  service pages. Business-permit fees are shown as computed rather than
+  fixed, and the local birth-certificate copy is distinguished from the
+  PSA-issued copy. Barangay clearance remains marked pending because the
+  municipal charter does not cover barangay-issued clearances.
 - Transparency detail pages: every record now opens at
   `/transparency/[slug]` with its category, year, verification block,
   original-document link, and source attribution, and is included in

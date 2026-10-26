@@ -40,13 +40,17 @@ export const offices: GovernmentOffice[] = [
     name: "Municipal Treasurer's Office",
     group: "finance",
     description:
-      "Collects local taxes, fees, and charges — including real property tax — and keeps municipal funds.",
+      "Collects local taxes, fees, and charges — including real property tax — and keeps municipal funds. The 2026 Citizen's Charter places business permit processing at this office.",
     statutoryBasis: "Local Government Code of 1991 (RA 7160)",
-    services: ["real-property-tax"],
+    services: [
+      "business-permit",
+      "business-permit-renewal",
+      "real-property-tax",
+    ],
     verification: {
       status: "pending",
-      sourceId: "ra-7160",
-      note: "Contact details and payment schedules for Pagsanjan have not yet been verified.",
+      sourceId: "pagsanjan-citizens-charter",
+      note: "The 2026 Citizen's Charter confirms this office processes business permits and collects local taxes; contact details and payment schedules for Pagsanjan have not yet been verified.",
     },
   },
   {
@@ -67,11 +71,11 @@ export const offices: GovernmentOffice[] = [
     name: "Business Permits and Licensing Office",
     group: "administration",
     description:
-      "Handles new business permit applications and annual renewals. The exact office name and setup in Pagsanjan still need verification.",
-    services: ["business-permit", "business-permit-renewal"],
+      "Standard municipal office for business permitting. The 2026 Citizen's Charter places business permit processing at the Municipal Treasurer's Office, so whether Pagsanjan maintains a separate BPLO counter has not yet been verified.",
     verification: {
       status: "pending",
-      note: "Business permitting is a standard municipal function, but the responsible Pagsanjan office and its contact details have not yet been verified.",
+      sourceId: "pagsanjan-citizens-charter",
+      note: "The charter names the Municipal Treasurer's Office as the processing office for new and renewal business permits; a separate BPLO's role and contact details have not been verified.",
     },
   },
   {
@@ -81,11 +85,15 @@ export const offices: GovernmentOffice[] = [
     description:
       "Registers vital events — births, marriages, and deaths — and keeps the civil registry records of the municipality.",
     statutoryBasis: "Local Government Code of 1991 (RA 7160)",
-    services: ["birth-certificate", "marriage-certificate", "death-certificate"],
+    services: [
+      "birth-certificate",
+      "marriage-certificate",
+      "death-certificate",
+    ],
     verification: {
       status: "pending",
-      sourceId: "ra-7160",
-      note: "Contact details and fees for Pagsanjan have not yet been verified.",
+      sourceId: "pagsanjan-citizens-charter",
+      note: "The 2026 Citizen's Charter confirms this office issues certified true copies of civil registry documents and lists the birth-certificate copy fee; contact details and office hours for Pagsanjan have not yet been verified.",
     },
   },
   {

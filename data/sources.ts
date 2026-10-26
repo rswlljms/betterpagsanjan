@@ -154,8 +154,18 @@ export const sources: SourceRecord[] = [
     url: "https://www.pagsanjanlaguna.com",
     sourceType: "government",
     description:
-      "Self-described Official Government Portal of the Municipality of Pagsanjan, operated as a legislative information system (site footer: Legislative System). Hosts the searchable ordinance and resolution archive with official document PDFs, the Sangguniang Bayan roster, and a site-wide emergency hotline directory. Content is stated to be in the public domain. Note: this portal uses a .com domain; the .gov.ph site (pagsanjan.gov.ph, linked from the DTI CMCI profile) remains the primary municipal website.",
-    accessedAt: LAST_CHECKED,
+      "Self-described Official Government Portal of the Municipality of Pagsanjan, operated as a legislative information system (site footer: Legislative System). Hosts the searchable ordinance and resolution archive with official document PDFs, the 2026 Citizen's Charter, the Sangguniang Bayan roster, and a site-wide emergency hotline directory. Content is stated to be in the public domain. Note: this portal uses a .com domain; the .gov.ph site (pagsanjan.gov.ph, linked from the DTI CMCI profile) remains the primary municipal website.",
+    accessedAt: "October 2026",
+  },
+  {
+    id: "pagsanjan-citizens-charter",
+    name: "Pagsanjan Citizen's Charter 2026",
+    organization: "Municipality of Pagsanjan",
+    url: "https://www.pagsanjanlaguna.com/citizenscharter",
+    sourceType: "government",
+    description:
+      "Official 2026 Citizen's Charter published on the Municipality of Pagsanjan's legislative portal as a single 367-page PDF. Used to transcribe service requirements, steps, fees, and processing times. Service citations name both the printed page and the PDF page.",
+    accessedAt: "October 2026",
   },
 
   // ——— Secondary references (cross-checking) ———

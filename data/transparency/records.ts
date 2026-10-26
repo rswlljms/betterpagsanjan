@@ -119,16 +119,16 @@ export const transparencyRecords: TransparencyRecord[] = [
     title: "Citizen's Charter",
     category: "documents",
     description:
-      "Service standards and procedures published on the official legislative portal. Individual service entries are not yet transcribed — browse the full charter on the portal.",
+      "Service standards and procedures published on the official legislative portal. Selected entries — including business permits and local birth-certificate copies — are being transcribed into the Service Finder with page citations; the full charter remains linked on the portal.",
     documentUrl: "https://www.pagsanjanlaguna.com/citizenscharter",
     verification: {
       status: "verified",
       sourceId: "pagsanjan-legislative-portal",
       sourceUrl: "https://www.pagsanjanlaguna.com/citizenscharter",
-      verifiedAt: "2026-09",
-      note: "Charter index exists on the official portal; contents not individually transcribed.",
+      verifiedAt: "2026-10",
+      note: "Charter published on the official portal as a single PDF; selected service entries have been transcribed and cited to printed page numbers.",
     },
-    lastChecked: LAST_CHECKED,
+    lastChecked: "October 2026",
   },
 ];
 

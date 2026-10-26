@@ -10,7 +10,11 @@ import { VerificationNotice } from "@/components/civic/verification-notice";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
-import { getServiceBySlug, getServiceCategory, services } from "@/data/services";
+import {
+  getServiceBySlug,
+  getServiceCategory,
+  services,
+} from "@/data/services";
 import { site } from "@/data/site";
 
 interface ServicePageProps {
@@ -50,11 +54,12 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   const hasProcedureDetails = Boolean(
     service.eligibility ||
-      service.requirements ||
-      service.steps ||
-      service.fees ||
-      service.processingTime,
+    service.requirements ||
+    service.steps ||
+    service.fees ||
+    service.processingTime,
   );
+  const isVerified = service.verification.status === "verified";
 
   return (
     <Container className="py-8 sm:py-10">
@@ -85,11 +90,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
       {service.verification.status === "pending" ? (
         <div className="mt-6 max-w-3xl">
           <VerificationNotice>
-            This page currently provides general information only.
-            Requirements, fees, steps, processing times, and office contact
-            details for Pagsanjan have not yet been verified from official
-            sources. Confirm details with the responsible office before
-            transacting.
+            This page currently provides general information only. Requirements,
+            fees, steps, processing times, and office contact details for
+            Pagsanjan have not yet been verified from official sources. Confirm
+            details with the responsible office before transacting.
           </VerificationNotice>
         </div>
       ) : null}
@@ -148,9 +152,16 @@ export default async function ServicePage({ params }: ServicePageProps) {
                     {service.fees.map((fee) => (
                       <li
                         key={fee.description}
-                        className="flex items-center justify-between gap-4 px-4 py-3 text-sm"
+                        className="flex items-start justify-between gap-4 px-4 py-3 text-sm"
                       >
-                        <span className="text-slate-700">{fee.description}</span>
+                        <span className="text-slate-700">
+                          {fee.description}
+                          {fee.note ? (
+                            <span className="mt-1 block text-xs leading-relaxed text-muted">
+                              {fee.note}
+                            </span>
+                          ) : null}
+                        </span>
                         {fee.amount != null ? (
                           <span className="shrink-0 font-semibold text-ink">
                             ₱{fee.amount.toLocaleString("en-PH")}
@@ -185,19 +196,27 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 </span>
                 <span className="pt-0.5 text-sm leading-relaxed text-slate-700">
                   <strong className="font-semibold text-ink">
-                    Confirm requirements and fees first.
+                    {isVerified
+                      ? "Prepare the requirements above."
+                      : "Confirm requirements and fees first."}
                   </strong>{" "}
-                  Details for Pagsanjan have not yet been verified here. Contact
-                  the responsible office or check the{" "}
-                  <a
-                    href={site.officialWebsite}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary-700 hover:underline"
-                  >
-                    official municipal website
-                  </a>{" "}
-                  before preparing your documents.
+                  {isVerified ? (
+                    "The requirements, fees, and processing time on this page are transcribed from the 2026 Pagsanjan Citizen's Charter. The office may still ask for additional documents depending on your situation."
+                  ) : (
+                    <>
+                      Details for Pagsanjan have not yet been verified here.
+                      Contact the responsible office or check the{" "}
+                      <a
+                        href={site.officialWebsite}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary-700 hover:underline"
+                      >
+                        official municipal website
+                      </a>{" "}
+                      before preparing your documents.
+                    </>
+                  )}
                 </span>
               </li>
               <li className="flex gap-3">
@@ -211,8 +230,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
                   <strong className="font-semibold text-ink">
                     Bring a valid ID and your documents.
                   </strong>{" "}
-                  Most government transactions require a valid government-issued
-                  ID and photocopies. Ask the office exactly what it needs.
+                  {isVerified
+                    ? "The requirements above list the accepted IDs and copies. Confirm the current fee with the responsible office before paying."
+                    : "Most government transactions require a valid government-issued ID and photocopies. Ask the office exactly what it needs."}
                 </span>
               </li>
               <li className="flex gap-3">
@@ -235,7 +255,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <SourceAttribution
               className="mt-6"
               sourceId="betterpagsanjan"
-              note="General guidance written by BetterPagsanjan. It is not an official procedure."
+              note={
+                isVerified
+                  ? "Practical guidance written by BetterPagsanjan. The requirements, fees, and processing time above come from the cited official source."
+                  : "General guidance written by BetterPagsanjan. It is not an official procedure."
+              }
             />
           </section>
         </div>

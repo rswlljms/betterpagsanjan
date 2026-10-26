@@ -96,7 +96,7 @@ export const communityServices: GovernmentService[] = [
     title: "Barangay Clearance",
     category: "barangay",
     description:
-      "A barangay clearance certifies that a person is a resident of good standing in a barangay. It is commonly required for employment, school enrollment, and business applications, and is issued by the barangay where you live.",
+      "A barangay clearance certifies that a person is a resident of good standing in a barangay. It is commonly required for employment, school enrollment, and business applications, and is issued by the barangay where you live. The municipal Citizen's Charter lists it as a requirement for some municipal services but does not publish barangay-level requirements or fees.",
     aliases: [
       "barangay certificate",
       "barangay business clearance",
@@ -110,10 +110,10 @@ export const communityServices: GovernmentService[] = [
     },
     verification: {
       status: "pending",
-      sourceId: "ra-7160",
-      note: "Barangays issue clearances under the Local Government Code. Pagsanjan barangay fees and requirements have not yet been verified from official sources.",
+      sourceId: "pagsanjan-citizens-charter",
+      note: "The 2026 Pagsanjan Citizen's Charter lists a barangay clearance as a requirement for some municipal services, including business permits, but does not publish barangay-level requirements, fees, or procedures. Barangays issue clearances under the Local Government Code (RA 7160); confirm details with your barangay hall.",
     },
-    lastChecked: LAST_CHECKED,
+    lastChecked: "October 2026",
     featured: true,
   },
 ];
