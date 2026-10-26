@@ -16,7 +16,7 @@ appropriate government office.
 
 - [Next.js 15](https://nextjs.org) (App Router, static-first) + TypeScript
 - Tailwind CSS v4 (civic design tokens in `app/globals.css`)
-- Poppins via `next/font/google`, Lucide icons
+- Poppins + Inter, self-hosted via `next/font/local` (`app/fonts/`), Lucide icons
 - Structured TypeScript data (`data/`) — no database yet, migration-friendly
 - PWA foundation: web manifest + service worker (`public/sw.js`)
 
@@ -56,7 +56,7 @@ types/        Shared civic data types
    requirements, statistics, or contact numbers. Use “Information not yet
    available.”
 2. **Every civic fact carries a source.** Records reference the central
-   registry in `data/sources.ts` and show a *last checked* date.
+   registry in `data/sources.ts` and show a _last checked_ date.
 3. **Conflicts are shown, not hidden.** If authoritative sources disagree,
    the platform displays the conflict.
 4. **BetterPagsanjan never processes transactions.** Service pages explain and

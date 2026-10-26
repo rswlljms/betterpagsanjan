@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Poppins } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { PwaRegister } from "@/components/civic/pwa-register";
 import { AskWidget } from "@/components/civic/ask-widget";
@@ -12,19 +12,32 @@ import { UtilityBar } from "@/components/civic/utility-bar";
 import { site } from "@/data/site";
 import { faviconSet } from "@/data/sources";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+// Fonts are self-hosted (see app/fonts/README.md) so builds do not depend on
+// Google Fonts' changing response format — which broke Turbopack builds.
+const poppins = localFont({
+  src: [
+    { path: "./fonts/poppins-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/poppins-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/poppins-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/poppins-700.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-poppins",
   display: "swap",
+  adjustFontFallback: "Arial",
 });
 
 // BP guide: Poppins for display + Inter for reading and civic UI text.
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+const inter = localFont({
+  src: [
+    {
+      path: "./fonts/inter-latin-var.woff2",
+      weight: "100 900",
+      style: "normal",
+    },
+  ],
   variable: "--font-inter",
   display: "swap",
+  adjustFontFallback: "Arial",
 });
 
 export const metadata: Metadata = {
