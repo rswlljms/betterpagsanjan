@@ -126,17 +126,17 @@ export const sources: SourceRecord[] = [
     url: "https://cmci.dti.gov.ph/lgu-profile.php?lgu=Pagsanjan",
     sourceType: "government",
     description:
-      "Government-published LGU profile used for the Municipal Hall address, trunkline, official website, mayor's name, and classification. Profile data is supplied by the LGU.",
+      "Government-published LGU profile used for the Municipal Hall address, trunkline, mayor's name, and classification. Profile data is supplied by the LGU. Its listed website (pagsanjan.gov.ph) is superseded in this project by the municipality's current official portal, pagsanjanlaguna.com.",
     accessedAt: LAST_CHECKED,
   },
   {
     id: "pagsanjan-lgu-website",
-    name: "Municipality of Pagsanjan — official website",
+    name: "Municipality of Pagsanjan — .gov.ph website (transparency archive)",
     url: "https://pagsanjan.gov.ph",
     sourceType: "government",
     description:
-      "The official website of the Municipal Government of Pagsanjan on the government-reserved .gov.ph domain. The authoritative channel for official transactions, announcements, and current information.",
-    accessedAt: LAST_CHECKED,
+      "Earlier municipal website on the government-reserved .gov.ph domain. Still online and still the host of the 2022 Statement of Indebtedness, Payments and Balances and Statement of Receipts and Expenditures. The municipality's current official portal is pagsanjanlaguna.com.",
+    accessedAt: "October 2026",
   },
   {
     id: "pagsanjan-mdrrmo-fb",
@@ -149,12 +149,12 @@ export const sources: SourceRecord[] = [
   },
   {
     id: "pagsanjan-legislative-portal",
-    name: "Municipality of Pagsanjan — Legislative Portal (pagsanjanlaguna.com)",
-    organization: "Sangguniang Bayan of Pagsanjan",
+    name: "Bayan ng Pagsanjan — Official Government Portal (pagsanjanlaguna.com)",
+    organization: "Municipality of Pagsanjan",
     url: "https://www.pagsanjanlaguna.com",
     sourceType: "government",
     description:
-      "Self-described Official Government Portal of the Municipality of Pagsanjan, operated as a legislative information system (site footer: Legislative System). Hosts the searchable ordinance and resolution archive with official document PDFs, the 2026 Citizen's Charter, the Sangguniang Bayan roster, and a site-wide emergency hotline directory. Content is stated to be in the public domain. Note: this portal uses a .com domain; the .gov.ph site (pagsanjan.gov.ph, linked from the DTI CMCI profile) remains the primary municipal website.",
+      "Current official website of the Municipality of Pagsanjan, titled “Bayan ng Pagsanjan Laguna | Official Government Portal” and labeled “Official Portal” on its homepage (verified October 2026). Runs the legislative information system: the searchable ordinance and resolution archive with official document PDFs, downloadable forms, the 2026 Citizen's Charter, the Executive and Legislative pages, municipal news, a site-wide emergency hotline directory, and a transparency seal. Content is stated to be in the public domain. Note: the portal uses a .com domain; the earlier .gov.ph site (pagsanjan.gov.ph) is still online as an archive of older disclosures.",
     accessedAt: "October 2026",
   },
   {
@@ -164,7 +164,7 @@ export const sources: SourceRecord[] = [
     url: "https://www.pagsanjanlaguna.com/citizenscharter",
     sourceType: "government",
     description:
-      "Official 2026 Citizen's Charter published on the Municipality of Pagsanjan's legislative portal as a single 367-page PDF. Used to transcribe service requirements, steps, fees, and processing times. Service citations name both the printed page and the PDF page.",
+      "Official 2026 Citizen's Charter published on the Municipality of Pagsanjan's official portal as a single 367-page PDF. Used to transcribe service requirements, steps, fees, and processing times. Service citations name both the printed page and the PDF page.",
     accessedAt: "October 2026",
   },
 

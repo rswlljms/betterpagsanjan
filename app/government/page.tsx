@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  ExternalLink,
-  Info,
-  Mail,
-  MapPin,
-  Phone,
-} from "lucide-react";
+import { ExternalLink, Info, Mail, MapPin, Phone } from "lucide-react";
 import { PageHero } from "@/components/civic/page-hero";
 import { SourceAttribution } from "@/components/civic/source-attribution";
 import { Badge } from "@/components/ui/badge";
@@ -41,6 +35,9 @@ const groupLabels: Record<OfficeGroup, string> = {
   "health-social": "Health & social services",
   safety: "Public safety & disaster risk",
 };
+
+/** Read the portal hostname from config instead of hardcoding it (AGENTS.md §13). */
+const officialWebsiteHost = new URL(site.officialWebsite).host;
 
 const municipalHall = {
   address:
@@ -102,7 +99,12 @@ export default function GovernmentPage() {
                 className="inline-flex items-start gap-2 font-medium text-primary-700 hover:underline"
               >
                 <ExternalLink className="mt-0.5 size-4 shrink-0" aria-hidden />
-                pagsanjan.gov.ph — official website
+                <span>
+                  {officialWebsiteHost} — official website
+                  <span className="block text-xs font-normal text-muted">
+                    Checked on the portal itself — October 2026
+                  </span>
+                </span>
               </a>
             </CardContent>
           </Card>
@@ -135,8 +137,8 @@ export default function GovernmentPage() {
                       {official.name}
                     </p>
                     <p className="mt-2 text-xs leading-relaxed text-muted">
-                      Source: {source?.name ?? official.sourceId} ·
-                      Verified: {official.verifiedAt}
+                      Source: {source?.name ?? official.sourceId} · Verified:{" "}
+                      {official.verifiedAt}
                     </p>
                     {official.note ? (
                       <p className="mt-2 text-xs leading-relaxed text-muted">
@@ -219,9 +221,7 @@ export default function GovernmentPage() {
                             <div className="mt-3 flex flex-wrap gap-1.5">
                               {office.services.map((slug) => (
                                 <Link key={slug} href={`/services/${slug}`}>
-                                  <Badge variant="primary">
-                                    View service
-                                  </Badge>
+                                  <Badge variant="primary">View service</Badge>
                                 </Link>
                               ))}
                             </div>

@@ -15,13 +15,15 @@ export const site = {
   location: "Pagsanjan, Laguna, Philippines",
   lastChecked: "September 2026",
   /**
-   * Official website of the Municipal Government of Pagsanjan
-   * (verified via the DTI CMCI LGU profile, September 2026).
+   * Official website of the Municipal Government of Pagsanjan —
+   * "Bayan ng Pagsanjan Laguna | Official Government Portal"
+   * (verified directly on the portal, October 2026).
    */
-  officialWebsite: "https://pagsanjan.gov.ph",
+  officialWebsite: "https://www.pagsanjanlaguna.com",
   /**
-   * Legislative information portal of the Municipality of Pagsanjan —
-   * searchable ordinance/resolution archive with official PDFs.
+   * The same official portal also hosts the legislative information system:
+   * searchable ordinance/resolution archive, downloadable forms, and the
+   * Citizen's Charter, all with official PDFs.
    */
   legislativePortal: "https://www.pagsanjanlaguna.com",
 };
