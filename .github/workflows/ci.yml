@@ -29,6 +29,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Check civic data integrity
+        run: npm run check:data
+
       - name: Check announcement checker syntax
         run: node --check scripts/check-announcements.mjs
 

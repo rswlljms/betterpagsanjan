@@ -48,8 +48,7 @@ Authoritative starting point: [2026 Citizen's Charter](https://www.pagsanjanlagu
 After the October 27 transcription pass, nine of ten guides have verified
 charter details within their stated scope. Barangay clearance remains pending.
 Lint, typecheck, production build, and mobile/desktop browser smoke checks
-passed for this content increment; the broader quality-gate work below is
-still outstanding.
+passed for this content increment; the remaining quality-gate work is below.
 
 ### 3. Verify local contact and location information
 
@@ -64,12 +63,19 @@ still outstanding.
 
 ### 4. Strengthen quality gates
 
-- [ ] Add data-integrity checks for source references, verification dates,
-      unique IDs/slugs, cross-links, and census totals.
+- [x] Add data-integrity checks for source references, verification dates,
+      unique IDs/slugs, cross-links, and census totals. `npm run check:data`
+      runs offline in CI and also checks date formats, placeholder strings, and
+      the FY2026 project total.
 - [ ] Check public API contracts and high-value citizen journeys.
 - [ ] Check mobile layouts, keyboard access, focus, contrast, and offline
       emergency behavior; add useful automated coverage to CI.
-- [ ] Audit official links and introduce a repeatable broken-link review.
+- [x] Audit official links and introduce a repeatable broken-link review.
+      `npm run check:links` probes every cited URL and reports missing, blocked,
+      or unreachable links; it is manual and report-only so CI never depends on
+      government-site uptime. First run (October 27, 2026): 69 reachable, 8
+      bot-blocked (PSA, Official Gazette, pagsanjan.gov.ph), and 1 unreachable
+      (DILG). Recheck the blocked pages in a browser before editing their data.
 
 ### 5. Release and launch
 

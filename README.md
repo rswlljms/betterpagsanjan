@@ -24,10 +24,11 @@ appropriate government office.
 
 ```bash
 npm install
-npm run dev      # local development
-npm run build    # production build
-npm run lint     # eslint
-npx tsc --noEmit # type check
+npm run dev        # local development
+npm run build      # production build
+npm run lint       # eslint
+npx tsc --noEmit   # type check
+npm run check:data # validate civic data and source references
 ```
 
 Set `NEXT_PUBLIC_SITE_URL` in production so canonical URLs, the sitemap, and
@@ -53,6 +54,29 @@ the post's publication date, and set `lastChecked` to the date you reviewed it.
 The announcements page links to the official news feed and shows a warning once
 the newest review is more than `ANNOUNCEMENT_STALE_AFTER_DAYS` (60) days old.
 
+## Data integrity checks
+
+`npm run check:data` validates the structured data without any network access.
+It runs in CI and checks:
+
+- every `sourceId` against the registry in `data/sources.ts`;
+- verification metadata (`status`, `verifiedAt`, source links, and notes);
+- unique IDs and slugs, plus lowercase kebab-case URL slugs;
+- service/category, office/service, transparency/legislation, and reporting
+  cross-links;
+- ISO and display date formats, and date ordering where one date depends on
+  another;
+- the 16-barangay PSGC list and its 2024 population total against the municipal
+  statistic;
+- the FY2026 project total and placeholder or malformed URL strings.
+
+`npm run check:links` is a **manual, report-only** audit of every URL cited in
+the civic data. It reports missing, blocked, and unreachable links with the
+records that use them, and never runs in CI — a government site being down or
+blocking bots must not fail a build. Review its findings by hand; add `--strict`
+to make missing or unreachable links exit non-zero. Its first run found 69
+reachable URLs, 8 that block automated requests, and 1 unreachable agency page.
+
 ## Project structure
 
 ```text
@@ -67,7 +91,7 @@ data/         Structured civic data — the single source of content
   sources.ts    Central source registry
   site.ts       Site config and independence disclaimer
 lib/          Search index + helpers, formatting, cn()
-scripts/      Maintenance checks (announcement review)
+scripts/      Maintenance checks (announcements, data integrity, link audit)
 types/        Shared civic data types
 ```
 

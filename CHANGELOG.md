@@ -13,6 +13,12 @@ internal mechanics.
 
 ### Added
 
+- Every civic-data change is now checked in CI for broken source references,
+  missing verification dates, duplicate IDs or slugs, dead service/office and
+  transparency/legislation cross-links, invalid dates, and mismatched barangay
+  population or project totals. Inconsistencies are caught before they reach a
+  page. A separate manual link audit lists cited URLs that are missing, blocked
+  to bots, or unreachable, without making CI depend on government-site uptime.
 - Announcements now link directly to the official municipal news feed and warn
   when the newest reviewed summary is more than 60 days old. A weekly GitHub
   Actions check detects new portal posts and opens or updates one review issue;
