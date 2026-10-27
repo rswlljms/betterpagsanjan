@@ -66,6 +66,9 @@ types/        Shared civic data types
 
 See `AGENTS.md` for the complete project charter.
 
+See [ROADMAP.md](ROADMAP.md) for current priorities, verification gaps, and
+the trust-and-launch plan.
+
 ## License
 
 This project is dual-licensed:
