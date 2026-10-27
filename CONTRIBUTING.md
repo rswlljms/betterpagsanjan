@@ -11,20 +11,17 @@ imply otherwise.
 
 Trunk-based development. The default branch (`main`) is always deployable.
 
-1. Sync the default branch: `git checkout main && git pull`
-2. Create a short-lived branch (merge within 1–3 days):
-   - `feature/<short-description>` — new citizen-facing capability
-   - `fix/<short-description>` — bug fix
-   - `content/<short-description>` — civic data update (services, offices, sources)
-   - `chore/<short-description>` — tooling, dependencies, config
-   - `refactor/<short-description>` — code change with no behavior change
-3. Work in small slices: implement → verify → commit → next slice.
-4. Open a pull request against `main`. One logical change per PR (~100 lines
-   is ideal; split anything approaching ~1000 lines).
-5. After merge, delete the branch.
+The project is currently maintained by a solo developer. The maintainer
+commits directly to `main` in small, verified slices; short-lived branches are
+optional and reserved for experimental work that may not ship.
 
-External contributors: fork the repository, create your branch in the fork,
-and open a pull request from it. Keep your fork synced with upstream before
+1. Sync `main`: `git checkout main && git pull`
+2. Work in small slices: implement → verify → commit → next slice.
+3. Run the checks below, then commit directly to `main`.
+4. Push after the slice is verified.
+
+External contributors: fork the repository, create a branch in the fork, and
+open a pull request against `main`. Keep your fork synced with upstream before
 branching.
 
 ## Commit messages
