@@ -13,6 +13,9 @@ internal mechanics.
 
 ### Added
 
+- Three reviewed municipal news summaries with original-story links,
+  publication and last-checked dates, homepage links, and site search entries.
+  News publication dates are distinguished from event schedules.
 - Verified service details for new and renewal business permits and
   local birth-certificate copies, transcribed from the 2026 Pagsanjan
   Citizen's Charter with printed-page and PDF-page citations:

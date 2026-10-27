@@ -161,7 +161,21 @@ export default function HomePage() {
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {announcements.slice(0, 2).map((announcement) => (
                 <li key={announcement.id} className="text-sm">
-                  <p className="font-medium text-ink">{announcement.title}</p>
+                  <p className="font-medium text-ink">
+                    <Link
+                      href={`/announcements#${announcement.id}`}
+                      className="hover:underline"
+                    >
+                      {announcement.title}
+                    </Link>
+                  </p>
+                  <p className="mt-1 text-xs text-muted">
+                    Municipal news · Published{" "}
+                    <time dateTime={announcement.date}>
+                      {announcement.date}
+                    </time>
+                    {" · BetterPagsanjan summary"}
+                  </p>
                   <p className="mt-0.5 text-muted">{announcement.summary}</p>
                 </li>
               ))}

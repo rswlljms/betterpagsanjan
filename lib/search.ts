@@ -1,4 +1,5 @@
 import { barangays } from "@/data/barangays/barangays";
+import { announcements } from "@/data/announcements";
 import { consultations } from "@/data/consultations";
 import { offices } from "@/data/government/offices";
 import { reportingCategories } from "@/data/reporting";
@@ -269,6 +270,15 @@ const pageRecords: SearchRecord[] = [
 ];
 
 export const searchIndex: SearchRecord[] = [
+  ...announcements.map((announcement): SearchRecord => ({
+    id: `announcement-${announcement.id}`,
+    title: announcement.title,
+    type: "page",
+    description: `Published ${announcement.date}. ${announcement.summary}`,
+    href: `/announcements#${announcement.id}`,
+    keywords: ["news", announcement.category ?? ""].filter(Boolean),
+    badge: "Municipal update",
+  })),
   ...services.map((service): SearchRecord => {
     const category = getServiceCategory(service.category);
     return {

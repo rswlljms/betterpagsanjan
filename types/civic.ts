@@ -150,10 +150,12 @@ export interface Announcement {
   summary: string;
   /** ISO date of publication by the original source. */
   date: string;
+  /** ISO date when BetterPagsanjan reviewed the original story. */
+  lastChecked: string;
   category?: string;
   sourceId: string;
   sourceUrl?: string;
-  kind?: "announcement" | "advisory" | "notice" | "event";
+  kind?: "announcement" | "advisory" | "notice" | "event" | "news";
 }
 
 export type LegislativeDocumentType = "ordinance" | "resolution";

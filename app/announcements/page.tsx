@@ -6,6 +6,7 @@ import { SourceAttribution } from "@/components/civic/source-attribution";
 import { Container } from "@/components/ui/container";
 import { announcements } from "@/data/announcements";
 import { site } from "@/data/site";
+import { formatMonthYear } from "@/lib/format";
 
 export const metadata: Metadata = {
   title: "Announcements",
@@ -19,7 +20,7 @@ export default function AnnouncementsPage() {
       <PageHero
         eyebrow="Today in Pagsanjan"
         title="Announcements & advisories"
-        description="Official announcements, public notices, and advisories that affect Pagsanjan residents."
+        description="BetterPagsanjan summaries of municipal news, announcements, and advisories, with links to the original sources. Dates below are publication dates, not event schedules."
       />
       <Container className="py-10 sm:py-12">
         {announcements.length === 0 ? (
@@ -41,13 +42,14 @@ export default function AnnouncementsPage() {
               }
             />
             <p className="mt-6 text-sm leading-relaxed text-muted">
-              Planned for this section: municipal announcements, public
-              notices, disaster advisories, and community events — each with
-              its source and publication date.
+              Planned for this section: municipal announcements, public notices,
+              disaster advisories, and community events — each with its source
+              and publication date.
             </p>
             <SourceAttribution
               className="mt-6"
-              sourceId="pagsanjan-lgu-website"
+              sourceId="pagsanjan-legislative-portal"
+              lastChecked="October 27, 2026"
               note="Official announcements should always be confirmed with the Municipality of Pagsanjan's official channels."
             />
           </div>
@@ -56,10 +58,14 @@ export default function AnnouncementsPage() {
             {announcements.map((announcement) => (
               <li
                 key={announcement.id}
-                className="rounded-lg border border-line bg-white p-5"
+                id={announcement.id}
+                className="scroll-mt-32 rounded-lg border border-line bg-white p-5"
               >
                 <p className="text-xs font-semibold uppercase tracking-wider text-primary-700">
-                  {announcement.kind ?? "Announcement"} · {announcement.date}
+                  {announcement.kind ?? "Announcement"} · Published{" "}
+                  <time dateTime={announcement.date}>
+                    {formatMonthYear(announcement.date)}
+                  </time>
                 </p>
                 <h2 className="mt-1 font-semibold text-ink">
                   {announcement.title}
@@ -67,6 +73,13 @@ export default function AnnouncementsPage() {
                 <p className="mt-1 text-sm leading-relaxed text-slate-600">
                   {announcement.summary}
                 </p>
+                <SourceAttribution
+                  className="mt-4"
+                  sourceId={announcement.sourceId}
+                  sourceUrl={announcement.sourceUrl}
+                  lastChecked={formatMonthYear(announcement.lastChecked)}
+                  note="Summary by BetterPagsanjan. Follow the source link to read the original municipal post."
+                />
               </li>
             ))}
           </ul>
