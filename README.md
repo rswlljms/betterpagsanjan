@@ -33,6 +33,26 @@ npx tsc --noEmit # type check
 Set `NEXT_PUBLIC_SITE_URL` in production so canonical URLs, the sitemap, and
 the robots file point at the real domain.
 
+## Announcements review
+
+`data/announcements.ts` is a manually reviewed set. It is not fetched at build
+time or runtime, and nothing on the official portal is published automatically.
+
+```bash
+npm run check:announcements
+```
+
+The check reads the official portal's news listing, compares `news/<id>` links
+with the reviewed links in `data/announcements.ts`, and writes ignored reports
+(`announcement-candidates.md` and `.json`) listing unreviewed posts. A weekly
+GitHub Actions workflow runs the same check and opens or updates one review
+issue; it never publishes content.
+
+To publish a candidate, write a short summary in your own words, set `date` to
+the post's publication date, and set `lastChecked` to the date you reviewed it.
+The announcements page links to the official news feed and shows a warning once
+the newest review is more than `ANNOUNCEMENT_STALE_AFTER_DAYS` (60) days old.
+
 ## Project structure
 
 ```text
@@ -47,6 +67,7 @@ data/         Structured civic data — the single source of content
   sources.ts    Central source registry
   site.ts       Site config and independence disclaimer
 lib/          Search index + helpers, formatting, cn()
+scripts/      Maintenance checks (announcement review)
 types/        Shared civic data types
 ```
 

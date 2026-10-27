@@ -29,6 +29,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Check announcement checker syntax
+        run: node --check scripts/check-announcements.mjs
+
       - name: Build
         run: npm run build
 

@@ -13,6 +13,11 @@ internal mechanics.
 
 ### Added
 
+- Announcements now link directly to the official municipal news feed and warn
+  when the newest reviewed summary is more than 60 days old. A weekly GitHub
+  Actions check detects new portal posts and opens or updates one review issue;
+  summaries are still written and committed by a person, never published
+  automatically.
 - Six more service guides now summarize the 2026 Citizen's Charter: local
   marriage/death certificate copies, real property tax payment, general health
   consultation, first-time senior citizen IDs, and building permits. Each has

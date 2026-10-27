@@ -1,0 +1,119 @@
+name: Announcements check
+
+on:
+  schedule:
+    # 01:00 UTC on Mondays = 09:00 Philippine Standard Time.
+    - cron: "0 1 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: announcements-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: Detect unreviewed municipal news
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check the official portal
+        run: npm run check:announcements
+
+      - name: Open or update the review issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require("node:fs");
+            const report = JSON.parse(
+              fs.readFileSync("announcement-candidates.json", "utf8"),
+            );
+            const title = "[announcements] Municipal news review";
+            const marker = "<!-- announcements-check -->";
+            const { owner, repo } = context.repo;
+
+            const issues = await github.paginate(
+              github.rest.issues.listForRepo,
+              { owner, repo, state: "open", per_page: 100 },
+            );
+            const existing = issues.find(
+              (issue) => !issue.pull_request && issue.title === title,
+            );
+
+            if (report.newCount === 0) {
+              if (existing) {
+                await github.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number: existing.number,
+                  body: `No unreviewed posts found among ${report.totalPosts} listing posts checked on ${report.checkedAt.slice(0, 10)}. Closing this review issue.`,
+                });
+                await github.rest.issues.update({
+                  owner,
+                  repo,
+                  issue_number: existing.number,
+                  state: "closed",
+                });
+              }
+              core.info("No unreviewed posts found.");
+              return;
+            }
+
+            const lines = [
+              marker,
+              "New posts were found on the official municipal portal. Review each one before adding a summary.",
+              "",
+              `- Checked: ${report.checkedAt.slice(0, 10)}`,
+              `- Posts found: ${report.totalPosts}`,
+              `- Already reviewed: ${report.reviewedCount}`,
+              `- New candidates: ${report.newCount}`,
+              "",
+              "## New posts to review",
+              "",
+              ...report.items.map((item) => {
+                const date = item.dateKnown ? item.date : "Date not retrieved";
+                const safeTitle = item.title.replace(/([\\[\]])/g, "\\$1");
+                return `- [ ] ${date} — [${safeTitle}](<${item.url}>)`;
+              }),
+              "",
+              "## Review steps",
+              "",
+              "1. Open each post and confirm it is municipal news relevant to residents.",
+              "2. Write a short summary in your own words in `data/announcements.ts`.",
+              "3. Keep `date` as the publication date and set `lastChecked` to the review date.",
+              '4. Use `kind: "news"`, `sourceId: "pagsanjan-legislative-portal"`, and the post URL as `sourceUrl`.',
+              "5. Run lint, typecheck, and build; commit the reviewed summaries.",
+              "6. Close this issue after the commit.",
+              "",
+              "Publication dates are not event dates. A news post does not prove a program is still open.",
+            ];
+            const body = lines.join("\n");
+
+            if (existing) {
+              await github.rest.issues.update({
+                owner,
+                repo,
+                issue_number: existing.number,
+                body,
+              });
+              core.info(`Updated review issue #${existing.number}.`);
+            } else {
+              const created = await github.rest.issues.create({
+                owner,
+                repo,
+                title,
+                body,
+              });
+              core.info(`Created review issue #${created.data.number}.`);
+            }

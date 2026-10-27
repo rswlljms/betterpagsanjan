@@ -64,6 +64,28 @@ to the last commit and investigate — commits are save points.
 - Verify on a narrow mobile viewport; preserve keyboard navigation and
   visible focus states.
 
+## Announcement reviews
+
+Announcements are published only after a person reviews the original post and
+writes a BetterPagsanjan summary. The official portal is never scraped into the
+live site.
+
+1. Run `npm run check:announcements` (or open the weekly
+   `[announcements] Municipal news review` issue).
+2. Open each candidate post and confirm it is municipal news relevant to
+   residents.
+3. Add a short summary in your own words to `data/announcements.ts`. Do not copy
+   portal prose.
+4. Keep `date` as the publication date, set `lastChecked` to the review date,
+   and use `kind: "news"`, `sourceId: "pagsanjan-legislative-portal"`, and the
+   post URL as `sourceUrl`.
+5. Run lint, typecheck, and build; commit the reviewed summaries and close the
+   review issue.
+
+Publication dates are not event dates, and a news post does not prove a program
+is still open. The announcements page warns after 60 days without a review and
+always links to the official municipal news feed.
+
 ## Versioning and changelog
 
 - Versioning follows [Semantic Versioning](https://semver.org/): breaking →

@@ -1,6 +1,13 @@
 import type { Announcement } from "@/types/civic";
 
 /**
+ * How long reviewed summaries remain acceptable before the announcements
+ * page warns that they may be out of date. The warning is a prompt to review
+ * the official feed, not an automatic update.
+ */
+export const ANNOUNCEMENT_STALE_AFTER_DAYS = 60;
+
+/**
  * Manually reviewed summaries, newest publication first. Dates are the
  * portal's publication dates, not event dates or application deadlines.
  * News reports do not establish that a program is currently open.

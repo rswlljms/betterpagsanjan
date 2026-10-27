@@ -24,7 +24,10 @@ facility locations need local verification. Filipino localization is outstanding
 - [x] Label summaries as BetterPagsanjan summaries. Publication dates are not
       event dates, registration deadlines, or proof a program is still open.
 - [x] Correct the announcements fallback attribution to the current portal.
-- [ ] Establish a regular editorial review cadence for new and outdated posts.
+- [x] Establish a regular editorial review cadence for new and outdated posts:
+      a weekly detection workflow opens or updates one review issue, the page
+      warns after 60 days without review, and links to the official news feed.
+      Publishing remains a manual, reviewed commit.
 
 ### 2. Expand Citizen's Charter service coverage
 
