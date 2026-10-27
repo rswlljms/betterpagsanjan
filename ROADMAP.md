@@ -31,16 +31,22 @@ facility locations need local verification. Filipino localization is outstanding
 The starting dataset has three verified service guides (new and renewal
 business permits and local birth-certificate copies) and seven pending guides.
 
-- [ ] Transcribe local marriage- and death-certificate copies.
-- [ ] Transcribe real property tax payment, general health consultation,
+- [x] Transcribe local marriage- and death-certificate copies.
+- [x] Transcribe real property tax payment, general health consultation,
       new senior citizen IDs, and building permits.
-- [ ] Include requirements, steps, fees, processing times, exact printed/PDF
+- [x] Include requirements, steps, fees, processing times, exact printed/PDF
       page citations, scope limitations, and individual verification dates.
-- [ ] Retain published discrepancies and conditional requirements explicitly.
+- [x] Retain published discrepancies and conditional requirements explicitly.
 - [ ] Verify barangay clearance from barangay-level sources when available;
       the municipal charter does not establish its local procedure or fees.
 
 Authoritative starting point: [2026 Citizen's Charter](https://www.pagsanjanlaguna.com/citizenscharter).
+
+After the October 27 transcription pass, nine of ten guides have verified
+charter details within their stated scope. Barangay clearance remains pending.
+Lint, typecheck, production build, and mobile/desktop browser smoke checks
+passed for this content increment; the broader quality-gate work below is
+still outstanding.
 
 ### 3. Verify local contact and location information
 

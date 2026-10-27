@@ -228,11 +228,13 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 </span>
                 <span className="pt-0.5 text-sm leading-relaxed text-slate-700">
                   <strong className="font-semibold text-ink">
-                    Bring a valid ID and your documents.
+                    {isVerified
+                      ? "Bring the documents listed above."
+                      : "Confirm which documents to bring."}
                   </strong>{" "}
                   {isVerified
-                    ? "The requirements above list the accepted IDs and copies. Confirm the current fee with the responsible office before paying."
-                    : "Most government transactions require a valid government-issued ID and photocopies. Ask the office exactly what it needs."}
+                    ? "Follow the listed conditions for IDs and copies. Confirm the current fee with the responsible office before paying."
+                    : "Ask the office which IDs, originals, and photocopies it requires for your situation."}
                 </span>
               </li>
               <li className="flex gap-3">

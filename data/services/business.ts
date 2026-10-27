@@ -1,4 +1,3 @@
-import { LAST_CHECKED } from "@/data/sources";
 import type { GovernmentService } from "@/types/civic";
 
 /**
@@ -121,7 +120,7 @@ export const businessServices: GovernmentService[] = [
     title: "Building Permit",
     category: "business",
     description:
-      "A building permit is required under the National Building Code before constructing, altering, or demolishing a structure. This page explains what the permit covers and where to start in Pagsanjan.",
+      "Apply to Pagsanjan's Office of the Building Official (OBO) before starting work that requires a building permit. The 2026 charter distinguishes simple, complex, and highly technical applications. Ask OBO to confirm the classification and permits required for your project.",
     aliases: [
       "construction permit",
       "building clearance",
@@ -129,15 +128,55 @@ export const businessServices: GovernmentService[] = [
       "fencing permit",
     ],
     office: { name: "Office of the Building Official" },
+    eligibility: [
+      "Applicants for building permits for buildings and other structures in Pagsanjan, including citizens, businesses, and government entities.",
+      "Simple examples in the charter include private garages up to 90 square meters, carports, agricultural buildings, and certain repairs or stand-alone permits. See the source for the complete classification list.",
+      "Complex examples include interior renovations, changes of occupancy, multiple-unit residences, single detached houses up to 7 storeys, and commercial buildings up to 9 storeys.",
+      "Highly technical examples include commercial buildings above 9 storeys, hospitals, public-assembly buildings, disaster-response structures, and special structures. OBO determines the applicable classification.",
+    ],
+    requirements: [
+      "Completed application forms from OBO: notarized Unified Building form, Civil/Structural, Sanitary, Electrical, and Mechanical/Electronics forms if applicable.",
+      "Certified true copy of the Transfer Certificate of Title or Original Certificate of Title on file with the Register of Deeds.",
+      "Tax Declaration from the Municipal Assessor's Office and current real property tax receipt from the Municipal Treasurer's Office.",
+      "If the applicant is not the registered lot owner: notarized lease contract or deed of absolute sale, plus the lot owner's authorization to construct.",
+      "Five sets of plans, specifications, and bill of materials signed by the appropriately licensed professionals listed in the charter, as applicable to the project.",
+      "For buildings of 2 storeys or more: structural computations signed and sealed by a civil or structural engineer.",
+      "Photocopies of PRC IDs and Professional Tax Receipts (PTR) of engineers who signed and sealed the plans and application forms.",
+      "Locational clearance (2 copies), from the Municipal Planning and Development Office.",
+      "Fire safety clearance certificate, from the Bureau of Fire Protection station in Pagsanjan.",
+      "Authorization for the person allowed to follow up the application.",
+      "Special Power of Attorney if the owner is not signing the forms, plans, and other documents.",
+      "Barangay permit from the Barangay Hall.",
+      "Clearances from other agencies when applicable. The charter names DPWH, ATO, HLURB, and DENR; confirm the applicable agency and clearance with OBO.",
+    ],
+    steps: [
+      "Submit all documents to OBO. Staff check and encode the application, evaluate plans, inspect the site, prepare an inspection report, assess fees, and issue an order of payment. Incomplete applications are not accepted under the charter.",
+      "Pay at the Municipal Treasury Office or One-Stop Shop and obtain an official receipt.",
+      "Return to OBO and submit the official receipt for recording.",
+      "The Building Official or Municipal Engineer reviews and signs the building and ancillary plans and permit for approval.",
+      "Claim the approved plans and permit, with the approved Fire Safety Evaluation Clearance (FSEC) and checklist described in the charter.",
+    ],
+    fees: [
+      {
+        description: "Building permit assessment",
+        note: "Based on the Building Code and system-generated assessment. The charter publishes no fixed peso amount for this service; pay the amount in the official order of payment.",
+      },
+    ],
+    processingTime:
+      "Published totals: 2 days for simple applications, 4 days for complex applications, and 16 days for highly technical applications. Each total is marked as with zoning/locational clearance and FSEC or Fire Safety Inspection Certificate (FSIC). The charter allows multi-stage processing; confirm the applicable timeline with OBO.",
     officialChannel: {
       label: "Office of the Building Official at the Pagsanjan Municipal Hall",
+      url: "https://www.pagsanjanlaguna.com/citizenscharter",
       note: "BetterPagsanjan cannot process applications. Apply through the municipal office or official government channels.",
     },
     verification: {
-      status: "pending",
-      sourceId: "pd-1096",
-      note: "The National Building Code requires building permits for construction. Pagsanjan-specific requirements, fees, and steps have not yet been verified from official sources.",
+      status: "verified",
+      sourceId: "pagsanjan-citizens-charter",
+      sourceUrl:
+        "https://www.pagsanjanlaguna.com/charter_documents/1791773600_6acc4ba076ef8.pdf#page=291",
+      verifiedAt: "2026-10-27",
+      note: "Summarized from the 2026 Citizen's Charter: simple building permits, printed pp. 290–292 (PDF pp. 291–293); complex, printed pp. 292–294 (PDF pp. 293–295); highly technical, printed pp. 294–296 (PDF pp. 295–297). Common requirements and steps are summarized together; examples of classifications are not exhaustive. Fees require an official assessment.",
     },
-    lastChecked: LAST_CHECKED,
+    lastChecked: "October 27, 2026",
   },
 ];

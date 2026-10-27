@@ -13,6 +13,12 @@ internal mechanics.
 
 ### Added
 
+- Six more service guides now summarize the 2026 Citizen's Charter: local
+  marriage/death certificate copies, real property tax payment, general health
+  consultation, first-time senior citizen IDs, and building permits. Each has
+  exact page citations and an individual review date. Published timing
+  discrepancies and building-permit complexity tiers remain explicit; PSA
+  copies, other health programs, and assistance claims have separate procedures.
 - Three reviewed municipal news summaries with original-story links,
   publication and last-checked dates, homepage links, and site search entries.
   News publication dates are distinguished from event schedules.
