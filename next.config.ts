@@ -9,7 +9,7 @@ import type { NextConfig } from "next";
 const isDeployment = Boolean(process.env.VERCEL);
 if (isDeployment && !process.env.NEXT_PUBLIC_SITE_URL?.trim()) {
   console.warn(
-    "[betterpagsanjan] NEXT_PUBLIC_SITE_URL is not set. Canonical URLs, the sitemap, and robots.txt will advertise the placeholder https://betterpagsanjan.org, which is not registered. Set it in the deployment environment before launch.",
+    "[betterpagsanjan] NEXT_PUBLIC_SITE_URL is not set. Metadata, the sitemap, and robots.txt will advertise the placeholder https://betterpagsanjan.org, which is not registered. Set it in the deployment environment before launch.",
   );
 }
 

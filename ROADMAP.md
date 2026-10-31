@@ -76,6 +76,14 @@ passed for this content increment; the remaining quality-gate work is below.
       government-site uptime. First run (October 27, 2026): 69 reachable, 8
       bot-blocked (PSA, Official Gazette, pagsanjan.gov.ph), and 1 unreachable
       (DILG). Recheck the blocked pages in a browser before editing their data.
+- [ ] Emit per-page canonical URLs. No page currently sets
+      `alternates.canonical` or `og:url`, so the staging host and the future
+      production domain would look like independent copies to search engines.
+      The 0.1.0 changelog claim about canonical URLs is inaccurate until this
+      lands.
+- [ ] Return real 404s for unknown `[slug]` values. `/services/...` and
+      `/barangays/...` currently answer `200` with the not-found page (a soft
+      404); `/transition/xyz` correctly answers 404.
 
 ### 5. Release and launch
 
@@ -85,7 +93,11 @@ passed for this content increment; the remaining quality-gate work is below.
       crawling and responses carry `X-Robots-Tag: noindex` until
       `SITE_LAUNCHED=true`, so a preview URL can be tested without being
       indexed.
-- [ ] Deploy the first staging build to Vercel and record its URL here.
+- [x] Deploy the first staging build to Vercel:
+      https://betterpagsanjan.vercel.app (October 31, 2026). Verified pre-launch:
+      `robots.txt` disallows crawling, responses carry `X-Robots-Tag: noindex`,
+      the key pages and `/api/v1/services` return 200, and the assistant answers
+      through the model (`mode: "ai"`) with grounded page links.
 - [ ] Register the production domain and confirm whether any deployment is
       already live. A failed domain lookup alone is not proof that no
       deployment exists. As of October 31, 2026 `betterpagsanjan.org` is not
@@ -104,9 +116,10 @@ passed for this content increment; the remaining quality-gate work is below.
       Vercel KV) if traffic ever justifies a site-wide quota.
 - [x] Run lint, typecheck, civic-data check, and production build: October 31,
       2026, all passing.
-- [ ] Run deployed smoke checks — homepage, a service page, search, map, an
-      open-data endpoint, and `/offline` with the network disconnected — after
-      the first production deploy.
+- [ ] Run browser-level deployed smoke checks — mobile layout, keyboard
+      navigation, service-worker install, and `/offline` with the network
+      disconnected. HTTP-level checks on the staging deployment passed on
+      October 31, 2026.
 - [x] Prepare v0.4.0: version bump and curated changelog entry.
 - [ ] Tag v0.4.0 after release review.
 

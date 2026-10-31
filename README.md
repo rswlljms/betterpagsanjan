@@ -42,7 +42,7 @@ never committed — only the documentation copy (`.env.example`) is tracked.
 
 | Variable               | Required           | Purpose                                                                                                                                    |
 | ---------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `NEXT_PUBLIC_SITE_URL` | Yes, in production | Canonical URL for metadata, canonical tags, the sitemap, and robots.txt. Unset builds fall back to an unregistered placeholder domain.     |
+| `NEXT_PUBLIC_SITE_URL` | Yes, in production | Base URL used by metadata, the sitemap, and robots.txt. Unset builds fall back to an unregistered placeholder domain.                      |
 | `LLM_API_KEY`          | Optional           | Google AI Studio key for Ask BetterPagsanjan. Without it the assistant answers from the civic index and never calls a model.               |
 | `LLM_MODEL`            | Optional           | Model for grounded answers. Defaults to `gemini-3.6-flash`.                                                                                |
 | `SITE_LAUNCHED`        | Optional           | Set to `true` only when the site should be indexed. While unset, `robots.txt` disallows everything and responses carry a `noindex` header. |
@@ -62,7 +62,8 @@ tested for real. The deployment stays out of search results.
 
 1. Import the repository in Vercel.
 2. Set `NEXT_PUBLIC_SITE_URL` to the generated `https://<project>.vercel.app`
-   address, so canonical tags match an address that is actually reachable.
+   address, so metadata and the sitemap point at an address that is actually
+   reachable.
 3. Set `LLM_API_KEY` as a server-side variable (never `NEXT_PUBLIC_`), or leave
    it unset to ship the assistant in deterministic mode.
 4. Leave `SITE_LAUNCHED` unset. `robots.txt` disallows crawling and every
