@@ -1,5 +1,18 @@
 import type { NextConfig } from "next";
 
+/**
+ * Canonical URL placement is a deployment setting, not content: metadata,
+ * canonical tags, the sitemap, and robots.txt all derive from it. This file
+ * is loaded a few times per build, so keep the warning to real deployments
+ * instead of every local build and CI run. See `.env.example`.
+ */
+const isDeployment = Boolean(process.env.VERCEL);
+if (isDeployment && !process.env.NEXT_PUBLIC_SITE_URL?.trim()) {
+  console.warn(
+    "[betterpagsanjan] NEXT_PUBLIC_SITE_URL is not set. Canonical URLs, the sitemap, and robots.txt will advertise the placeholder https://betterpagsanjan.org, which is not registered. Set it in the deployment environment before launch.",
+  );
+}
+
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {

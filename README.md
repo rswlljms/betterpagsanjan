@@ -24,15 +24,51 @@ appropriate government office.
 
 ```bash
 npm install
-npm run dev        # local development
-npm run build      # production build
-npm run lint       # eslint
-npx tsc --noEmit   # type check
-npm run check:data # validate civic data and source references
+npm run dev              # local development
+npm run build            # production build
+npm run lint             # eslint
+npx tsc --noEmit         # type check
+npm run check:data       # validate civic data and source references
+npm run check:rate-limit # verify the assistant's request limiter
 ```
 
 Set `NEXT_PUBLIC_SITE_URL` in production so canonical URLs, the sitemap, and
 the robots file point at the real domain.
+
+## Configuration
+
+Copy `.env.example` to `.env.local` and fill in what you need. Real values are
+never committed — only the documentation copy (`.env.example`) is tracked.
+
+| Variable               | Required           | Purpose                                                                                                                                |
+| ---------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | Yes, in production | Canonical URL for metadata, canonical tags, the sitemap, and robots.txt. Unset builds fall back to an unregistered placeholder domain. |
+| `LLM_API_KEY`          | Optional           | Google AI Studio key for Ask BetterPagsanjan. Without it the assistant answers from the civic index and never calls a model.           |
+| `LLM_MODEL`            | Optional           | Model for grounded answers. Defaults to `gemini-3.6-flash`.                                                                            |
+
+## Deployment
+
+The intended target is **Vercel** (AGENTS.md §9). Every page is prerendered at
+build time; only `/api/ask` and the read-only `/api/v1/*` routes run on demand.
+
+Before a production deploy:
+
+1. Register the production domain, then set `NEXT_PUBLIC_SITE_URL` to it in the
+   Vercel project. Until a domain is registered this is a launch blocker: the
+   fallback `https://betterpagsanjan.org` is not owned by this project, and a
+   Vercel build logs a warning while the variable is unset.
+2. Set `LLM_API_KEY` as a server-side (non-`NEXT_PUBLIC_`) variable, or leave it
+   unset deliberately to ship the assistant in deterministic mode.
+3. Run `npm run lint`, `npm run typecheck`, `npm run check:data`,
+   `npm run check:rate-limit`, and `npm run build`.
+4. Smoke check the deployed site: homepage, a service page, search, the map, an
+   open-data endpoint, and `/offline` with the network disconnected.
+
+The assistant's rate limit (`app/api/ask/route.ts`, `lib/rate-limit.ts`) keeps
+counters in module memory. That is a per-visitor limit on a single long-lived
+Node process, but on Vercel each serverless instance has its own counter, so it
+brakes bursts rather than enforcing a site-wide quota. Move the store to
+Upstash Redis or Vercel KV when traffic makes the difference matter.
 
 ## Announcements review
 

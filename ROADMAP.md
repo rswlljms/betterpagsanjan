@@ -1,6 +1,6 @@
 # BetterPagsanjan roadmap
 
-Updated: October 27, 2026.
+Updated: October 31, 2026.
 
 BetterPagsanjan is an independent civic information project, not an official
 municipal service. This roadmap supplements the priorities in `AGENTS.md`.
@@ -79,14 +79,30 @@ passed for this content increment; the remaining quality-gate work is below.
 
 ### 5. Release and launch
 
-- [ ] Confirm the deployment target, production domain, and actual deployment
-      status with the maintainer. A failed domain lookup alone is not proof
-      that no deployment exists.
-- [ ] Configure production site URLs and server-side model credentials.
-- [ ] Make assistant rate limits suitable for the chosen deployment topology.
-- [ ] Run lint, typecheck, production build, and deployment smoke checks.
-- [ ] Prepare the next release (proposed v0.4.0), its curated changelog, and tag
-      after release review.
+- [x] Confirm the deployment target with the maintainer: Vercel, matching
+      AGENTS.md §9.
+- [ ] Register the production domain and confirm whether any deployment is
+      already live. A failed domain lookup alone is not proof that no
+      deployment exists. As of October 31, 2026 `betterpagsanjan.org` is not
+      registered, so `NEXT_PUBLIC_SITE_URL` cannot be set and the site still
+      canonicalizes to that placeholder.
+- [x] Document the production environment: `.env.example` lists every variable,
+      a Vercel build warns while the canonical URL is unset, and the README
+      describes the deploy and smoke-check steps.
+- [ ] Set `NEXT_PUBLIC_SITE_URL` and the server-side model key in the Vercel
+      project once the domain exists.
+- [x] Make assistant rate limits suitable for the chosen deployment topology:
+      bounded key storage, no self-extending penalty window, a `Retry-After`
+      response, and the serverless per-instance caveat documented in the README.
+- [ ] Replace the in-memory rate-limit store with a shared one (Upstash Redis or
+      Vercel KV) if traffic ever justifies a site-wide quota.
+- [x] Run lint, typecheck, civic-data check, and production build: October 31,
+      2026, all passing.
+- [ ] Run deployed smoke checks — homepage, a service page, search, map, an
+      open-data endpoint, and `/offline` with the network disconnected — after
+      the first production deploy.
+- [x] Prepare v0.4.0: version bump and curated changelog entry.
+- [ ] Tag v0.4.0 after release review.
 
 ## Follow-on phase — English and Filipino
 

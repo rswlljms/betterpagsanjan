@@ -11,6 +11,8 @@ internal mechanics.
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-31
+
 ### Added
 
 - Every civic-data change is now checked in CI for broken source references,
@@ -73,6 +75,17 @@ internal mechanics.
   topic chips, card badges, and keyword search on `/ordinances` and
   `/resolutions` filter real data; topics are labeled as
   BetterPagsanjan discovery aids, not official classifications
+- Production configuration is documented in `.env.example` and the README, and
+  a Vercel build warns while `NEXT_PUBLIC_SITE_URL` is unset, so the site
+  cannot silently advertise a placeholder domain it does not own in canonical
+  tags, the sitemap, or robots.txt
+
+### Fixed
+
+- Ask BetterPagsanjan meters questions per visitor with a bounded,
+  self-cleaning window: a heavy user now gets a short wait instead of spending
+  the shared free-tier model quota, and the rate-limit store no longer grows an
+  entry for every address ever seen
 
 ## [0.3.0] - 2026-09-25
 
@@ -178,7 +191,8 @@ internal mechanics.
 - PWA foundation (web manifest, service worker, offline page)
 - SEO baseline (sitemap, robots, canonical URLs, Open Graph metadata)
 
-[Unreleased]: https://github.com/rswlljms/betterpagsanjan/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/rswlljms/betterpagsanjan/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/rswlljms/betterpagsanjan/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/rswlljms/betterpagsanjan/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/rswlljms/betterpagsanjan/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/rswlljms/betterpagsanjan/releases/tag/v0.1.0

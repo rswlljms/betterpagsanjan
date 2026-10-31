@@ -2,16 +2,21 @@
  * Site-wide configuration and independence disclaimer (AGENTS.md §54).
  */
 
+/**
+ * Canonical URL. Set NEXT_PUBLIC_SITE_URL in every deployment; the fallback
+ * is a placeholder domain this project does not own, kept only so local
+ * builds have a valid absolute URL. next.config.ts warns once per build or
+ * server start while the variable is unset.
+ */
+const placeholderSiteUrl = "https://betterpagsanjan.org";
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+
 export const site = {
   name: "BetterPagsanjan",
   tagline: "Government information, made easier for Pagsanjan.",
   description:
     "BetterPagsanjan is an independent civic technology project that makes public information about Pagsanjan, Laguna easier to find, understand, and use. It is not an official website of the Municipality of Pagsanjan.",
-  /**
-   * Set NEXT_PUBLIC_SITE_URL in production so canonical URLs and the
-   * sitemap point at the real domain.
-   */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://betterpagsanjan.org",
+  url: configuredSiteUrl || placeholderSiteUrl,
   location: "Pagsanjan, Laguna, Philippines",
   lastChecked: "September 2026",
   /**
