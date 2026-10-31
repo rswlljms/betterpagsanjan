@@ -13,6 +13,7 @@ import {
   transparencyCategories,
   transparencyRecords,
 } from "@/data/transparency/records";
+import { canonical } from "@/lib/metadata";
 
 interface TransparencyDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -22,6 +23,8 @@ export function generateStaticParams() {
   return transparencyRecords.map((record) => ({ slug: record.slug }));
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: TransparencyDetailPageProps): Promise<Metadata> {
@@ -29,6 +32,7 @@ export async function generateMetadata({
   const record = getTransparencyBySlug(slug);
   if (!record) return {};
   return {
+    ...canonical(`/transparency/${record.slug}`),
     title: record.title,
     description: record.description,
   };

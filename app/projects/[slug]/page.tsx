@@ -15,6 +15,7 @@ import {
   floodControlProjects,
   getFloodControlProjectBySlug,
 } from "@/data/projects/flood-control";
+import { canonical } from "@/lib/metadata";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -30,6 +31,8 @@ export function generateStaticParams() {
   }));
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: ProjectPageProps): Promise<Metadata> {
@@ -37,6 +40,7 @@ export async function generateMetadata({
   const project = getAnyProjectBySlug(slug);
   if (!project) return {};
   return {
+    ...canonical(`/projects/${project.slug}`),
     title: project.name,
     description: project.description,
   };

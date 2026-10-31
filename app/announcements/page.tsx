@@ -11,8 +11,10 @@ import {
 } from "@/data/announcements";
 import { site } from "@/data/site";
 import { formatMonthYear } from "@/lib/format";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/announcements"),
   title: "Announcements",
   description:
     "Reviewed summaries of announcements, advisories, and public notices for Pagsanjan, with links to their official sources.",

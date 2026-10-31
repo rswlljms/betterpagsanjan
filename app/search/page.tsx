@@ -5,8 +5,10 @@ import { SiteSearch } from "@/components/civic/site-search";
 import { Container } from "@/components/ui/container";
 import { CardGridSkeleton } from "@/components/ui/page-skeleton";
 import { searchIndex } from "@/lib/search";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/search"),
   title: "Search",
   description:
     "Search Pagsanjan services, government offices, barangays, and civic information.",

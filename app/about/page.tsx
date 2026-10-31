@@ -5,8 +5,10 @@ import { SourceAttribution } from "@/components/civic/source-attribution";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { independence, site } from "@/data/site";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/about"),
   title: "About",
   description:
     "BetterPagsanjan is an independent civic technology project for the people of Pagsanjan, Laguna. It is not an official website of the Municipality of Pagsanjan.",
@@ -70,7 +72,10 @@ export default function AboutPage() {
       />
 
       <Container className="space-y-12 py-10 sm:py-12">
-        <section aria-labelledby="what-heading" className="grid gap-4 lg:grid-cols-2">
+        <section
+          aria-labelledby="what-heading"
+          className="grid gap-4 lg:grid-cols-2"
+        >
           <h2 id="what-heading" className="sr-only">
             What BetterPagsanjan is and is not
           </h2>
@@ -81,8 +86,14 @@ export default function AboutPage() {
             <CardContent>
               <ul className="list-none space-y-2.5">
                 {isItems.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-slate-700">
-                    <Check className="mt-0.5 size-4 shrink-0 text-green-700" aria-hidden />
+                  <li
+                    key={item}
+                    className="flex items-start gap-2 text-sm text-slate-700"
+                  >
+                    <Check
+                      className="mt-0.5 size-4 shrink-0 text-green-700"
+                      aria-hidden
+                    />
                     {item}
                   </li>
                 ))}
@@ -96,8 +107,14 @@ export default function AboutPage() {
             <CardContent>
               <ul className="list-none space-y-2.5">
                 {isNotItems.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-slate-700">
-                    <X className="mt-0.5 size-4 shrink-0 text-red-700" aria-hidden />
+                  <li
+                    key={item}
+                    className="flex items-start gap-2 text-sm text-slate-700"
+                  >
+                    <X
+                      className="mt-0.5 size-4 shrink-0 text-red-700"
+                      aria-hidden
+                    />
                     {item}
                   </li>
                 ))}
@@ -137,9 +154,9 @@ export default function AboutPage() {
             ))}
           </ol>
           <p className="mt-4 max-w-3xl text-xs leading-relaxed text-muted">
-            This workflow governs BetterPagsanjan&rsquo;s own editorial process. It is
-            not, and must never be presented as, an official municipal approval
-            process.
+            This workflow governs BetterPagsanjan&rsquo;s own editorial process.
+            It is not, and must never be presented as, an official municipal
+            approval process.
           </p>
           <SourceAttribution
             className="mt-4 max-w-3xl"

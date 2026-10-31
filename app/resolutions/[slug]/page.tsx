@@ -10,6 +10,7 @@ import {
   getLegislativeBySlug,
   legislativeDocuments,
 } from "@/data/legislative/documents";
+import { canonical } from "@/lib/metadata";
 
 interface ResolutionPageProps {
   params: Promise<{ slug: string }>;
@@ -21,6 +22,8 @@ export function generateStaticParams() {
     .map((doc) => ({ slug: doc.slug }));
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: ResolutionPageProps): Promise<Metadata> {
@@ -28,6 +31,7 @@ export async function generateMetadata({
   const doc = getLegislativeBySlug(slug);
   if (!doc || doc.documentType !== "resolution") return {};
   return {
+    ...canonical(`/resolutions/${doc.slug}`),
     title: doc.number ? `${doc.number} — ${doc.title}` : doc.title,
     description: doc.summary,
   };
@@ -62,9 +66,7 @@ export default async function ResolutionPage({ params }: ResolutionPageProps) {
       />
       <div className="mt-6 max-w-3xl">
         <div className="flex flex-wrap items-center gap-1.5">
-          {doc.number ? (
-            <Badge variant="primary">{doc.number}</Badge>
-          ) : null}
+          {doc.number ? <Badge variant="primary">{doc.number}</Badge> : null}
           {doc.year ? <Badge variant="outline">{doc.year}</Badge> : null}
           {(doc.topics ?? []).map((topic) => (
             <Badge key={topic} variant="neutral">

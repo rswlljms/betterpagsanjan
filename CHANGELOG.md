@@ -13,6 +13,14 @@ internal mechanics.
 
 ### Added
 
+- Every page now declares its own canonical URL and Open Graph URL, so search
+  engines and shared links point at one address per page instead of treating a
+  staging host and the production domain as separate copies.
+- Unknown record URLs now return a real 404. Guessed or truncated links such as
+  `/services/not-a-service` no longer answer `200` with a not-found page.
+- `npm run check:seo` guards both: CI fails if a page loses its canonical path,
+  declares a path that does not match its route, or lets a statically generated
+  route render made-up URLs.
 - Staging deployments stay out of search results until launch: while
   `SITE_LAUNCHED` is unset, `robots.txt` disallows crawling and every response
   carries `X-Robots-Tag: noindex`, so the site can be deployed and tested

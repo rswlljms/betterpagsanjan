@@ -11,8 +11,10 @@ import {
   getOrdinances,
 } from "@/data/legislative/documents";
 import { site } from "@/data/site";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/ordinances"),
   title: "Ordinances",
   description:
     "Searchable public index of Pagsanjan municipal ordinances — numbers, dates, topics, and official sources.",
@@ -29,8 +31,8 @@ export default function OrdinancesPage() {
       />
       <Container className="py-10 sm:py-12">
         <p className="mb-8 max-w-3xl text-sm leading-relaxed text-muted">
-          Showing {ordinances.length} recent records indexed by
-          BetterPagsanjan. The complete archive lives on the{" "}
+          Showing {ordinances.length} recent records indexed by BetterPagsanjan.
+          The complete archive lives on the{" "}
           <a
             href={`${site.legislativePortal}/ordinances`}
             target="_blank"

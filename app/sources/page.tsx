@@ -6,8 +6,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { sources } from "@/data/sources";
 import type { SourceType } from "@/types/civic";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/sources"),
   title: "Sources",
   description:
     "The source registry behind BetterPagsanjan: government sources, statutes, secondary references, and original content.",

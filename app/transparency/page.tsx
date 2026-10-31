@@ -9,8 +9,10 @@ import {
   transparencyCategories,
   transparencyRecords,
 } from "@/data/transparency/records";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/transparency"),
   title: "Transparency",
   description:
     "Budget, procurement, projects, and public document information for Pagsanjan — as it becomes verifiable from official sources.",

@@ -11,8 +11,10 @@ import {
   getResolutions,
 } from "@/data/legislative/documents";
 import { site } from "@/data/site";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/resolutions"),
   title: "Resolutions",
   description:
     "Searchable public index of Pagsanjan municipal resolutions — numbers, dates, topics, and official sources.",

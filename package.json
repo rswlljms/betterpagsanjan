@@ -14,7 +14,8 @@
     "check:announcements": "node scripts/check-announcements.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "check:seo": "tsx scripts/check-seo.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^4.0.76",

@@ -5,8 +5,10 @@ import { PageHero } from "@/components/civic/page-hero";
 import { SourceAttribution } from "@/components/civic/source-attribution";
 import { Container } from "@/components/ui/container";
 import { barangays } from "@/data/barangays/barangays";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/barangays"),
   title: "Barangays",
   description:
     "Directory of the 16 barangays of Pagsanjan, Laguna, verified against the Philippine Standard Geographic Code.",

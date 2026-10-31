@@ -7,6 +7,7 @@ import { VerificationBadge } from "@/components/civic/verification-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { barangays, getBarangayBySlug } from "@/data/barangays/barangays";
+import { canonical } from "@/lib/metadata";
 
 interface BarangayPageProps {
   params: Promise<{ slug: string }>;
@@ -16,6 +17,8 @@ export function generateStaticParams() {
   return barangays.map((barangay) => ({ slug: barangay.slug }));
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: BarangayPageProps): Promise<Metadata> {
@@ -23,6 +26,7 @@ export async function generateMetadata({
   const barangay = getBarangayBySlug(slug);
   if (!barangay) return {};
   return {
+    ...canonical(`/barangays/${barangay.slug}`),
     title: `Barangay ${barangay.name}`,
     description: `Information about Barangay ${barangay.name}, Pagsanjan, Laguna.`,
   };

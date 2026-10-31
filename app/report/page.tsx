@@ -11,8 +11,10 @@ import { emergencyContacts, nationalHotline } from "@/data/emergency/contacts";
 import { getOffice } from "@/data/government/offices";
 import { reportingCategories } from "@/data/reporting";
 import { site } from "@/data/site";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/report"),
   title: "Report a community issue",
   description:
     "How to report road damage, flooding, garbage, streetlights, and other community concerns in Pagsanjan through official channels. BetterPagsanjan does not receive reports.",

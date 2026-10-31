@@ -11,8 +11,10 @@ import {
   getMappableLocations,
   locationCategoryLabels,
 } from "@/data/locations/locations";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/map"),
   title: "Civic map",
   description:
     "Verified civic locations in Pagsanjan — government offices, emergency facilities, health centers, barangay halls, and evacuation centers.",

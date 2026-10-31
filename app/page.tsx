@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   BarChart3,
@@ -23,6 +24,9 @@ import { getMappableLocations } from "@/data/locations/locations";
 import { getFeaturedServices } from "@/data/services";
 import { site } from "@/data/site";
 import { statistics } from "@/data/statistics";
+import { canonical } from "@/lib/metadata";
+
+export const metadata: Metadata = canonical("/");
 
 const popularSearches = [
   "Business permit",

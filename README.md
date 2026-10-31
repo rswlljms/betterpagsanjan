@@ -30,6 +30,7 @@ npm run lint             # eslint
 npx tsc --noEmit         # type check
 npm run check:data       # validate civic data and source references
 npm run check:rate-limit # verify the assistant's request limiter
+npm run check:seo        # verify canonical paths and 404 behaviour
 ```
 
 Set `NEXT_PUBLIC_SITE_URL` in production so canonical URLs, the sitemap, and
@@ -83,7 +84,8 @@ tested for real. The deployment stays out of search results.
 5. Tag the release.
 
 Run `npm run lint`, `npm run typecheck`, `npm run check:data`,
-`npm run check:rate-limit`, and `npm run build` before either stage.
+`npm run check:rate-limit`, `npm run check:seo`, and `npm run build` before
+either stage.
 
 The assistant's rate limit (`app/api/ask/route.ts`, `lib/rate-limit.ts`) keeps
 counters in module memory. That is a per-visitor limit on a single long-lived

@@ -12,6 +12,7 @@ import {
   getConsultationStatus,
   consultations,
 } from "@/data/consultations";
+import { canonical } from "@/lib/metadata";
 
 interface ConsultationPageProps {
   params: Promise<{ slug: string }>;
@@ -21,6 +22,8 @@ export function generateStaticParams() {
   return consultations.map((consultation) => ({ slug: consultation.slug }));
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: ConsultationPageProps): Promise<Metadata> {
@@ -28,6 +31,7 @@ export async function generateMetadata({
   const consultation = getConsultationBySlug(slug);
   if (!consultation) return {};
   return {
+    ...canonical(`/consultations/${consultation.slug}`),
     title: consultation.topic,
     description: consultation.description,
   };

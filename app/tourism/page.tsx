@@ -8,8 +8,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { site } from "@/data/site";
 import { tourismHighlights } from "@/data/tourism/highlights";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/tourism"),
   title: "Explore Pagsanjan",
   description:
     "Pagsanjan's falls, rivers, gorge, history, and heritage — presented with sources and clearly labeled interpretations.",

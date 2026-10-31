@@ -76,14 +76,12 @@ passed for this content increment; the remaining quality-gate work is below.
       government-site uptime. First run (October 27, 2026): 69 reachable, 8
       bot-blocked (PSA, Official Gazette, pagsanjan.gov.ph), and 1 unreachable
       (DILG). Recheck the blocked pages in a browser before editing their data.
-- [ ] Emit per-page canonical URLs. No page currently sets
-      `alternates.canonical` or `og:url`, so the staging host and the future
-      production domain would look like independent copies to search engines.
-      The 0.1.0 changelog claim about canonical URLs is inaccurate until this
-      lands.
-- [ ] Return real 404s for unknown `[slug]` values. `/services/...` and
-      `/barangays/...` currently answer `200` with the not-found page (a soft
-      404); `/transition/xyz` correctly answers 404.
+- [x] Emit per-page canonical URLs. Every route declares its own canonical path
+      through `lib/metadata.ts`, which also supplies the Open Graph URL; a
+      `check:seo` gate fails CI when a page loses it or declares the wrong path.
+- [x] Return real 404s for unknown `[slug]` values: the seven static-param
+      routes set `dynamicParams = false`, so made-up record URLs answer 404
+      instead of a `200` not-found page.
 
 ### 5. Release and launch
 

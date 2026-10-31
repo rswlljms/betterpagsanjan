@@ -12,8 +12,10 @@ import {
   getConsultationStatus,
 } from "@/data/consultations";
 import { site } from "@/data/site";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/consultations"),
   title: "Public consultations",
   description:
     "Public consultations affecting Pagsanjan — listed only when traceable to an official government notice, with dates, documents, and how to participate.",

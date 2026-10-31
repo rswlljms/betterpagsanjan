@@ -4,8 +4,10 @@ import { ButtonLink } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { emergencyContacts, nationalHotline } from "@/data/emergency/contacts";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/offline"),
   title: "Offline",
   description:
     "You are offline. Core emergency numbers cached on this device are shown below, but cached content can be outdated.",

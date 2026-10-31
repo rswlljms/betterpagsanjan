@@ -6,8 +6,10 @@ import { SourceAttribution } from "@/components/civic/source-attribution";
 import { StatCard } from "@/components/civic/stat-card";
 import { Container } from "@/components/ui/container";
 import { statistics } from "@/data/statistics";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/statistics"),
   title: "Statistics",
   description:
     "Pagsanjan statistics with sources and years: population, barangays, land area, and classification.",

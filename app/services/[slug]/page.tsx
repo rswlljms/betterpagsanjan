@@ -16,6 +16,7 @@ import {
   services,
 } from "@/data/services";
 import { site } from "@/data/site";
+import { canonical } from "@/lib/metadata";
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;
@@ -24,6 +25,8 @@ interface ServicePageProps {
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
 }
+
+export const dynamicParams = false;
 
 export async function generateMetadata({
   params,
@@ -34,6 +37,7 @@ export async function generateMetadata({
   return {
     title: service.title,
     description: service.description,
+    ...canonical(`/services/${service.slug}`),
   };
 }
 

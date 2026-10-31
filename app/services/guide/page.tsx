@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { ServiceGuide } from "@/components/civic/service-guide";
 import { PageHero } from "@/components/civic/page-hero";
 import { Container } from "@/components/ui/container";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/services/guide"),
   title: "Which service do I need?",
   description:
     "Answer two quick questions in plain language and get pointed to the right Pagsanjan government service. No account, nothing stored.",

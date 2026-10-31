@@ -11,8 +11,10 @@ import { officials } from "@/data/government/officials";
 import { site } from "@/data/site";
 import { getSource } from "@/data/sources";
 import type { OfficeGroup } from "@/types/civic";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/government"),
   title: "Government directory",
   description:
     "Municipal offices of Pagsanjan, their functions, and Municipal Hall contact details — published only when verifiable from official sources.",

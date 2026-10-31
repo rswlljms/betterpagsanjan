@@ -6,8 +6,10 @@ import { VerificationBadge } from "@/components/civic/verification-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { emergencyContacts, nationalHotline } from "@/data/emergency/contacts";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/emergency"),
   title: "Emergency & disaster information",
   description:
     "Emergency hotlines, disaster preparedness guides, and safety information for Pagsanjan, Laguna. In a life-threatening emergency, call 911.",

@@ -12,6 +12,7 @@ import {
   legislativeDocuments,
 } from "@/data/legislative/documents";
 import { getTransparencyByLegislativeSlug } from "@/data/transparency/records";
+import { canonical } from "@/lib/metadata";
 
 interface OrdinancePageProps {
   params: Promise<{ slug: string }>;
@@ -23,6 +24,8 @@ export function generateStaticParams() {
     .map((doc) => ({ slug: doc.slug }));
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: OrdinancePageProps): Promise<Metadata> {
@@ -30,6 +33,7 @@ export async function generateMetadata({
   const doc = getLegislativeBySlug(slug);
   if (!doc || doc.documentType !== "ordinance") return {};
   return {
+    ...canonical(`/ordinances/${doc.slug}`),
     title: doc.number ? `${doc.number} — ${doc.title}` : doc.title,
     description: doc.summary,
   };

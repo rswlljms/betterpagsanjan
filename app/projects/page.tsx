@@ -14,8 +14,10 @@ import {
   projects,
 } from "@/data/projects/projects";
 import { floodControlProjects } from "@/data/projects/flood-control";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/projects"),
   title: "Public projects",
   description:
     "Public project directory for Pagsanjan with verifiable status information — built only from official records.",

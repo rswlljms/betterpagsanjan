@@ -7,8 +7,10 @@ import { ServiceFinder } from "@/components/civic/service-finder";
 import { Container } from "@/components/ui/container";
 import { CardGridSkeleton } from "@/components/ui/page-skeleton";
 import { serviceCategories, services } from "@/data/services";
+import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  ...canonical("/services"),
   title: "Services",
   description:
     "Find Pagsanjan government services — permits, certificates, taxes, and assistance — explained in plain language, with pointers to the responsible offices.",
