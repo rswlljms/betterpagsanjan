@@ -15,6 +15,19 @@ if (isDeployment && !process.env.NEXT_PUBLIC_SITE_URL?.trim()) {
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  async headers() {
+    // Backstop for app/robots.ts: a crawler that ignores robots.txt is still
+    // told not to index a pre-launch deployment. Mirrors the SITE_LAUNCHED
+    // check there; keep the two in sync.
+    if (process.env.SITE_LAUNCHED === "true") return [];
+
+    return [
+      {
+        source: "/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+    ];
+  },
   images: {
     // The logo SVGs are first-party static assets in public/ — serving them
     // through next/image is safe. The CSP keeps the optimizer locked down.

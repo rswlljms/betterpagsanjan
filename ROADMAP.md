@@ -81,11 +81,17 @@ passed for this content increment; the remaining quality-gate work is below.
 
 - [x] Confirm the deployment target with the maintainer: Vercel, matching
       AGENTS.md §9.
+- [x] Keep staging deployments out of search results: `robots.txt` disallows
+      crawling and responses carry `X-Robots-Tag: noindex` until
+      `SITE_LAUNCHED=true`, so a preview URL can be tested without being
+      indexed.
+- [ ] Deploy the first staging build to Vercel and record its URL here.
 - [ ] Register the production domain and confirm whether any deployment is
       already live. A failed domain lookup alone is not proof that no
       deployment exists. As of October 31, 2026 `betterpagsanjan.org` is not
-      registered, so `NEXT_PUBLIC_SITE_URL` cannot be set and the site still
-      canonicalizes to that placeholder.
+      registered; a staging deployment can canonicalize to its
+      `*.vercel.app` address in the meantime, but launching on the placeholder
+      domain is not an option.
 - [x] Document the production environment: `.env.example` lists every variable,
       a Vercel build warns while the canonical URL is unset, and the README
       describes the deploy and smoke-check steps.

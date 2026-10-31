@@ -11,6 +11,15 @@
 const placeholderSiteUrl = "https://betterpagsanjan.org";
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 
+/**
+ * Crawler access switch. Staging deployments are reachable but must stay out
+ * of search results: while this is false, `/robots.txt` disallows everything
+ * and every response carries `X-Robots-Tag: noindex`. Set `SITE_LAUNCHED=true`
+ * only once the production domain is configured and the content is ready to
+ * be found. Changing it requires a redeploy — `robots.txt` is prerendered.
+ */
+export const isSiteLaunched = process.env.SITE_LAUNCHED === "true";
+
 export const site = {
   name: "BetterPagsanjan",
   tagline: "Government information, made easier for Pagsanjan.",

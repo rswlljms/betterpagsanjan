@@ -11,6 +11,13 @@ internal mechanics.
 
 ## [Unreleased]
 
+### Added
+
+- Staging deployments stay out of search results until launch: while
+  `SITE_LAUNCHED` is unset, `robots.txt` disallows crawling and every response
+  carries `X-Robots-Tag: noindex`, so the site can be deployed and tested
+  before a domain is registered without a preview URL being indexed.
+
 ## [0.4.0] - 2026-10-31
 
 ### Added

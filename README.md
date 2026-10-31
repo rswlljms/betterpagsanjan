@@ -40,29 +40,49 @@ the robots file point at the real domain.
 Copy `.env.example` to `.env.local` and fill in what you need. Real values are
 never committed — only the documentation copy (`.env.example`) is tracked.
 
-| Variable               | Required           | Purpose                                                                                                                                |
-| ---------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL` | Yes, in production | Canonical URL for metadata, canonical tags, the sitemap, and robots.txt. Unset builds fall back to an unregistered placeholder domain. |
-| `LLM_API_KEY`          | Optional           | Google AI Studio key for Ask BetterPagsanjan. Without it the assistant answers from the civic index and never calls a model.           |
-| `LLM_MODEL`            | Optional           | Model for grounded answers. Defaults to `gemini-3.6-flash`.                                                                            |
+| Variable               | Required           | Purpose                                                                                                                                    |
+| ---------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `NEXT_PUBLIC_SITE_URL` | Yes, in production | Canonical URL for metadata, canonical tags, the sitemap, and robots.txt. Unset builds fall back to an unregistered placeholder domain.     |
+| `LLM_API_KEY`          | Optional           | Google AI Studio key for Ask BetterPagsanjan. Without it the assistant answers from the civic index and never calls a model.               |
+| `LLM_MODEL`            | Optional           | Model for grounded answers. Defaults to `gemini-3.6-flash`.                                                                                |
+| `SITE_LAUNCHED`        | Optional           | Set to `true` only when the site should be indexed. While unset, `robots.txt` disallows everything and responses carry a `noindex` header. |
 
 ## Deployment
 
 The intended target is **Vercel** (AGENTS.md §9). Every page is prerendered at
 build time; only `/api/ask` and the read-only `/api/v1/*` routes run on demand.
+The Next.js preset and its defaults are correct — no build or output directory
+overrides are needed.
 
-Before a production deploy:
+### Stage 1 — staging deployment
 
-1. Register the production domain, then set `NEXT_PUBLIC_SITE_URL` to it in the
-   Vercel project. Until a domain is registered this is a launch blocker: the
-   fallback `https://betterpagsanjan.org` is not owned by this project, and a
-   Vercel build logs a warning while the variable is unset.
-2. Set `LLM_API_KEY` as a server-side (non-`NEXT_PUBLIC_`) variable, or leave it
-   unset deliberately to ship the assistant in deterministic mode.
-3. Run `npm run lint`, `npm run typecheck`, `npm run check:data`,
-   `npm run check:rate-limit`, and `npm run build`.
-4. Smoke check the deployed site: homepage, a service page, search, the map, an
-   open-data endpoint, and `/offline` with the network disconnected.
+Worth doing before the domain exists: it proves the deploy path and lets the
+browser-only behaviour (service worker, offline page, serverless assistant) be
+tested for real. The deployment stays out of search results.
+
+1. Import the repository in Vercel.
+2. Set `NEXT_PUBLIC_SITE_URL` to the generated `https://<project>.vercel.app`
+   address, so canonical tags match an address that is actually reachable.
+3. Set `LLM_API_KEY` as a server-side variable (never `NEXT_PUBLIC_`), or leave
+   it unset to ship the assistant in deterministic mode.
+4. Leave `SITE_LAUNCHED` unset. `robots.txt` disallows crawling and every
+   response carries `X-Robots-Tag: noindex, nofollow`.
+5. Smoke check: homepage, a service page, search, the map, `/api/v1/services`,
+   a few assistant questions, and `/offline` with the network disconnected.
+
+### Stage 2 — public launch
+
+1. Register the domain, add it in Vercel, and point its DNS at Vercel.
+2. Change `NEXT_PUBLIC_SITE_URL` to that domain and set `SITE_LAUNCHED=true`.
+3. Redeploy. `robots.txt` is prerendered, so an environment change alone does
+   not update it.
+4. Confirm `/robots.txt` allows crawling and lists the sitemap, and that
+   responses no longer carry `X-Robots-Tag`; then submit `sitemap.xml` in
+   Search Console.
+5. Tag the release.
+
+Run `npm run lint`, `npm run typecheck`, `npm run check:data`,
+`npm run check:rate-limit`, and `npm run build` before either stage.
 
 The assistant's rate limit (`app/api/ask/route.ts`, `lib/rate-limit.ts`) keeps
 counters in module memory. That is a per-visitor limit on a single long-lived
