@@ -9,6 +9,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "check:data": "tsx scripts/check-civic-data.ts",
+    "check:rate-limit": "tsx scripts/check-rate-limit.ts",
     "check:links": "tsx scripts/audit-civic-links.ts",
     "check:announcements": "node scripts/check-announcements.mjs",
     "format": "prettier --write .",

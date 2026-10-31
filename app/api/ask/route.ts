@@ -2,6 +2,7 @@ import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { generateText } from "ai";
 import { emergencyContacts, nationalHotline } from "@/data/emergency/contacts";
 import { isEmergencyQuery } from "@/lib/ask";
+import { clientIp, createRateLimiter } from "@/lib/rate-limit";
 import { searchIndex, searchRecordsRanked } from "@/lib/search";
 
 export const dynamic = "force-dynamic";
@@ -12,26 +13,15 @@ const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX = 10;
 
 /**
- * In-memory per-IP rate limit. Enough for single-instance dev and low
- * traffic; switch to a shared store (e.g. Upstash Redis) if the route
- * ever runs on multiple instances.
+ * Per-instance rate limit, sized for the Vercel deployment: ten questions
+ * a minute from one address, with memory bounded so a long-lived instance
+ * cannot grow a bucket per visitor. See lib/rate-limit.ts for why this is
+ * not a global quota on serverless.
  */
-const rateBuckets = new Map<string, number[]>();
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const hits = (rateBuckets.get(ip) ?? []).filter(
-    (time) => now - time < RATE_LIMIT_WINDOW_MS,
-  );
-  hits.push(now);
-  rateBuckets.set(ip, hits);
-  return hits.length > RATE_LIMIT_MAX;
-}
-
-function clientIp(request: Request): string {
-  const forwarded = request.headers.get("x-forwarded-for");
-  return forwarded?.split(",")[0]?.trim() ?? "unknown";
-}
+const rateLimiter = createRateLimiter({
+  windowMs: RATE_LIMIT_WINDOW_MS,
+  max: RATE_LIMIT_MAX,
+});
 
 /**
  * Guardrail prompt (AGENTS.md §16, §48). The model answers ONLY from the
@@ -68,11 +58,14 @@ function buildContext(question: string): string {
  * unavailable, over quota, or unconfigured — users never see errors.
  */
 export async function POST(request: Request) {
-  const ip = clientIp(request);
-  if (isRateLimited(ip)) {
+  const limit = rateLimiter(clientIp(request));
+  if (!limit.allowed) {
     return Response.json(
       { mode: "fallback", emergency: false, matches: [], reply: null },
-      { status: 429 },
+      {
+        status: 429,
+        headers: { "Retry-After": String(limit.retryAfterSeconds) },
+      },
     );
   }
 

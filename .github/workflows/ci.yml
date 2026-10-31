@@ -32,6 +32,9 @@ jobs:
       - name: Check civic data integrity
         run: npm run check:data
 
+      - name: Check assistant rate limiting
+        run: npm run check:rate-limit
+
       - name: Check announcement checker syntax
         run: node --check scripts/check-announcements.mjs
 
