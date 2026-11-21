@@ -15,6 +15,7 @@
 import {
   ANNOUNCEMENT_STALE_AFTER_DAYS,
   announcements,
+  announcementsReviewedWithoutSummary,
 } from "../data/announcements";
 import { barangays } from "../data/barangays/barangays";
 import { consultations } from "../data/consultations";
@@ -729,6 +730,37 @@ for (const announcement of announcements) {
     )
   ) {
     error("announcements", `${context}: invalid kind "${announcement.kind}"`);
+  }
+}
+
+const publishedAnnouncementUrls = new Set(
+  announcements
+    .map((announcement) => announcement.sourceUrl)
+    .filter((url): url is string => Boolean(url)),
+);
+const reviewedWithoutSummaryUrls = new Set<string>();
+for (const entry of announcementsReviewedWithoutSummary) {
+  const context = `reviewed-without-summary post "${entry.sourceUrl}"`;
+  requireString(entry.sourceUrl, "announcements", context, "sourceUrl");
+  requireString(entry.reason, "announcements", context, "reason");
+  checkUrl(entry.sourceUrl, "announcements", context);
+  if (
+    isNonEmptyString(entry.sourceUrl) &&
+    reviewedWithoutSummaryUrls.has(entry.sourceUrl)
+  ) {
+    error("announcements", `${context}: duplicate sourceUrl`);
+  }
+  if (
+    isNonEmptyString(entry.sourceUrl) &&
+    publishedAnnouncementUrls.has(entry.sourceUrl)
+  ) {
+    error(
+      "announcements",
+      `${context}: already has a published announcement summary`,
+    );
+  }
+  if (isNonEmptyString(entry.sourceUrl)) {
+    reviewedWithoutSummaryUrls.add(entry.sourceUrl);
   }
 }
 

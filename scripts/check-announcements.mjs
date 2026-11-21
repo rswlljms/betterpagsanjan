@@ -264,6 +264,8 @@ async function collectListing(baseUrl, maxPages) {
 
 async function readReviewedIds(dataFile) {
   const contents = await readFile(dataFile, "utf8");
+  // Any `/news/<id>` reference counts as reviewed, including entries in
+  // `announcementsReviewedWithoutSummary` that were deliberately not published.
   return new Set(
     [...contents.matchAll(/\/news\/(\d+)/g)].map((match) => match[1]),
   );
