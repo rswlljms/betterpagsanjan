@@ -13,6 +13,14 @@ internal mechanics.
 
 ### Added
 
+- Fifteen more reviewed municipal news summaries cover the October–November
+  2026 feed: the circular energy and housing agreement, the 16-barangay
+  assistance release, the DILG Full Disclosure Policy citation, Undas 2026
+  operations and cemetery services, OWWA and AICS outreach, the Mardi Undaz
+  event, the PNP 911 motorcycles, the Pagsanjan–Lumban health agreement, and
+  the SPES applicant pause. Each links to the original post and carries its own
+  review date; recognition-only and image-only posts are recorded as reviewed
+  but not published.
 - Every page now declares its own canonical URL and Open Graph URL, so search
   engines and shared links point at one address per page instead of treating a
   staging host and the production domain as separate copies.
