@@ -98,7 +98,9 @@ export default async function BarangayPage({ params }: BarangayPageProps) {
         <aside className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Common needs</CardTitle>
+              <CardTitle as="h2" className="text-base">
+                Common needs
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-2 text-sm">
               <p>

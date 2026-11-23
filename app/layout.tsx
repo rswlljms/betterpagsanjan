@@ -87,7 +87,11 @@ export default function RootLayout({
         <EmergencyStrip />
         <SiteHeader />
         <UtilityBar />
-        <main id="main-content" tabIndex={-1} className="focus:outline-none">
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="focus:outline-2 focus:outline-offset-[-2px] focus:outline-bp-ink"
+        >
           {children}
         </main>
         <SiteFooter />

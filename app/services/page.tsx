@@ -33,6 +33,7 @@ export default function ServicesPage() {
             icon={Compass}
           />
         </div>
+        <h2 className="sr-only">All services</h2>
         <Suspense fallback={<CardGridSkeleton />}>
           <ServiceFinder services={services} categories={serviceCategories} />
         </Suspense>

@@ -15,9 +15,15 @@ export function CardHeader({ className, ...props }: ComponentProps<"div">) {
   return <div className={cn("p-6 pb-3", className)} {...props} />;
 }
 
-export function CardTitle({ className, ...props }: ComponentProps<"h3">) {
+type CardTitleTag = "h2" | "h3" | "h4";
+
+export function CardTitle({
+  as: Tag = "h3",
+  className,
+  ...props
+}: ComponentProps<"h3"> & { as?: CardTitleTag }) {
   return (
-    <h3
+    <Tag
       className={cn(
         "font-display text-xl font-semibold tracking-[0.2px] text-ink",
         className,
@@ -27,10 +33,7 @@ export function CardTitle({ className, ...props }: ComponentProps<"h3">) {
   );
 }
 
-export function CardDescription({
-  className,
-  ...props
-}: ComponentProps<"p">) {
+export function CardDescription({ className, ...props }: ComponentProps<"p">) {
   return <p className={cn("mt-1 text-sm text-muted", className)} {...props} />;
 }
 

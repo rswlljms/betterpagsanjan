@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { CodeXml, Mail } from "lucide-react";
+import { Info, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { site } from "@/data/site";
 import packageJson from "@/package.json";
@@ -51,7 +51,7 @@ export function SiteFooter() {
             <Link
               href="/"
               aria-label={`${site.name} — home`}
-              className="inline-block"
+              className="inline-block rounded focus-visible:outline-white"
             >
               <Image
                 src="/images/logo/better-pagsanjan-logo-white.svg"
@@ -78,7 +78,7 @@ export function SiteFooter() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-neutral-300 hover:text-white"
+                    className="text-sm text-neutral-300 hover:text-white focus-visible:outline-white"
                   >
                     {item.title}
                   </Link>
@@ -99,7 +99,7 @@ export function SiteFooter() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-neutral-300 hover:text-white"
+                    className="text-sm text-neutral-300 hover:text-white focus-visible:outline-white"
                   >
                     {item.title}
                   </a>
@@ -115,29 +115,30 @@ export function SiteFooter() {
             </p>
             <div className="mt-4 flex flex-col items-start gap-2.5">
               {/*
-                Both actions point at /about until dedicated volunteer /
-                contribution channels exist — never ship a dead button.
+                No volunteer or code-contribution channel is public yet, so
+                this column points only at pages that actually explain the
+                project — labels match destinations (AGENTS.md §14).
               */}
               <Link
                 href="/about"
-                className="inline-flex min-h-10 items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/15"
+                className="inline-flex min-h-10 items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/15 focus-visible:outline-white"
               >
-                <Mail className="size-4" aria-hidden />
-                Volunteer with us
+                <Info className="size-4" aria-hidden />
+                About the project
               </Link>
               <Link
-                href="/about"
-                className="inline-flex min-h-10 items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/15"
+                href="/sources"
+                className="inline-flex min-h-10 items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/15 focus-visible:outline-white"
               >
-                <CodeXml className="size-4" aria-hidden />
-                Contribute code with us
+                <ShieldCheck className="size-4" aria-hidden />
+                How sources are verified
               </Link>
             </div>
           </div>
         </div>
 
         {/* Bottom bar — independence disclaimer (AGENTS.md §54) + version */}
-        <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-neutral-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-neutral-400 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
             <p>
               © {new Date().getFullYear()} {site.name} MIT | CC BY 4.0

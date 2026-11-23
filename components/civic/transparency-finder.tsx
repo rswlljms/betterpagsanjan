@@ -157,7 +157,10 @@ export function TransparencyFinder({
           {visibleAreas.map(({ area, records: areaRecords }) => (
             <Card key={area.id} className="flex flex-col">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-base">
+                <CardTitle
+                  as="h2"
+                  className="flex items-center gap-2 text-base"
+                >
                   <FileText
                     className="size-5 shrink-0 text-primary-700"
                     aria-hidden

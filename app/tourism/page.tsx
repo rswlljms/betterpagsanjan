@@ -31,7 +31,10 @@ export default function TourismPage() {
             <li key={highlight.id}>
               <Card className="h-full">
                 <CardHeader>
-                  <CardTitle className="flex flex-wrap items-center gap-2">
+                  <CardTitle
+                    as="h2"
+                    className="flex flex-wrap items-center gap-2"
+                  >
                     {highlight.title}
                     {highlight.secondarySource ? (
                       <Badge variant="neutral">Secondary source</Badge>

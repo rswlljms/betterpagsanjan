@@ -44,6 +44,7 @@ export default function OrdinancesPage() {
           </a>
           , where every record links to its official document PDF.
         </p>
+        <h2 className="sr-only">Ordinance index</h2>
         <Suspense fallback={<CardGridSkeleton />}>
           <LegislativeFinder
             documents={ordinances}

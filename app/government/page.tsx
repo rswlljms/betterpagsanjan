@@ -3,11 +3,11 @@ import Link from "next/link";
 import { ExternalLink, Info, Mail, MapPin, Phone } from "lucide-react";
 import { PageHero } from "@/components/civic/page-hero";
 import { SourceAttribution } from "@/components/civic/source-attribution";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { offices } from "@/data/government/offices";
 import { officials } from "@/data/government/officials";
+import { getServiceBySlug } from "@/data/services";
 import { site } from "@/data/site";
 import { getSource } from "@/data/sources";
 import type { OfficeGroup } from "@/types/civic";
@@ -221,11 +221,18 @@ export default function GovernmentPage() {
                           ) : null}
                           {office.services && office.services.length > 0 ? (
                             <div className="mt-3 flex flex-wrap gap-1.5">
-                              {office.services.map((slug) => (
-                                <Link key={slug} href={`/services/${slug}`}>
-                                  <Badge variant="primary">View service</Badge>
-                                </Link>
-                              ))}
+                              {office.services.map((slug) => {
+                                const service = getServiceBySlug(slug);
+                                return (
+                                  <Link
+                                    key={slug}
+                                    href={`/services/${slug}`}
+                                    className="rounded-full border border-line bg-bp-info-banner-bg px-3 py-1 text-xs font-medium text-bp-graphite transition-colors hover:border-bp-stone hover:text-bp-ink"
+                                  >
+                                    {service?.title ?? slug}
+                                  </Link>
+                                );
+                              })}
                             </div>
                           ) : null}
                           <p className="mt-auto pt-3 text-xs italic text-muted">

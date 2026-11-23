@@ -64,7 +64,9 @@ export default function OfflinePage() {
         {emergencyContacts.map((contact) => (
           <Card key={contact.id}>
             <CardHeader>
-              <CardTitle className="text-base">{contact.name}</CardTitle>
+              <CardTitle as="h2" className="text-base">
+                {contact.name}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <ul className="list-none space-y-1.5">
@@ -100,7 +102,7 @@ export default function OfflinePage() {
 
       <Card className="mx-auto mt-6 max-w-3xl">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-base">
+          <CardTitle as="h2" className="flex items-center gap-2 text-base">
             <PhoneCall
               className="size-5 shrink-0 text-primary-700"
               aria-hidden
