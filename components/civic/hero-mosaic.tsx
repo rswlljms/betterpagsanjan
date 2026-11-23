@@ -13,9 +13,9 @@ import { cn } from "@/lib/utils";
  * fresh). Each row track holds 4 identical strips and loops by exactly one
  * strip width, so the scroll is seamless. Pure CSS motion (see
  * `bp-marquee-track` in `app/globals.css`); the whole mosaic is decorative —
- * hidden from assistive technology, with photo credits rendered as visible
- * text next to it instead. Images are small (480px, lazy-loaded) to protect
- * mobile bandwidth.
+ * hidden from assistive technology. Photo credits live on the tourism page
+ * (`/tourism#photo-credits`) and are linked from the hero card. The first
+ * row's first strip loads eagerly; the repeated strips stay lazy.
  */
 const ROWS: string[][] = [
   ["pagsanjan-falls-1", "pagsanjan-stone-arch", "pagsanjan-church-facade"],
@@ -34,10 +34,12 @@ function MarqueeRow({
   ids,
   duration,
   reverse,
+  eagerFirst,
 }: {
   ids: string[];
   duration: number;
   reverse?: boolean;
+  eagerFirst?: boolean;
 }) {
   const photos = ids
     .map((id) => byId.get(id))
@@ -65,7 +67,7 @@ function MarqueeRow({
                   alt=""
                   fill
                   sizes="(max-width: 640px) 224px, (max-width: 1024px) 256px, 288px"
-                  loading="lazy"
+                  loading={eagerFirst && copy === 0 ? "eager" : "lazy"}
                   decoding="async"
                   className="object-cover"
                 />
@@ -80,7 +82,7 @@ function MarqueeRow({
 
 export function HeroMosaic() {
   return (
-    <div aria-hidden className="absolute inset-0 bg-bp-ink">
+    <div id="hero-mosaic" aria-hidden className="absolute inset-0 bg-bp-ink">
       <div className="flex h-full flex-col">
         {ROWS.map((ids, index) => (
           <MarqueeRow
@@ -88,6 +90,7 @@ export function HeroMosaic() {
             ids={ids}
             duration={ROW_DURATIONS[index] ?? 70}
             reverse={ROW_REVERSE[index] ?? false}
+            eagerFirst={index === 0}
           />
         ))}
       </div>

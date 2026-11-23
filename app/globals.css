@@ -260,7 +260,8 @@ html {
 }
 
 .bp-ticker:hover .bp-ticker-track,
-.bp-ticker:focus-within .bp-ticker-track {
+.bp-ticker:focus-within .bp-ticker-track,
+.bp-ticker--paused .bp-ticker-track {
   animation-play-state: paused;
 }
 
@@ -409,6 +410,10 @@ input[type="search"]::-ms-clear {
 
 .bp-marquee-track--reverse {
   animation-direction: reverse;
+}
+
+.bp-hero-paused .bp-marquee-track {
+  animation-play-state: paused;
 }
 
 @keyframes bp-marquee-scroll {

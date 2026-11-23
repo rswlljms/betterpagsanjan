@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CalendarDays, Clock3, Thermometer } from "lucide-react";
+import { CalendarDays, Clock3, Pause, Play, Thermometer } from "lucide-react";
 import { liveFeeds } from "@/data/sources";
 
 const PAGSANJAN_LATITUDE = 14.2725;
@@ -176,17 +176,21 @@ export function UtilityBar() {
     return () => window.clearInterval(id);
   }, []);
 
+  const [ratePaused, setRatePaused] = useState(false);
+  const [isRateHoveredOrFocused, setIsRateHoveredOrFocused] = useState(false);
+
   // Reference behavior: rotate to the next currency every 4 seconds with a
   // short fade — one slot, no marquee, no overlap possible. Respects reduced
-  // motion by staying on the first rate.
+  // motion by staying on the first rate. Pauses on hover, focus, or user toggle.
   useEffect(() => {
-    if (!fx || fx.rates.length < 2) return;
+    if (!fx || fx.rates.length < 2 || ratePaused || isRateHoveredOrFocused)
+      return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = window.setInterval(() => {
       setRateIndex((index) => (index + 1) % (fx?.rates.length ?? 1));
     }, 4_000);
     return () => window.clearInterval(id);
-  }, [fx]);
+  }, [fx, ratePaused, isRateHoveredOrFocused]);
 
   if (!online) return null;
 
@@ -197,26 +201,52 @@ export function UtilityBar() {
   return (
     <div className="bg-ink text-white">
       <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-center gap-x-5 gap-y-1 px-4 py-1.5 text-xs sm:justify-end sm:px-6 sm:text-[13px]">
-        <span className="flex items-center gap-1.5">
+        <span
+          className="flex items-center gap-1.5"
+          onMouseEnter={() => setIsRateHoveredOrFocused(true)}
+          onMouseLeave={() => setIsRateHoveredOrFocused(false)}
+        >
           <span className="sr-only">
             Foreign exchange reference rate against the Philippine peso
           </span>
           <span aria-live="off">
             {current ? (
               <a
-                key={current.code}
                 href={liveFeeds.exchangeRate.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bp-rate-fade underline-offset-2 hover:underline focus-visible:outline-white"
+                onFocus={() => setIsRateHoveredOrFocused(true)}
+                onBlur={() => setIsRateHoveredOrFocused(false)}
+                className="underline-offset-2 hover:underline focus-visible:outline-white"
                 title={`Indicative reference rate for ${fx?.date ?? ""} via ${liveFeeds.exchangeRate.provider} — not a Bangko Sentral ng Pilipinas rate`}
               >
-                1 {current.code} = ₱ {current.perPhp.toFixed(2)}
+                <span key={current.code} className="bp-rate-fade inline-block">
+                  1 {current.code} = ₱ {current.perPhp.toFixed(2)}
+                </span>
               </a>
             ) : (
               <span className="opacity-70">1 USD = ₱ --</span>
             )}
           </span>
+          {fx && fx.rates.length > 1 ? (
+            <button
+              type="button"
+              onClick={() => setRatePaused((p) => !p)}
+              aria-pressed={ratePaused}
+              aria-label={
+                ratePaused
+                  ? "Resume currency rate rotation"
+                  : "Pause currency rate rotation"
+              }
+              className="ml-0.5 inline-flex size-4 items-center justify-center rounded text-white/70 hover:text-white focus-visible:outline-white"
+            >
+              {ratePaused ? (
+                <Play className="size-2.5" aria-hidden />
+              ) : (
+                <Pause className="size-2.5" aria-hidden />
+              )}
+            </button>
+          ) : null}
         </span>
         <span aria-hidden className="hidden h-3 w-px bg-white/25 sm:block" />
         <span className="flex items-center gap-1.5">

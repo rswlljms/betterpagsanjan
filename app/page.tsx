@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { CivicMapLoader } from "@/components/civic/civic-map-loader";
 import { HeroMosaic } from "@/components/civic/hero-mosaic";
+import { HeroMotionToggle } from "@/components/civic/hero-motion-toggle";
 import { LinkCard } from "@/components/civic/link-card";
 import { ServiceCard } from "@/components/civic/service-card";
 import { StatCard } from "@/components/civic/stat-card";
@@ -93,6 +94,7 @@ export default function HomePage() {
                 id="home-search"
                 name="q"
                 type="search"
+                autoComplete="off"
                 placeholder="Try “business permit” or “birth certificate”…"
                 className="min-h-12 flex-1 rounded-lg border border-line bg-white px-4 text-sm text-ink placeholder:text-bp-stone"
               />
@@ -112,6 +114,15 @@ export default function HomePage() {
                 </Link>
               ))}
             </div>
+          </div>
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-2 px-1 text-xs text-white">
+            <HeroMotionToggle />
+            <Link
+              href="/tourism#photo-credits"
+              className="inline-flex min-h-9 items-center rounded-full bg-bp-ink/85 px-3 font-medium text-white backdrop-blur-sm hover:bg-bp-ink focus-visible:outline-white"
+            >
+              Photo credits (CC BY)
+            </Link>
           </div>
         </Container>
       </section>

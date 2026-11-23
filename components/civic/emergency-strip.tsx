@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Siren } from "lucide-react";
+import { TickerPause } from "@/components/civic/ticker-pause";
 import { emergencyContacts, nationalHotline } from "@/data/emergency/contacts";
 
 /**
@@ -93,8 +94,8 @@ export function EmergencyStrip() {
     ?.numbers.at(0)?.value;
 
   return (
-    <div className="bg-red-700 text-white">
-      <div className="bp-ticker overflow-hidden">
+    <div className="relative bg-red-700 text-white">
+      <div className="bp-ticker overflow-hidden pr-10">
         <nav
           aria-label="Emergency hotlines"
           className="bp-ticker-track flex w-max items-center py-1.5 text-xs sm:text-[13px]"
@@ -105,6 +106,7 @@ export function EmergencyStrip() {
           <TickerCopy mdrrmo={mdrrmo} fire={fire} hidden />
         </nav>
       </div>
+      <TickerPause />
     </div>
   );
 }

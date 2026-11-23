@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { site } from "@/data/site";
+import { heroPhotos } from "@/data/tourism/hero-photos";
 import { tourismHighlights } from "@/data/tourism/highlights";
 import { canonical } from "@/lib/metadata";
 
@@ -77,6 +78,65 @@ export default function TourismPage() {
             . BetterPagsanjan does not book tours or collect payments.
           </p>
         </div>
+
+        <section
+          id="photo-credits"
+          className="mt-12 scroll-mt-24 border-t border-line pt-8"
+        >
+          <h2 className="font-display text-xl font-semibold text-ink">
+            Photo Credits
+          </h2>
+          <p className="mt-2 text-sm text-bp-graphite">
+            Photographs of Pagsanjan landmarks appearing on the homepage hero
+            mosaic are used under Creative Commons licenses. Full attribution
+            and file provenance:
+          </p>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {heroPhotos.map((photo) => (
+              <li
+                key={photo.id}
+                className="rounded-lg border border-line bg-white p-3 text-xs text-bp-graphite"
+              >
+                <p className="font-semibold text-ink">{photo.subject}</p>
+                <p className="mt-1">
+                  Photo:{" "}
+                  {photo.photographerUrl ? (
+                    <a
+                      href={photo.photographerUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:text-bp-ink"
+                    >
+                      {photo.photographer}
+                    </a>
+                  ) : (
+                    photo.photographer
+                  )}
+                </p>
+                <p className="mt-0.5">
+                  License:{" "}
+                  <a
+                    href={photo.licenseUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-bp-ink"
+                  >
+                    {photo.license}
+                  </a>{" "}
+                  ·{" "}
+                  <a
+                    href={photo.filePageUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-bp-ink"
+                  >
+                    Wikimedia Commons
+                  </a>
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
       </Container>
     </>
   );
