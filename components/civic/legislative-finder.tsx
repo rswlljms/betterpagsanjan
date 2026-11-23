@@ -110,11 +110,11 @@ export function LegislativeFinder({
           />
           <input
             id={`${documentType}-search`}
+            name="q"
             type="search"
+            autoComplete="off"
             value={query}
-            onChange={(event) =>
-              update({ q: event.target.value })
-            }
+            onChange={(event) => update({ q: event.target.value })}
             placeholder={`Search ${label} by keyword or number…`}
             className="min-h-11 w-full rounded-lg border border-slate-300 bg-white pl-9 pr-9 text-sm text-slate-900 placeholder:text-muted focus:border-primary-500"
           />
@@ -129,9 +129,6 @@ export function LegislativeFinder({
             </button>
           ) : null}
         </div>
-        <Button type="submit" tabIndex={-1}>
-          Search
-        </Button>
       </form>
 
       {years.length > 0 || topics.length > 0 ? (

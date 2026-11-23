@@ -87,7 +87,13 @@ export function AskAssistant({ idPrefix = "ask" }: { idPrefix?: string }) {
   const awaitingReply = messages.some((message) => message.pending);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    bottomRef.current?.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "end",
+    });
   }, [messages]);
 
   async function send(raw: string) {

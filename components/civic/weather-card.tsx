@@ -129,7 +129,12 @@ export function WeatherCard() {
     <Card className="h-full">
       <CardContent className="flex h-full flex-col pt-6">
         {status.state === "loading" ? (
-          <div aria-label="Loading weather" className="animate-pulse">
+          <div
+            role="status"
+            aria-label="Loading weather"
+            className="animate-pulse"
+          >
+            <span className="sr-only">Loading weather…</span>
             <div className="flex items-center gap-4">
               <div className="size-14 rounded-xl bg-surface" />
               <div className="flex-1">

@@ -137,7 +137,9 @@ export function ProjectFinder({
           />
           <input
             id="project-search"
+            name="q"
             type="search"
+            autoComplete="off"
             value={query}
             onChange={(event) => update({ q: event.target.value })}
             placeholder="Search projects by name or barangay…"
@@ -154,9 +156,6 @@ export function ProjectFinder({
             </button>
           ) : null}
         </div>
-        <Button type="submit" tabIndex={-1}>
-          Search
-        </Button>
       </form>
 
       <div className="mt-4 flex flex-wrap items-center gap-2">

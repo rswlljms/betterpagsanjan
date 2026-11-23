@@ -17,7 +17,13 @@ export function AskWidget() {
 
   useEffect(() => {
     if (!open) return;
-    document.getElementById("ask-widget-input")?.focus();
+    const isTouch =
+      typeof window !== "undefined" &&
+      (window.matchMedia("(pointer: coarse)").matches ||
+        window.innerWidth < 640);
+    if (!isTouch) {
+      document.getElementById("ask-widget-input")?.focus();
+    }
     function onKey(event: KeyboardEvent) {
       if (event.key === "Escape") setOpen(false);
     }
@@ -39,7 +45,7 @@ export function AskWidget() {
           id="ask-widget-panel"
           role="dialog"
           aria-label="Ask BetterPagsanjan chat"
-          className="fixed inset-x-3 bottom-20 z-50 flex max-h-[70vh] flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-bp-sm sm:inset-x-auto sm:bottom-24 sm:right-6 sm:w-[400px] sm:max-h-[600px]"
+          className="fixed inset-x-3 bottom-[calc(5rem+env(safe-area-inset-bottom,0px))] z-50 flex max-h-[70vh] flex-col overflow-hidden overscroll-contain rounded-2xl border border-line bg-surface shadow-bp-sm sm:inset-x-auto sm:bottom-24 sm:right-6 sm:w-[400px] sm:max-h-[600px]"
         >
           <header className="flex items-center justify-between gap-3 border-b border-line bg-white px-4 py-3">
             <div>
@@ -74,7 +80,7 @@ export function AskWidget() {
             ? "Close Ask BetterPagsanjan chat"
             : "Open Ask BetterPagsanjan chat"
         }
-        className="fixed bottom-4 right-4 z-50 flex size-14 items-center justify-center rounded-full bg-bp-ink text-white shadow-bp-sm transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 sm:bottom-6 sm:right-6"
+        className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-4 z-50 flex size-14 items-center justify-center rounded-full bg-bp-ink text-white shadow-bp-sm transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 sm:bottom-6 sm:right-6"
       >
         {open ? (
           <X className="size-6" aria-hidden />

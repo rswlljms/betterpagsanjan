@@ -109,7 +109,9 @@ export function SiteSearch({ records }: SiteSearchProps) {
           />
           <input
             id="site-search"
+            name="q"
             type="search"
+            autoComplete="off"
             value={query}
             onChange={(event) => {
               setQuery(event.target.value);

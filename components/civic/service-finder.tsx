@@ -25,9 +25,7 @@ export function ServiceFinder({ services, categories }: ServiceFinderProps) {
   const searchParams = useSearchParams();
 
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
-  const [category, setCategory] = useState(
-    searchParams.get("category") ?? "",
-  );
+  const [category, setCategory] = useState(searchParams.get("category") ?? "");
 
   // Keep local state in sync when the URL changes (e.g. back/forward).
   useEffect(() => {
@@ -54,11 +52,7 @@ export function ServiceFinder({ services, categories }: ServiceFinderProps) {
   }
 
   const filtered = useMemo(() => {
-    const terms = query
-      .trim()
-      .toLowerCase()
-      .split(/\s+/)
-      .filter(Boolean);
+    const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
 
     return services.filter((service) => {
       if (category && service.category !== category) return false;
@@ -94,7 +88,9 @@ export function ServiceFinder({ services, categories }: ServiceFinderProps) {
           />
           <input
             id="service-search"
+            name="q"
             type="search"
+            autoComplete="off"
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
             placeholder="Search services, e.g. business permit…"
@@ -111,12 +107,13 @@ export function ServiceFinder({ services, categories }: ServiceFinderProps) {
             </button>
           ) : null}
         </div>
-        <Button type="submit" tabIndex={-1}>
-          Search
-        </Button>
       </form>
 
-      <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+      <div
+        className="mt-4 flex flex-wrap gap-2"
+        role="group"
+        aria-label="Filter by category"
+      >
         <button
           type="button"
           onClick={() => onCategoryChange("")}
@@ -134,7 +131,9 @@ export function ServiceFinder({ services, categories }: ServiceFinderProps) {
           <button
             key={item.id}
             type="button"
-            onClick={() => onCategoryChange(item.id === category ? "" : item.id)}
+            onClick={() =>
+              onCategoryChange(item.id === category ? "" : item.id)
+            }
             aria-pressed={category === item.id}
             className={cn(
               "min-h-9 rounded-full border px-3.5 text-sm font-medium transition-colors",
@@ -170,7 +169,13 @@ export function ServiceFinder({ services, categories }: ServiceFinderProps) {
           title="No services match your search"
           description="Try different words, clear the category filter, or browse the full list of services."
           action={
-            <Button variant="secondary" onClick={() => { onQueryChange(""); onCategoryChange(""); }}>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                onQueryChange("");
+                onCategoryChange("");
+              }}
+            >
               Clear filters
             </Button>
           }
