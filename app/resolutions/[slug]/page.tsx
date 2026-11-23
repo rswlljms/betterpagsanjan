@@ -10,6 +10,7 @@ import {
   getLegislativeBySlug,
   legislativeDocuments,
 } from "@/data/legislative/documents";
+import { formatMonthYear, formatLongDate } from "@/lib/format";
 import { canonical } from "@/lib/metadata";
 
 interface ResolutionPageProps {
@@ -80,9 +81,9 @@ export default async function ResolutionPage({ params }: ResolutionPageProps) {
         <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted">
           <VerificationBadge verification={doc.verification} />
           {doc.lastChecked ? (
-            <span>Last checked: {doc.lastChecked}</span>
+            <span>Last checked: {formatMonthYear(doc.lastChecked)}</span>
           ) : null}
-          {doc.date ? <span>Approved: {doc.date}</span> : null}
+          {doc.date ? <span>Approved: {formatLongDate(doc.date)}</span> : null}
         </div>
         <p className="mt-5 text-base leading-relaxed text-slate-700">
           {doc.summary}

@@ -24,6 +24,7 @@ import { getMappableLocations } from "@/data/locations/locations";
 import { getFeaturedServices } from "@/data/services";
 import { site } from "@/data/site";
 import { statistics } from "@/data/statistics";
+import { formatMonthYear } from "@/lib/format";
 import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = canonical("/");
@@ -176,7 +177,7 @@ export default function HomePage() {
                   <p className="mt-1 text-xs text-muted">
                     Municipal news · Published{" "}
                     <time dateTime={announcement.date}>
-                      {announcement.date}
+                      {formatMonthYear(announcement.date)}
                     </time>
                     {" · BetterPagsanjan summary"}
                   </p>

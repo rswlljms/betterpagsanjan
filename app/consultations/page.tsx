@@ -12,6 +12,7 @@ import {
   getConsultationStatus,
 } from "@/data/consultations";
 import { site } from "@/data/site";
+import { formatLongDate } from "@/lib/format";
 import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = {
@@ -92,9 +93,13 @@ export default function ConsultationsPage() {
                       {consultation.description}
                     </p>
                     <p className="mt-3 text-xs text-muted">
-                      {consultation.opensAt ?? "Opening date not published"}
+                      {consultation.opensAt
+                        ? formatLongDate(consultation.opensAt)
+                        : "Opening date not published"}
                       {" → "}
-                      {consultation.closesAt ?? "Closing date not published"}
+                      {consultation.closesAt
+                        ? formatLongDate(consultation.closesAt)
+                        : "Closing date not published"}
                     </p>
                   </article>
                 </li>

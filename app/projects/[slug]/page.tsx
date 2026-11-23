@@ -15,6 +15,7 @@ import {
   floodControlProjects,
   getFloodControlProjectBySlug,
 } from "@/data/projects/flood-control";
+import { formatLongDate } from "@/lib/format";
 import { canonical } from "@/lib/metadata";
 
 interface ProjectPageProps {
@@ -116,7 +117,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <dt className="w-36 shrink-0 font-medium text-slate-900">
                 Start date
               </dt>
-              <dd className="text-slate-700">{project.startDate}</dd>
+              <dd className="text-slate-700">
+                {formatLongDate(project.startDate)}
+              </dd>
             </div>
           ) : null}
           {project.targetCompletion ? (
@@ -124,7 +127,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <dt className="w-36 shrink-0 font-medium text-slate-900">
                 Target completion
               </dt>
-              <dd className="text-slate-700">{project.targetCompletion}</dd>
+              <dd className="text-slate-700">
+                {formatLongDate(project.targetCompletion)}
+              </dd>
             </div>
           ) : null}
         </dl>

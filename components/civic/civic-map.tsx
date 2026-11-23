@@ -7,6 +7,7 @@ import "leaflet/dist/leaflet.css";
 import { MapPin } from "lucide-react";
 import { barangays } from "@/data/barangays/barangays";
 import { locationCategoryLabels } from "@/data/locations/locations";
+import { formatMonthYear } from "@/lib/format";
 import type { CivicLocation, CivicLocationCategory } from "@/types/civic";
 
 interface CivicMapProps {
@@ -57,7 +58,7 @@ function popupHtml(location: CivicLocation): string {
   const category = locationCategoryLabels[location.category];
   const verified =
     location.verification.status === "verified"
-      ? `Verified${location.verification.verifiedAt ? ` · ${location.verification.verifiedAt}` : ""}`
+      ? `Verified${location.verification.verifiedAt ? ` · ${formatMonthYear(location.verification.verifiedAt)}` : ""}`
       : "Verification pending";
   const coords =
     typeof location.latitude === "number" &&

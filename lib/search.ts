@@ -9,6 +9,7 @@ import { floodControlProjects } from "@/data/projects/flood-control";
 import { projects } from "@/data/projects/projects";
 import { getServiceCategory, services } from "@/data/services";
 import { transparencyRecords } from "@/data/transparency/records";
+import { formatLongDate } from "@/lib/format";
 
 export type SearchResultType =
   | "service"
@@ -274,7 +275,7 @@ export const searchIndex: SearchRecord[] = [
     id: `announcement-${announcement.id}`,
     title: announcement.title,
     type: "page",
-    description: `Published ${announcement.date}. ${announcement.summary}`,
+    description: `Published ${formatLongDate(announcement.date)}. ${announcement.summary}`,
     href: `/announcements#${announcement.id}`,
     keywords: ["news", announcement.category ?? ""].filter(Boolean),
     badge: "Municipal update",

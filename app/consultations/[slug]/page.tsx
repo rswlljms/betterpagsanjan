@@ -12,6 +12,7 @@ import {
   getConsultationStatus,
   consultations,
 } from "@/data/consultations";
+import { formatLongDate } from "@/lib/format";
 import { canonical } from "@/lib/metadata";
 
 interface ConsultationPageProps {
@@ -88,7 +89,9 @@ export default async function ConsultationPage({
               Opening date
             </dt>
             <dd className="text-slate-700">
-              {consultation.opensAt ?? "Information not yet available."}
+              {consultation.opensAt
+                ? formatLongDate(consultation.opensAt)
+                : "Information not yet available."}
             </dd>
           </div>
           <div className="flex gap-3 px-4 py-3">
@@ -96,7 +99,9 @@ export default async function ConsultationPage({
               Closing date
             </dt>
             <dd className="text-slate-700">
-              {consultation.closesAt ?? "Information not yet available."}
+              {consultation.closesAt
+                ? formatLongDate(consultation.closesAt)
+                : "Information not yet available."}
             </dd>
           </div>
         </dl>
