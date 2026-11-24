@@ -10,6 +10,7 @@ import {
   ScrollText,
   Users,
 } from "lucide-react";
+import { AnnouncementCard } from "@/components/civic/announcement-card";
 import { CivicMapLoader } from "@/components/civic/civic-map-loader";
 import { HeroMosaic } from "@/components/civic/hero-mosaic";
 import { HeroMotionToggle } from "@/components/civic/hero-motion-toggle";
@@ -25,7 +26,6 @@ import { getMappableLocations } from "@/data/locations/locations";
 import { getFeaturedServices } from "@/data/services";
 import { site } from "@/data/site";
 import { statistics } from "@/data/statistics";
-import { formatMonthYear } from "@/lib/format";
 import { canonical } from "@/lib/metadata";
 
 export const metadata: Metadata = canonical("/");
@@ -153,8 +153,19 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+        </Container>
+      </section>
+
+      {/* Latest announcements & updates */}
+      <section className="pb-16 sm:pb-24">
+        <Container>
+          <SectionHeading
+            title="Latest announcements & updates"
+            description="Reviewed summaries of municipal news and public notices for Pagsanjan, each linked to its official source. Dates are publication dates, not event schedules."
+            action={{ label: "View all updates", href: "/announcements" }}
+          />
           {announcements.length === 0 ? (
-            <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted">
+            <p className="mt-8 max-w-3xl text-sm leading-relaxed text-muted">
               No announcements yet — see the{" "}
               <Link
                 href="/announcements"
@@ -174,25 +185,10 @@ export default function HomePage() {
               .
             </p>
           ) : (
-            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-              {announcements.slice(0, 2).map((announcement) => (
-                <li key={announcement.id} className="text-sm">
-                  <p className="font-medium text-ink">
-                    <Link
-                      href={`/announcements#${announcement.id}`}
-                      className="hover:underline"
-                    >
-                      {announcement.title}
-                    </Link>
-                  </p>
-                  <p className="mt-1 text-xs text-muted">
-                    Municipal news · Published{" "}
-                    <time dateTime={announcement.date}>
-                      {formatMonthYear(announcement.date)}
-                    </time>
-                    {" · BetterPagsanjan summary"}
-                  </p>
-                  <p className="mt-0.5 text-muted">{announcement.summary}</p>
+            <ul className="mt-8 grid list-none gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {announcements.slice(0, 3).map((announcement) => (
+                <li key={announcement.id} className="h-full">
+                  <AnnouncementCard announcement={announcement} />
                 </li>
               ))}
             </ul>

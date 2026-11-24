@@ -34,6 +34,13 @@ internal mechanics.
   carries `X-Robots-Tag: noindex`, so the site can be deployed and tested
   before a domain is registered without a preview URL being indexed.
 
+### Changed
+
+- The homepage's latest announcements are now a dedicated section of cards,
+  each showing the topic, publication date, a short summary, and the government
+  organization that published it. A "View all updates" link leads to the full
+  reviewed announcement list.
+
 ## [0.4.0] - 2026-10-31
 
 ### Added
